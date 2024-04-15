@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class ManagerController extends Controller
 {
-    //
+    public function show()
+    {
+        return view('home');
+    }
 }
