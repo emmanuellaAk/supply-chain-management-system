@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthenticationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//      return view('welcome');
+// });
 
 Route::get('/register', [AuthenticationController::class, 'viewRegisterForm']); //view form
+Route::post('/register', [AuthenticationController::class, 'store'])->name('register'); //send form
 
-Route::post('/home', [AuthenticationController::class, 'store']); //send form
+Route::get('/', [SessionsController::class, 'create']); //view login form
+Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login');//submit Login form
