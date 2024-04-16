@@ -12,22 +12,38 @@ class SessionsController extends Controller
         return view('sessions');
     }
 
-    public function submitLogin()
+    public function submitLogin(Request $request)
     {
         $attributes = request()->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
 
-        if (auth()->attempt($attributes)) {
-
-            //if authentication failed
-            throw ValidationException::withMessages([
-                'email' => 'Your provided credentials could not be verified'
+        if(!auth()->attempt(['email'=>$request->email , 'password' => $request->password])){
+                throw ValidationException::withMessages([
+                'incorrect_login' => 'Your provided credentials could not be verified'
             ]);
         }
 
-        session()->regenerate();
-        return 'saved successfully';
+        return redirect()->route('dashboard') ;
+
+
+
+        // return 123;
+
+        // if (auth()->attempt($attributes)) {
+
+        //     //if authentication failed
+        //     throw ValidationException::withMessages([
+        //         'email' => 'Your provided credentials could not be verified'
+        //     ]);
+        // }
+
+
+        // session()->regenerate();
+
+        // return 123;
+
+        // return redirect()->route('dashboard');
     }
 }

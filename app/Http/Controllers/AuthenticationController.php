@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
         // Create user based on validated input
         User::create($attributes);
 
-        return 'saved successfully';
+        return redirect('login');
     }
 }
 
@@ -37,18 +37,18 @@ class AuthenticationController extends Controller
 
 // {
 //     // 1. register function
-//    public function register(Request $request) 
+//    public function register(Request $request)
 //    {
 //      //name
 //      //email
 //      //password
 //      //checking validation for user's input
-//      $this->validate($request, 
+//      $this->validate($request,
 //      [
 //        'name'=>'required|string',
 //        'email'=>'required|email',
 //        'password'=>'required|min:7'
-//     ], 
+//     ],
 //     [
 //        'name.required'=>'A name is required'
 //     ]);
@@ -64,12 +64,12 @@ class AuthenticationController extends Controller
 //     return 'saved successfully';
 //     }
 
-//     public function viewRegisterForm() 
+//     public function viewRegisterForm()
 //     {
 //        return view('register');
 //     }
 
-   
+
 //     // 2.Login function
 //     // 3.reset password function
 // }
