@@ -1,0 +1,5 @@
+<x-navbar/>
+
+<x-sidebar/>
+
+
