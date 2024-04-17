@@ -1,17 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
-<head>
-    <meta charset="utf-8">
-    <link href="dist/images/logo.svg" rel="shortcut icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Icewall admin is super flexible, powerful, clean & modern responsive tailwind admin template with unlimited possibilities.">
-    <meta name="keywords" content="admin template, Icewall Admin Template, dashboard template, flat admin template, responsive admin template, web app">
-    <meta name="author" content="LEFT4CODE">
-    <title>Log In Page</title>
-    <!-- BEGIN: CSS Assets-->
-    <link rel="stylesheet" href="dist/css/app.css" />
-    <!-- END: CSS Assets-->
-</head>
+<x-head/>
 <body class="login">
     <div class="container sm:px-10">
         <div class="block xl:grid grid-cols-2 gap-4">

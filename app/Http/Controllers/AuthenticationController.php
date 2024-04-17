@@ -29,7 +29,7 @@ class AuthenticationController extends Controller
         // Create user based on validated input
         User::create($attributes);
 
-        return redirect('login');
+        return redirect('/');
     }
 }
 

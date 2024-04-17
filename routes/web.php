@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthenticationController;
 
 /*
@@ -29,3 +30,6 @@ Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login')
 Route::get('/dashboard', function () {
      return view('dashboard');
 })->name('dashboard');
+
+Route::get('/showSuppliers', [SupplierController::class, 'create']);
+Route::post('/showSuppliers', [SupplierController::class, 'store'])->name('show.suppliers');
