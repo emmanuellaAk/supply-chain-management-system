@@ -19,10 +19,11 @@ class SupplierController extends Controller
     public function store()
     {
         $attributes = request()->validate([
-            'other_names' => 'required',
-            'last_name' => 'required',
+            'fullname' => 'required',
             'email' => 'required|email|max:255|unique:suppliers,email',
-            'mobile_number' => 'required'
+            'companyname'=>'required',
+            'mobile_number' => 'required',
+            'location'=>'required'
         ]);
 
         Supplier::create($attributes);

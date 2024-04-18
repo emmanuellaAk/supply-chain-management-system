@@ -31,7 +31,7 @@ Route::get('/dashboard', function () {
      return view('dashboard');
 })->name('dashboard');
 
-Route::get('/view.suppliers', [SupplierController::class, 'index'])->name('view.suppliers');
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
 //supplier's form route
 Route::get('/showSuppliers', [SupplierController::class, 'create']);
 Route::post('/showSuppliers', [SupplierController::class, 'store'])->name('show.suppliers');
