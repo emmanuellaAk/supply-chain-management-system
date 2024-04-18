@@ -14,7 +14,7 @@ class SessionsController extends Controller
 
     public function submitLogin(Request $request)
     {
-        $attributes = request()->validate([
+            request()->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
