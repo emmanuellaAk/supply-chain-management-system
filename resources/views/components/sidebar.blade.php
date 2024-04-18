@@ -1,14 +1,19 @@
-<nav class="side-nav">
+  <body class="main">
+        {{-- <x-mobile-menu/> --}}
+        <div class="wrapper">
+            <div class="wrapper-box">
+                <!-- BEGIN: Side Menu -->
+                <nav class="side-nav">
                     <ul>
                         <li>
-                            <a href="javascript:;" class="side-menu">
+                            <a href="javascript:;.html" class="side-menu side-menu--active">
                                 <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                                 <div class="side-menu__title">
                                     Dashboard
-                                    <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                    <div class="side-menu__sub-icon transform rotate-180"> <i data-lucide="chevron-down"></i> </div>
                                 </div>
                             </a>
-                            <ul class="">
+                            <ul class="side-menu__sub-open">
                                 <li>
                                     <a href="side-menu-light-dashboard-overview-1.html" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
@@ -28,7 +33,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="side-menu-light-dashboard-overview-4.html" class="side-menu">
+                                    <a href="side-menu-light-dashboard-overview-4.html" class="side-menu side-menu--active">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                         <div class="side-menu__title"> Overview 4 </div>
                                     </a>
@@ -39,7 +44,7 @@
                             <a href="javascript:;" class="side-menu">
                                 <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                                 <div class="side-menu__title">
-                                    Menu Layout
+                                    Suppliers
                                     <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                                 </div>
                             </a>
@@ -47,19 +52,13 @@
                                 <li>
                                     <a href="side-menu-light-dashboard-overview-1.html" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                        <div class="side-menu__title"> Side Menu </div>
+                                        <div class="side-menu__title"> Current Suppliers </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a href="simple-menu-light-dashboard-overview-1.html" class="side-menu">
                                         <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                        <div class="side-menu__title"> Simple Menu </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="top-menu-light-dashboard-overview-1.html" class="side-menu">
-                                        <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                        <div class="side-menu__title"> Top Menu </div>
+                                        <div class="side-menu__title"> Add Supplier</div>
                                     </a>
                                 </li>
                             </ul>
@@ -193,7 +192,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="side-menu-light-calendar.html" class="side-menu side-menu--active">
+                            <a href="side-menu-light-calendar.html" class="side-menu">
                                 <div class="side-menu__icon"> <i data-lucide="calendar"></i> </div>
                                 <div class="side-menu__title"> Calendar </div>
                             </a>
