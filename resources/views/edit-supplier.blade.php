@@ -11,7 +11,7 @@
 
         <div id="vertical-form" class="p-5">
             <div class="preview">
-                <form method="POST" action="{{ route('add.supplier') }}">
+                <form method="POST" action="{{ route('edit.supplier') }}">
                     @csrf
 
                     <label for="company_name">Company Name</label>

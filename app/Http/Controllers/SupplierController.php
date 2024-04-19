@@ -7,8 +7,10 @@ use Illuminate\Http\Request;
 
 class SupplierController extends Controller
 {
-    public function index(){
-       return view('suppliers');
+    public function index()
+    {
+        $suppliers = Supplier::all();
+        return view('suppliers', compact('suppliers'));
     }
 
     public function create()
@@ -16,18 +18,36 @@ class SupplierController extends Controller
         return view('supplier-form');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+
+
         $attributes = request()->validate([
-            'fullname' => 'required',
+            'full_name' => 'required',
             'email' => 'required|email|max:255|unique:suppliers,email',
-            'companyname'=>'required',
+            'company_name' => 'required',
             'mobile_number' => 'required',
-            'location'=>'required'
+            'location' => 'required'
         ]);
 
-        Supplier::create($attributes);
+        Supplier::create([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'company_name' => $request->company_name,
+            'mobile_number' => $request->mobile_number,
+            'location' => $request->location
+
+        ]);
 
         return redirect()->route('suppliers');
+    }
+
+    public function edit()
+    {
+        return view('edit-supplier');
+    }
+
+    public function update(Request $request) {
+        
     }
 }

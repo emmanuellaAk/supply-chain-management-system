@@ -33,6 +33,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
 //supplier's form route
-Route::get('/showSuppliers', [SupplierController::class, 'create']);
-Route::post('/showSuppliers', [SupplierController::class, 'store'])->name('show.suppliers');
+Route::get('/add.supplier', [SupplierController::class, 'create']);
+Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier');
 
+Route::get('/edit.supplier/{supplier}/edit', [SupplierController::class, 'edit']);
+Route::post('/edit.supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier');
