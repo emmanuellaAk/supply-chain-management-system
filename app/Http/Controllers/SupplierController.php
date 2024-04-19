@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class SupplierController extends Controller
 {
@@ -42,12 +44,37 @@ class SupplierController extends Controller
         return redirect()->route('suppliers');
     }
 
-    public function edit()
+    public function edit(Supplier $supplier)
     {
-        return view('edit-supplier');
+        return view('edit-supplier', ['supplier' => $supplier]);
     }
 
-    public function update(Request $request) {
-        
+
+    public function update(Request $request, Supplier $supplier)
+    {
+        // return 3456789;
+
+        $validation = Validator::make($request->all(), [
+            'full_name' => 'required',
+            'company_name' => 'nullable',
+            'email' => 'required',
+            'mobile_number' => 'required',
+            'location' => 'required',
+        ]);
+
+        if ($validation->fails()) {
+            return back()->with('error', "Validation Failed");
+        }
+
+        $attributes = ([
+            'full_name' => $request->full_name,
+            'company_name' => $request->company_name,
+            'email' => $request->email,
+            'mobile_number' => $request->mobile_number,
+            'location' => $request->location
+        ]);
+
+        $supplier->update($attributes);
+        return redirect('suppliers');
     }
 }

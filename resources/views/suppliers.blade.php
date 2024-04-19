@@ -38,7 +38,9 @@
                                 <td>
                                     <div class="flex mt-4 lg:mt-0">
                                         <button class="btn btn-primary py-1 px-2 mr-2">Profile</button>
-                                        <button class="btn btn-primary py-1 px-2 mr-2">Edit</button>
+                                        <a href="{{ route('edit.supplier', $supplier->id) }}"
+                                        class="btn btn-primary py-1 px-2 mr-2">Edit
+                                        </a>
                                         <button class="btn btn-primary py-1 px-2 mr-2">Delete</button>
                                     </div>
                                 </td>

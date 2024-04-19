@@ -24,11 +24,11 @@ Route::get('/register', [AuthenticationController::class, 'viewRegisterForm']); 
 Route::post('/register', [AuthenticationController::class, 'store'])->name('register'); //send form
 
 Route::get('/', [SessionsController::class, 'create']); //view login form
-Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login');//submit Login form
+Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
 
 
 Route::get('/dashboard', function () {
-     return view('dashboard');
+    return view('dashboard');
 })->name('dashboard');
 
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
