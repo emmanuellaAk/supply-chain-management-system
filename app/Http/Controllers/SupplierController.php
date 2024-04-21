@@ -77,4 +77,12 @@ class SupplierController extends Controller
         $supplier->update($attributes);
         return redirect('suppliers');
     }
+
+    public function destroy(Supplier $supplier)
+    {
+        $supplier->delete();
+
+        return redirect()->route('suppliers')->with('success', 'Supplier deleted successfully.');
+    }
+
 }

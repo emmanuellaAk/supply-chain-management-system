@@ -36,5 +36,9 @@ Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers'
 Route::get('/add.supplier', [SupplierController::class, 'create']);
 Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier');
 
-Route::get('/edit.supplier/{supplier}/edit', [SupplierController::class, 'edit']);
-Route::post('/edit.supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier');
+Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod');
+Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier');
+
+
+Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier');
+

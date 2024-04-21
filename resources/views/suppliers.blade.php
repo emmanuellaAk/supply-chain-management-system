@@ -27,25 +27,32 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($suppliers as $supplier)
-                            <tr>
-                                <td>{{ $supplier->id }}</td>
-                                <td>{{ $supplier->full_name }}</td>
-                                <td>{{ $supplier->company_name }}</td>
-                                <td>{{ $supplier->mobile_number }}</td>
-                                <td>{{ $supplier->email }}</td>
-                                <td>{{ $supplier->location }}</td>
-                                <td>
-                                    <div class="flex mt-4 lg:mt-0">
-                                        <button class="btn btn-primary py-1 px-2 mr-2">Profile</button>
-                                        <a href="{{ route('edit.supplier', $supplier->id) }}"
-                                        class="btn btn-primary py-1 px-2 mr-2">Edit
-                                        </a>
-                                        <button class="btn btn-primary py-1 px-2 mr-2">Delete</button>
-                                    </div>
-                                </td>
-                            </tr>
-                             @endforeach
+                            @foreach ($suppliers as $supplier)
+                                <tr>
+                                    <td>{{ $supplier->id }}</td>
+                                    <td>{{ $supplier->full_name }}</td>
+                                    <td>{{ $supplier->company_name }}</td>
+                                    <td>{{ $supplier->mobile_number }}</td>
+                                    <td>{{ $supplier->email }}</td>
+                                    <td>{{ $supplier->location }}</td>
+                                    <td>
+                                        <div class="flex mt-4 lg:mt-0">
+                                            <button class="btn btn-primary py-1 px-2 mr-2">Profile</button>
+                                            <a href="{{ route('edit.supplier.getmethod', $supplier->id) }}"
+                                                class="btn btn-primary py-1 px-2 mr-2">Edit
+                                            </a>
+
+                                            <form action="{{ route('delete-supplier', $supplier->id) }}" method="POST">
+                                                @csrf
+                                                {{-- @method('DELETE') --}}
+
+                                                 <button type="submit"
+                                                    class="btn btn-primary py-1 px-2 mr-2">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
