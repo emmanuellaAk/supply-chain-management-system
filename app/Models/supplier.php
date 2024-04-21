@@ -8,9 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Supplier extends Model
 {
     protected $guarded = [];
-    public function manager()
+    public function user()
     {
 
-        return $this->belongsTo(Manager::class);
+        return $this->belongsTo(User::class);
+    }
+
+    public function purchase_order()
+    {
+
+        return $this->hasMany(PurchaseOrder::class);
     }
 }

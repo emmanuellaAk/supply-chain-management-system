@@ -5,7 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class customer extends Model
+class PurchaseOrder extends Model
 {
     use HasFactory;
+
+    public function suppliers()
+    {
+        return $this->belonsTo(Supplier::class);
+    }
 }
