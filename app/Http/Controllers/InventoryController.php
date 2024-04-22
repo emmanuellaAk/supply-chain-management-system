@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
-    public function create()
+    public function index()
     {
         return view('inventory');
+    }
+
+    public function create()
+    {
+        return view('inventory-form');
     }
 }
