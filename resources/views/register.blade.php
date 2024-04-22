@@ -27,25 +27,42 @@
                     <form action="{{ route('register')}}" method="POST">
                         @csrf
                         <div class="intro-x mt-2 text-slate-400 dark:text-slate-400 xl:hidden text-center">A few more clicks to sign in to your account. Manage all your e-commerce accounts in one place</div>
-                        <div class="intro-x mt-8">
+                        <div class="intro-x mt-8 d-flex justify-content-center">
                             <label for="name">Name</label>
                             <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="name" placeholder="Name" required>
                             @error('name')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
+                            <br>
 
                             <label for="email">Email</label>
                             <input type="email" class="intro-x login__input form-control py-3 px-4 block mt-4" name="email" placeholder="Email" required>
                             @error('email')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
+                            <br>
 
                             <label for="password">Password</label>
                             <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4" name="password" placeholder="Password" required>
                             @error('password')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
+                            <br>
+
+                            <label for="company_name">Company Name</label>
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="company_name" placeholder="Company Name" required>
+                            @error('company_name')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
+                            <br>
+
+                            <label for="mobile_number">Mobile Number</label>
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="mobile_number" placeholder="Mobile Number" required>
+                            @error('"mobile_number')
+                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
+
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" type="submit" value="Register">Register</button>
                         </div>

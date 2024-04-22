@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PurchaseOrder extends Model
 {
     use HasFactory;
-
+    protected $guarded = [];
+    
     public function suppliers()
     {
         return $this->belonsTo(Supplier::class);

@@ -22,8 +22,6 @@ class SupplierController extends Controller
 
     public function store(Request $request)
     {
-
-
         $attributes = request()->validate([
             'full_name' => 'required',
             'email' => 'required|email|max:255|unique:suppliers,email',
