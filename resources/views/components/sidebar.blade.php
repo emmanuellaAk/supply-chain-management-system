@@ -11,7 +11,7 @@
                               <div class="side-menu__title">
                                   Dashboard
                               </div>
-                            </a>
+                          </a>
                       </li>
                       <li>
                           <a href="javascript:;" class="side-menu">
@@ -136,27 +136,12 @@
                       </li>
                       <li class="side-nav__devider my-6"></li>
                       <li>
-                          <a href="javascript:;" class="side-menu">
+                          <a href="/inventory" class="side-menu">
                               <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
                               <div class="side-menu__title">
                                   Inventory
-                                  <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                               </div>
                           </a>
-                          <ul class="">
-                              <li>
-                                  <a href="side-menu-light-crud-data-list.html" class="side-menu">
-                                      <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                      <div class="side-menu__title"> Data List </div>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a href="side-menu-light-crud-form.html" class="side-menu">
-                                      <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                      <div class="side-menu__title"> Form </div>
-                                  </a>
-                              </li>
-                          </ul>
                       </li>
                       <li>
                           <a href="javascript:;" class="side-menu">
@@ -216,7 +201,7 @@
                               </li>
                           </ul>
                       </li>
-                          </ul>
-                      </li>
+                  </ul>
+                  </li>
                   </ul>
               </nav>
