@@ -48,4 +48,9 @@ class User extends Authenticatable
 
         return $this->hasMany(Supplier::class);
     }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

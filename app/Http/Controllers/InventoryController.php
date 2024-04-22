@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class InventoryController extends Controller
 {
-    public function user()
+    public function create()
     {
-        return $this->belongsTo(User::class);
+        return view('inventory');
     }
 }

@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\PurchaseOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseOrderController;
-use App\Models\PurchaseOrder;
+use App\Http\Controllers\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,8 @@ Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])
 Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier');
 
 Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order');
+
+Route::get('/inventory', [InventoryController::class, 'create'])->name('inventory');
 
 
 

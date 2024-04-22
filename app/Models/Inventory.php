@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Inventory extends Model
 {
     use HasFactory;
-    public function inventory()
+    public function user()
     {
-        return $this->hasMany(Inventory::class);
+        return $this->belongsTo(User::class);
     }
 }

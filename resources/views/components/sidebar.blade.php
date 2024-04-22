@@ -139,7 +139,7 @@
                           <a href="javascript:;" class="side-menu">
                               <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
                               <div class="side-menu__title">
-                                  Crud
+                                  Inventory
                                   <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                               </div>
                           </a>
