@@ -26,7 +26,7 @@ Route::post('/register', [AuthenticationController::class, 'store'])->name('regi
 
 Route::get('/', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
-
+Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

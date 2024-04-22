@@ -25,9 +25,16 @@ class SessionsController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard') ;
+        return redirect()->route('dashboard');
+    }
 
+    public function destroy()
+    {
+        auth()->logout();
 
+        return redirect('/');
+    }
+}
 
         // return 123;
 
@@ -45,5 +52,3 @@ class SessionsController extends Controller
         // return 123;
 
         // return redirect()->route('dashboard');
-    }
-}
