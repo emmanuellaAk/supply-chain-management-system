@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class PurchaseOrderController extends Controller
 {
-    
+    public function create()
+    {
+        return view('purchase-order');
+    }
 }

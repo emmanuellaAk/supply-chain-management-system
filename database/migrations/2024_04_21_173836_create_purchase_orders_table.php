@@ -9,19 +9,18 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
-        Schema::create('purchase_orders', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('supplier_id');
-            $table->string('supplier_name');
-            // $table->foreignId('supplier_id')->references('id')->on('suppliers');
-            $table->date('order_date');
-            $table->date('delivery_date')->nullable();
-            $table->string('order_status');
-            $table->timestamps();
-        });
-    }
+    // public function up(): void
+    // {
+    //     Schema::create('purchase_orders', function (Blueprint $table) {
+    //         $table->id();
+    //         $table->unsignedBigInteger('supplier_id');
+    //         $table->foreign('supplier_id')->references('id')->on('suppliers');
+    //         $table->date('order_date');
+    //         $table->date('delivery_date')->nullable();
+    //         $table->string('order_status');
+    //         $table->timestamps();
+    //     });
+    // }
 
 
     /**

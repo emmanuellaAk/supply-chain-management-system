@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\AuthenticationController;
+use App\Models\PurchaseOrder;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,9 @@ Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.su
 
 Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod');
 Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier');
-
-
 Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier');
+
+Route::get('/purchase-orders', [PurchaseOrder::class, 'create'])->name('purchase-order');
+
+
 

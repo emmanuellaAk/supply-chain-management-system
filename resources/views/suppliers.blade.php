@@ -11,10 +11,10 @@
                 Current Suppliers
             </h2>
         </div>
-        <div class="p-5" id="striped-rows-table">
+        <div class="p-5" id="example">
             <div class="preview">
                 <div class="overflow-x-auto">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="datatable">
                         <thead>
                             <tr>
                                 <th class="whitespace-nowrap">#</th>
@@ -46,7 +46,7 @@
                                                 @csrf
                                                 {{-- @method('DELETE') --}}
 
-                                                 <button type="submit"
+                                                <button type="submit"
                                                     class="btn btn-primary py-1 px-2 mr-2">Delete</button>
                                             </form>
                                         </div>
@@ -67,4 +67,5 @@
         </div>
     </div>
 </div>
+
 <x-script />
