@@ -8,27 +8,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
             <a href="/inventory-form" class="btn btn-primary shadow-md mr-2">Add New Product</a>
-            <div class="dropdown">
-                <button class="dropdown-toggle btn px-2 box" aria-expanded="false" data-tw-toggle="dropdown">
-                    <span class="w-5 h-5 flex items-center justify-center"> <i class="w-4 h-4" data-lucide="plus"></i>
-                    </span>
-                </button>
                 <div class="dropdown-menu w-40">
-                    <ul class="dropdown-content">
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
-                                Print </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text"
-                                    class="w-4 h-4 mr-2"></i> Export to Excel </a>
-                        </li>
-                        <li>
-                            <a href="#" class="dropdown-item"> <i data-lucide="file-text"
-                                    class="w-4 h-4 mr-2"></i> Export to PDF </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
             <div class="hidden md:block mx-auto text-slate-500">Showing 1 to 10 of 150 entries</div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
@@ -43,47 +23,39 @@
             <table class="table table-report -mt-2">
                 <thead>
                     <tr>
-                        <th class="whitespace-nowrap">PRODUCT NAME</th>
-                        <th class="whitespace-nowrap">COST PRICE</th>
+                        <th class="text-center whitespace-nowrap">PRODUCT NAME</th>
+                        <th class="text-center whitespace-nowrap">COST PRICE</th>
                         <th class="text-center whitespace-nowrap">SELLING PRICE</th>
                         <th class="text-center whitespace-nowrap">QUANTITY AVAILABLE</th>
-                        <th class="text-center whitespace-nowrap">STATUS</th>
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="intro-x">
-                        <td class="w-40">
-                            <div class="flex">
-
-                            </div>
-                        </td>
-                        <td>
-                            <a href="#" class="font-medium whitespace-nowrap">Sony Master Series A9G</a>
-                            <div class="text-slate-500 text-xs whitespace-nowrap mt-0.5">Electronic</div>
-                        </td>
-                        <td class="text-center">147</td>
-                        <td class="text-center">$107</td>
-                        <td class="w-40">
-                            <div class="flex items-center justify-center text-success"> <i data-lucide="check-square"
-                                    class="w-4 h-4 mr-2"></i> Active </div>
-                        </td>
-                        <td class="table-report__action w-56">
-                            <div class="flex justify-center items-center">
-                                <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
-                                        class="w-4 h-4 mr-1"></i> Edit </a>
-                                <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
-                                    data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
-                                        class="w-4 h-4 mr-1"></i> Delete </a>
-                            </div>
-                        </td>
-                    </tr>
-
+                    @foreach ($products as $product)
+                        <tr class="intro-x">
+                            <td class="w-40">{{ $product->product_name }}</td>
+                            <td class="text-center">{{ $product->cost_price }}</td>
+                            <td class="text-center">{{ $product->selling_price }}</td>
+                            <td class="text-center">{{ $product->quantity }}</td>
+                            <td class="table-report__action w-56">
+                                <div class="flex justify-center items-center">
+                                    <a class="flex items-center mr-3" href="javascript:;"> <i data-lucide="check-square"
+                                            class="w-4 h-4 mr-1"></i> Edit </a>
+                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
+                                        data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
+                                            class="w-4 h-4 mr-1"></i> Delete </a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                </tbody>
+            </table>
+        </div>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
 
-    <!-- BEGIN: Delete Confirmation Modal -->
-    {{-- <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
+        <!-- BEGIN: Delete Confirmation Modal -->
+        {{-- <div id="delete-confirmation-modal" class="modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body p-0">
@@ -105,6 +77,6 @@
             </div>
         </div>
     </div> --}}
-    <!-- END: Delete Confirmation Modal -->
-</div>
-<x-script />
+        <!-- END: Delete Confirmation Modal -->
+    </div>
+    <x-script />

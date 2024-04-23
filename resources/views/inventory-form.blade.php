@@ -11,49 +11,41 @@
 
         <div id="vertical-form" class="p-5">
             <div class="preview">
-                <form method="POST" action="{{ route('add.products') }}">
+                <form method="POST" action="{{ route('add.product') }}">
                     @csrf
 
-                    <label for="company_name">Company Name</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="company_name"
-                        placeholder="Enter company name" >
-                    @error('company_name')
+                    <label for="product_name">Product Name</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="product_name"
+                        placeholder="Enter product name" >
+                    @error('product_name')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="full_name" class="m-2">Full Name</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="full_name"
-                        placeholder="Enter supplier's full name" >
-                    @error('full_name')
+                    <label for="cost_price" class="m-2">Cost Price</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="cost_price"
+                        placeholder="Enter product's cost_price" >
+                    @error('cost_price')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="email">Email</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="email"
-                        placeholder="example@email.com" >
-                    @error('email')
+                    <label for="selling_price">Selling Price</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="selling_price"
+                        placeholder="Enter product's selling_price" >
+                    @error('selling_price')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="mobile_number">Mobile Number</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="mobile_number"
-                        placeholder="Enter supplier's mobile number" >
-                    @error('mobile_number')
+                    <label for="quantity">Product Quantity</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="quantity"
+                        placeholder="Enter product's quantity" >
+                    @error('quantity')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
-
-                    <label for="location">Location</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="location"
-                        placeholder="Enter supplier's mobile number" >
-                    @error('location')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                    @enderror
-
-                    <button class="btn btn-primary mt-5">Add Supplier</button>
+                    <button class="btn btn-primary mt-5">Add Product</button>
             </div>
         </div>
 
