@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Inventory;
 use App\Models\User;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InventoryController extends Controller
 {
     public function index()
     {
         $products = Inventory::all();
-        return view('inventory', compact('products'));
+        return view('inventory.inventory', compact('products'));
     }
 
     public function create()
     {
-
-        return view('inventory-form');
+       return view('inventory.inventory-form');
     }
 
     public function store(Request $request)
@@ -34,9 +34,37 @@ class InventoryController extends Controller
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
             'quantity' => $request->quantity
-
         ]);
 
         return redirect()->route('inventory');
+    }
+
+    public function edit(Inventory $product)
+    {
+        return view('inventory.edit-inventory', ['product'=> $product]);
+    }
+
+    public function update(Request $request, Inventory $product)
+    {
+           $validation = Validator::make($request->all(),[
+               'product_name'=>'required',
+               'cost_price'=>'required',
+               'selling_price'=>'required',
+               'quantity'=>'required'
+           ]);
+
+           if($validation->fails()){
+            return back()->with('error', "Validation Failed");
+           }
+
+           $attributes = ([
+            'product_name'=>$request->product_name,
+            'cost_price'=>$request->cost_price,
+            'selling_price'=>$request->selling_price,
+            'quantity'=>$request->quantity
+           ]);
+
+           $product->update($attributes);
+           return redirect('inventory');
     }
 }

@@ -49,4 +49,8 @@ Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory
 Route::get('/inventory-form', [InventoryController::class, 'create']);
 Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product');
 
+Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit');
+Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product');
+
+
 
