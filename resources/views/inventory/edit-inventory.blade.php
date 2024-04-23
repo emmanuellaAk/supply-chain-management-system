@@ -5,7 +5,7 @@
     <div class="intro-y box">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
             <h1 class="font-bold text-base mr-auto">
-               Edit Product:{{ $product->product_name }}
+               Edit:{{ $product->product_name }}
             </h1>
         </div>
 

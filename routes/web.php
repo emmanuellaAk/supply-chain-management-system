@@ -51,6 +51,6 @@ Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.
 
 Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit');
 Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product');
-
+Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete');
 
 

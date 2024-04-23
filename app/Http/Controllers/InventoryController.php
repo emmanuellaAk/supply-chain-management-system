@@ -11,8 +11,14 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        $products = Inventory::all();
-        return view('inventory.inventory', compact('products'));
+        // $products = Inventory::all();
+        $filter = request()->search;
+
+        return view('inventory.inventory', [
+            'products' => Inventory::latest()->filter([
+                'search' => $filter
+            ])->get()
+        ]);
     }
 
     public function create()
@@ -66,5 +72,11 @@ class InventoryController extends Controller
 
            $product->update($attributes);
            return redirect('inventory');
+    }
+
+    public function destroy(Inventory $product)
+    {
+       $product->delete();
+       return redirect()->route('delete');
     }
 }
