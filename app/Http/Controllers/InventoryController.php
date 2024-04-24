@@ -17,7 +17,7 @@ class InventoryController extends Controller
         return view('inventory.inventory', [
             'products' => Inventory::latest()->filter([
                 'search' => $filter
-            ])->paginate(6)
+            ])->paginate(9)
         ]);
     }
 
@@ -77,7 +77,7 @@ class InventoryController extends Controller
     public function destroy(Inventory $product)
     {
        $product->delete();
-       
-       return redirect()->route('delete');
+
+       return redirect()->route('inventory');
     }
 }
