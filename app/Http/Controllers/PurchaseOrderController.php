@@ -10,7 +10,7 @@ class PurchaseOrderController extends Controller
 {
     public function index()
     {
-         return view('all-purchases');
+         return view('purchases.all-purchases');
     }
 
     public function create()
