@@ -2,8 +2,8 @@
             <div class="h-full flex items-center">
                 <!-- BEGIN: Logo -->
                 <a href="#" class="-intro-x hidden md:flex">
-                    <img alt="Midone - HTML Admin Template" class="w-6" src="dist/images/logo.svg">
-                    <span class="text-white text-lg ml-3"> Icewall </span>
+                    <img alt="Midone - HTML Admin Template" class="w-6" src="dist\images\hexagon-photography-icon-logo-1.png">
+                    <span class="text-white text-lg ml-3">SCM</span>
                 </a>
                 <!-- END: Logo -->
                 <!-- BEGIN: Breadcrumb -->
@@ -70,34 +70,7 @@
                                 </a>
                             </div>
                             <div class="search-result__content__title">Products</div>
-                            <a href="#" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-13.jpg">
-                                </div>
-                                <div class="ml-3">Dell XPS 13</div>
-                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">PC &amp; Laptop</div>
-                            </a>
-                            <a href="#" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-9.jpg">
-                                </div>
-                                <div class="ml-3">Sony Master Series A9G</div>
-                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Electronic</div>
-                            </a>
-                            <a href="#" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-4.jpg">
-                                </div>
-                                <div class="ml-3">Nike Air Max 270</div>
-                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Sport &amp; Outdoor</div>
-                            </a>
-                            <a href="#" class="flex items-center mt-2">
-                                <div class="w-8 h-8 image-fit">
-                                    <img alt="Midone - HTML Admin Template" class="rounded-full" src="dist/images/preview-6.jpg">
-                                </div>
-                                <div class="ml-3">Nike Tanjun</div>
-                                <div class="ml-auto w-48 truncate text-slate-500 text-xs text-right">Sport &amp; Outdoor</div>
-                            </a>
+                            
                         </div>
                     </div>
                 </div>
