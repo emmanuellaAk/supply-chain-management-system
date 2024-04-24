@@ -80,7 +80,7 @@ class SupplierController extends Controller
     {
         $supplier->delete();
 
-        return redirect()->route('suppliers')->with('success', 'Supplier deleted successfully.');
+        return redirect()->route('suppliers');
     }
 
 }

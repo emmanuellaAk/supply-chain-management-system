@@ -43,15 +43,22 @@
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="{{ route('edit', $product->id)}}"> <i data-lucide="check-square"
                                             class="w-4 h-4 mr-1"></i> Edit </a>
-                                    <a class="flex items-center text-danger" href="javascript:;" data-tw-toggle="modal"
-                                        data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
-                                        class="w-4 h-4 mr-1"></i> Delete </a>
+
+                                    <form action="{{ route('delete', $product->id)}}" method="POST">
+                                        @csrf
+                                         <button class="flex items-center text-danger"  type="submit"
+                                                data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
+                                                class="w-4 h-4 mr-1"></i> Delete
+                                        </button>
+                                    </form>
+
                                 </div>
                             </td>
                         </tr>
                         @endforeach
                 </tbody>
             </table>
+            {{ $products->links() }}
         </div>
         <!-- END: Data List -->
         <!-- BEGIN: Pagination -->
