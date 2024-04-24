@@ -45,6 +45,14 @@
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
+
+                    <label for="suppliers">Suppliers</label>
+                    <select name="supplier" id="" class="intro-x login__input form-control py-3 px-4 block mt-4">
+                        @foreach ($suppliers as $supplier)
+                            <option value="{{ $supplier->id }}">{{ $supplier->full_name}}</option>
+                        @endforeach
+
+                    </select>
                     <button class="btn btn-primary mt-5">Add Product</button>
             </div>
         </div>

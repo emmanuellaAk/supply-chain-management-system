@@ -5,7 +5,7 @@
     <div class="intro-y box">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60 dark:border-darkmode-400">
             <h1 class="font-bold text-base mr-auto">
-               Edit Information
+                Edit Information
             </h1>
         </div>
 
@@ -16,47 +16,44 @@
 
                     <label for="name">Name</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="name"
-                        placeholder="name" value="{{ old('name', $user->name) }}" >
+                        placeholder="name" value="{{ old('name', $user->name) }}">
                     @error('name')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="" class="m-2">Full Name</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="full_name"
-                        placeholder="Enter supplier's full name" >
-                    @error('full_name')
+                    <label for="company_name" class="m-2">Company Name</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4"
+                        name="company_name" placeholder="company name" value="{{ old('company_name', $user->company_name) }}">
+                    @error('company_name')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="email">Email</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="email"
-                        placeholder="example@email.com" >
-                    @error('email')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                    @enderror
-                    <br>
-
-                    <label for="mobile_number">Mobile Number</label>
+                    <label for="mobile_number">Email</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="mobile_number"
-                        placeholder="Enter supplier's mobile number" >
+                        placeholder="" {{ old('mobile_number', $user->email) }}>
                     @error('mobile_number')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="location">Location</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="location"
-                        placeholder="Enter supplier's mobile number" >
-                    @error('location')
+                    <label for="mobile_number">Mobile Number</label>
+                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4"
+                        name="mobile_number" placeholder="Enter mobile_number"
+                       value="{{ old('mobile_number', $user->mobile_number) }}">
+                    @error('mobile_number')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
+                    <br>
 
-                    <button class="btn btn-primary mt-5">Add Supplier</button>
+
+
+
+                    <button class="btn btn-primary mt-5">Edit</button>
             </div>
         </div>
 
     </div>
 </div>
-<x-script/>
+<x-script />

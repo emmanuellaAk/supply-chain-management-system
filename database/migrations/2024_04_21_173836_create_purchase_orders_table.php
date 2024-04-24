@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('supplier_id');
             $table->foreignId(Supplier::class);
+            
             // $table->unsignedBigInteger('supplier_id');
             // $table->foreign('supplier_id')->references('id')->on('suppliers');
             $table->date('order_date');

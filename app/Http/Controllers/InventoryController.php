@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Supplier;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,23 +24,27 @@ class InventoryController extends Controller
 
     public function create()
     {
-       return view('inventory.inventory-form');
+        $suppliers = Supplier::all();
+       return view('inventory.inventory-form' , ['suppliers'=>$suppliers] );
     }
 
     public function store(Request $request)
     {
+        // return $request->all();
         request()->validate([
             'product_name' => 'required',
             'cost_price' => 'required',
             'selling_price' => 'required',
             'quantity' => 'required',
+            'supplier'=>'required'
         ]);
 
         Inventory::create([
             'product_name' => $request->product_name,
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
-            'quantity' => $request->quantity
+            'quantity' => $request->quantity,
+            'supplier_id'=>$request->supplier
         ]);
 
         return redirect()->route('inventory');
