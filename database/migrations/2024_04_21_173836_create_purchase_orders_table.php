@@ -14,13 +14,11 @@ return new class extends Migration
     {
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('supplier_id');
-            $table->foreignId(Supplier::class);
-            
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('inventories');
+            $table->integer('quantity');
             // $table->unsignedBigInteger('supplier_id');
             // $table->foreign('supplier_id')->references('id')->on('suppliers');
-            $table->date('order_date');
-            $table->date('delivery_date')->nullable();
             $table->string('order_status');
             $table->timestamps();
         });

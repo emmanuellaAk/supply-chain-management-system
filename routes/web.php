@@ -46,6 +46,7 @@ Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])
 Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier');
 
 Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order');
+Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder');
 
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
 Route::get('/inventory-form', [InventoryController::class, 'create']);

@@ -46,9 +46,9 @@
                           </a>
                           <ul class="">
                               <li>
-                                  <a href="side-menu-light-categories.html" class="side-menu">
+                                  <a href="/purchase-orders" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
-                                      <div class="side-menu__title"> Categories </div>
+                                      <div class="side-menu__title"> Purchase Order</div>
                                   </a>
                               </li>
                               <li>

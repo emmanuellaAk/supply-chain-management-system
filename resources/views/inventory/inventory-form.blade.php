@@ -24,7 +24,7 @@
 
                     <label for="cost_price" class="m-2">Cost Price</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="cost_price"
-                        placeholder="Enter product's cost_price" >
+                        placeholder="Enter product's cost price" >
                     @error('cost_price')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
@@ -32,16 +32,8 @@
 
                     <label for="selling_price">Selling Price</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="selling_price"
-                        placeholder="Enter product's selling_price" >
+                        placeholder="Enter product's selling price" >
                     @error('selling_price')
-                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                    @enderror
-                    <br>
-
-                    <label for="quantity">Product Quantity</label>
-                    <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="quantity"
-                        placeholder="Enter product's quantity" >
-                    @error('quantity')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>

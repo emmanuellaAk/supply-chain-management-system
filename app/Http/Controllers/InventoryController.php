@@ -35,7 +35,6 @@ class InventoryController extends Controller
             'product_name' => 'required',
             'cost_price' => 'required',
             'selling_price' => 'required',
-            'quantity' => 'required',
             'supplier'=>'required'
         ]);
 
@@ -43,7 +42,6 @@ class InventoryController extends Controller
             'product_name' => $request->product_name,
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
-            'quantity' => $request->quantity,
             'supplier_id'=>$request->supplier
         ]);
 

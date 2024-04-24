@@ -30,7 +30,7 @@
                         <th class="text-center whitespace-nowrap">COST PRICE</th>
                         <th class="text-center whitespace-nowrap">SELLING PRICE</th>
                         <th class="text-center whitespace-nowrap">SUPPLIERS</th>
-                        <th class="text-center whitespace-nowrap">QUANTITY AVAILABLE</th>
+                        {{-- <th class="text-center whitespace-nowrap">QUANTITY AVAILABLE</th> --}}
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
                 </thead>
@@ -42,7 +42,7 @@
                             <td class="text-center">{{ $product->selling_price }}</td>
                             <td class="text-center">{{ App\Models\Supplier::find($product->supplier_id)->full_name }}
                             </td>
-                            <td class="text-center">{{ $product->quantity }}</td>
+                            {{-- <td class="text-center">{{ $product->quantity }}</td> --}}
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
                                     <a class="flex items-center mr-3" href="{{ route('edit', $product->id) }}"> <i
