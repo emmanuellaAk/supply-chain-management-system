@@ -16,7 +16,7 @@ class PurchaseOrderController extends Controller
     public function create()
     {
         $products = Inventory::all();
-        return view('purchase-order', ['products' => $products]);
+        return view('purchases.purchase-order', ['products' => $products]);
     }
 
     public function store(Request $request)
