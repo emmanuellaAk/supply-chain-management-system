@@ -30,19 +30,19 @@
                     @enderror
                     <br>
 
-                    <label for="mobile_number">Email</label>
+                    <label for="mobile_number">Mobile Number</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="mobile_number"
-                        placeholder="" {{ old('mobile_number', $user->email) }}>
+                        placeholder="" value="{{old('mobile_number', $user->mobile_number) }}" >
                     @error('mobile_number')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>
 
-                    <label for="mobile_number">Mobile Number</label>
+                    <label for="email">Email</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4"
-                        name="mobile_number" placeholder="Enter mobile_number"
-                       value="{{ old('mobile_number', $user->mobile_number) }}">
-                    @error('mobile_number')
+                        name="email" placeholder="Enter email"
+                       value="{{ old('email', $user->email) }}">
+                    @error('email')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
                     <br>

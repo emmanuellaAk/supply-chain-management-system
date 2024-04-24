@@ -51,7 +51,6 @@
                         @foreach ($suppliers as $supplier)
                             <option value="{{ $supplier->id }}">{{ $supplier->full_name}}</option>
                         @endforeach
-
                     </select>
                     <button class="btn btn-primary mt-5">Add Product</button>
             </div>

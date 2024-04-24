@@ -7,16 +7,17 @@
     </h2>
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
-            <a href="/inventory-form" class="btn btn-primary shadow-md mr-2">Add New Product</a>
-                <div class="dropdown-menu w-40">
+            {{-- <a href="/inventory-form" class="btn btn-primary shadow-md mr-2">Add New Product</a> --}}
+            <div class="dropdown-menu w-40">
             </div>
             <div class="hidden md:block mx-auto text-slate-500"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
-                <form method="GET" action="/inventory">
-                    <input type="text" class="form-control w-56 box pr-10" placeholder="Search..." name="search" value="{{ request('search') }}">
-                    <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
-                </form>
+                    <form method="GET" action="/inventory">
+                        <input type="text" class="form-control w-56 box pr-10" placeholder="Search..." name="search"
+                            value="{{ request('search') }}">
+                        <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
+                    </form>
                 </div>
             </div>
         </div>
@@ -39,17 +40,18 @@
                             <td class="w-40">{{ $product->product_name }}</td>
                             <td class="text-center">{{ $product->cost_price }}</td>
                             <td class="text-center">{{ $product->selling_price }}</td>
-                            <td class="text-center">{{ App\Models\Supplier::find($product->supplier_id)->full_name }}</td>
+                            <td class="text-center">{{ App\Models\Supplier::find($product->supplier_id)->full_name }}
+                            </td>
                             <td class="text-center">{{ $product->quantity }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{ route('edit', $product->id)}}"> <i data-lucide="check-square"
-                                            class="w-4 h-4 mr-1"></i> Edit </a>
+                                    <a class="flex items-center mr-3" href="{{ route('edit', $product->id) }}"> <i
+                                            data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
 
-                                    <form action="{{ route('delete', $product->id)}}" method="POST">
+                                    <form action="{{ route('delete', $product->id) }}" method="POST">
                                         @csrf
-                                         <button class="flex items-center text-danger"  type="submit"
-                                                data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
+                                        <button class="flex items-center text-danger" type="submit"
+                                            data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
                                                 class="w-4 h-4 mr-1"></i> Delete
                                         </button>
                                     </form>
@@ -57,7 +59,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                 </tbody>
             </table>
             {{ $products->links() }}

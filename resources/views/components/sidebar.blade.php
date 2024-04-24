@@ -52,7 +52,7 @@
                                   </a>
                               </li>
                               <li>
-                                  <a href="side-menu-light-add-product.html" class="side-menu">
+                                  <a href="/inventory-form" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Add Product </div>
                                   </a>
