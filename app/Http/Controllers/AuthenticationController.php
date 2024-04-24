@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
 
@@ -34,45 +35,35 @@ class AuthenticationController extends Controller
 
         return redirect('/');
     }
+
+    public function edit(User $user)
+    {
+        return view('userinfo',['user'=> $user] );
+    }
+
+    public function update(Request $request, User $user)
+    {
+       $validation = Validator::make($request->all(), [
+        'name'=>'required',
+        'company'=>'required',
+        'email'=>'required',
+        'mobile_number'=>'required',
+       ]);
+
+       if ($validation->fails()){
+        return back()->with('error',"Validation Failed");
+       }
+
+       $attributes = ([
+        'name'=>$request->name,
+        'company'=>$request->company,
+        'email'=>$request->email,
+        'mobile_number'=>$request->mobile_number,
+       ]);
+
+      $user->update($attributes);
+      return redirect('/');
+    }
 }
 
 
-
-// {
-//     // 1. register function
-//    public function register(Request $request)
-//    {
-//      //name
-//      //email
-//      //password
-//      //checking validation for user's input
-//      $this->validate($request,
-//      [
-//        'name'=>'required|string',
-//        'email'=>'required|email',
-//        'password'=>'required|min:7'
-//     ],
-//     [
-//        'name.required'=>'A name is required'
-//     ]);
-
-//     User::create(
-//     [
-//       'name'=> $request->name,
-//       'email'=> $request->email,
-//       'password'=> Hash::make($request->password)
-//     ]
-//    );
-
-//     return 'saved successfully';
-//     }
-
-//     public function viewRegisterForm()
-//     {
-//        return view('register');
-//     }
-
-
-//     // 2.Login function
-//     // 3.reset password function
-// }

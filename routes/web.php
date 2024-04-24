@@ -25,6 +25,8 @@ use App\Http\Controllers\AuthenticationController;
 
 Route::get('/register', [AuthenticationController::class, 'viewRegisterForm']); //view form
 Route::post('/register', [AuthenticationController::class, 'store'])->name('register'); //send form
+Route::get('/edit-profile/{user}', [AuthenticationController::class, 'edit'])->name('edit-profile');
+Route::post('/update/{user}', [AuthenticationController::class, 'update'])->name('update');
 
 Route::get('/', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
