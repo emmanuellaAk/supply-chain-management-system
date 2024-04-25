@@ -23,7 +23,7 @@
                                 <th class="whitespace-nowrap">Mobile Number</th>
                                 <th class="whitespace-nowrap">Email</th>
                                 <th class="whitespace-nowrap">Location</th>
-                                <th class="whitespace-nowrap">More</th>
+                                <th class="whitespace-nowrap text-center">More</th>
                             </tr>
                         </thead>
                         <tbody>

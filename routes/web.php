@@ -48,6 +48,9 @@ Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'
 Route::get('/all-purchases',[PurchaseOrderController::class, 'index'])->name('all-purchases');
 Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order');
 Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder');
+Route::get('/received/{id}',[PurchaseOrderController::class, 'received'])->name('received');
+Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined');
+Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter');
 
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
 Route::get('/inventory-form', [InventoryController::class, 'create']);

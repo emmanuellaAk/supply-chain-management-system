@@ -8,8 +8,21 @@
     <div class="intro-y box mt-5">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60">
             <h2 class="font-medium text-base mr-auto">
-               Purchases
+                Purchases
             </h2>
+            <label for="purchase">STATUS</label>
+
+            <form action="{{ route('filter')}}" method="GET">
+            <select name="order_status" id="" class="intro-x login__input form-control py-3 px-4 block mt-4">
+
+                <option value="">Select</option>
+                <option value="pending">Pending</option>
+                <option value="received">Received</option>
+                <option value="declined">Declined</option>
+
+            </select>
+            <button class="btn btn-primary py-1 px-2">Search</button>
+            </form>
         </div>
         <div class="p-5" id="example">
             <div class="preview">
@@ -30,15 +43,21 @@
                                     <td>{{ $purchase->id }}</td>
                                     <td>{{ App\Models\Inventory::find($purchase->product_id)->product_name }}</td>
                                     <td>{{ $purchase->quantity }}</td>
-                                     <td class="w-40">
-                                            <div class="flex items-center justify-center {{$purchase->order_status == 'pending' ? 'text-red-500' : 'text-success'}} text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{$purchase->order_status}} </div>
-                                     </td>
-                                     <td>
-                                         <button class="btn btn-primary py-1 px-2 mr-2">Recieved</button>
-                                         <button class="btn btn-primary py-1 px-2 mr-2">Purchase Declined</button>
-                                     </td>
+                                    <td class="w-40">
+                                        <div
+                                            class="flex items-center justify-center {{ $purchase->order_status == 'pending' || $purchase->order_status == 'declined' ? 'text-red-500' : 'text-success' }} ">
+                                            <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
+                                            {{ $purchase->order_status }}
+                                        </div>
+                                    </td>
+                                    <td class="flex justify-center items-center gap-5 ">
+                                        <a class="btn btn-primary py-1 px-2 "
+                                            href="{{ route('received', $purchase->id) }}">Received</a>
+                                        <a class="btn btn-primary py-1 px-2 "
+                                            href="{{ route('declined', $purchase->id) }}">Purchase Declined</a>
+                                    </td>
 
-                                        {{-- <div class="flex mt-4 lg:mt-0">
+                                    {{-- <div class="flex mt-4 lg:mt-0">
 
                                             <a href="{{ route('all.purchases', $product->id) }}"
                                                 class="btn btn-primary py-1 px-2 mr-2">Edit
@@ -48,13 +67,14 @@
                                                 @csrf
                                                 {{-- @method('DELETE') --}}
 
-                                                {{-- <button type="submit"
+                                    {{-- <button type="submit"
                                                     class="btn btn-primary py-1 px-2 mr-2">Delete</button>
                                             </form>
                                         </div>
                                     </td> --}}
                                 </tr>
                             @endforeach
+                            {{$purchases->links()}}
                         </tbody>
                     </table>
                 </div>
