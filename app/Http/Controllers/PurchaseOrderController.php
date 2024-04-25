@@ -10,7 +10,8 @@ class PurchaseOrderController extends Controller
 {
     public function index()
     {
-         return view('purchases.all-purchases');
+         $purchases = PurchaseOrder::all();
+         return view('purchases.all-purchases', compact('purchases'));
     }
 
     public function create()
@@ -31,5 +32,17 @@ class PurchaseOrderController extends Controller
         'quantity'=>$request->quantity,
         'order_status' =>'pending'
        ]);
+
+       return redirect()->route('all-purchases');
+    }
+
+    public function received()
+    {
+      
+    }
+
+    public function purchaseDeclined()
+    {
+
     }
 }

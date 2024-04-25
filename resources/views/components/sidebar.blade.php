@@ -58,26 +58,13 @@
                                   </a>
                               </li>
                               <li>
-                                  <a href="javascript:;" class="side-menu">
+                                  <a href="/all-purchases" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title">
-                                          Products
-                                          <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
+                                          All Purchases
                                       </div>
                                   </a>
                                   <ul class="">
-                                      <li>
-                                          <a href="side-menu-light-product-list.html" class="side-menu">
-                                              <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                              <div class="side-menu__title">Product List</div>
-                                          </a>
-                                      </li>
-                                      <li>
-                                          <a href="side-menu-light-product-grid.html" class="side-menu">
-                                              <div class="side-menu__icon"> <i data-lucide="zap"></i> </div>
-                                              <div class="side-menu__title">Product Grid</div>
-                                          </a>
-                                      </li>
                                   </ul>
                               </li>
                               <li>

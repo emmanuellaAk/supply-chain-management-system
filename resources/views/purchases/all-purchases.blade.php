@@ -20,16 +20,26 @@
                                 <th class="whitespace-nowrap">#</th>
                                 <th class="whitespace-nowrap">Product</th>
                                 <th class="whitespace-nowrap">Quantity</th>
+                                <th class="text-center whitespace-nowrap">ORDER STATUS</th>
+                                <th class="text-center whitespace-nowrap">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($products as $product)
+                            @foreach ($purchases as $purchase)
                                 <tr>
-                                    <td>{{ $product->id }}</td>
-                                    <td>{{ $product->product_name }}</td>
-                                    <td>{{ $product->quantity }}</td>
+                                    <td>{{ $purchase->id }}</td>
+                                    <td>{{ App\Models\Inventory::find($purchase->product_id)->product_name }}</td>
+                                    <td>{{ $purchase->quantity }}</td>
+                                     <td class="w-40">
+                                            <div class="flex items-center justify-center {{$purchase->order_status == 'pending' ? 'text-red-500' : 'text-success'}} text-success"> <i data-lucide="check-square" class="w-4 h-4 mr-2"></i> {{$purchase->order_status}} </div>
+                                     </td>
+                                     <td>
+                                         <button class="btn btn-primary py-1 px-2 mr-2">Recieved</button>
+                                         <button class="btn btn-primary py-1 px-2 mr-2">Purchase Declined</button>
+                                     </td>
+
                                         {{-- <div class="flex mt-4 lg:mt-0">
-                                            <button class="btn btn-primary py-1 px-2 mr-2">Profile</button>
+
                                             <a href="{{ route('all.purchases', $product->id) }}"
                                                 class="btn btn-primary py-1 px-2 mr-2">Edit
                                             </a>
@@ -42,7 +52,7 @@
                                                     class="btn btn-primary py-1 px-2 mr-2">Delete</button>
                                             </form>
                                         </div>
-                                    </td> --}} 
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>
