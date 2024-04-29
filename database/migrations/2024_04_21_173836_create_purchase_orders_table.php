@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('purchase_orders', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('inventories');
+            $table->foreign('product_id')->references('id')->on('inventories')->cascadeOnUpdate()->cascadeOnDelete();;
             $table->integer('quantity');
             // $table->unsignedBigInteger('supplier_id');
             // $table->foreign('supplier_id')->references('id')->on('suppliers');

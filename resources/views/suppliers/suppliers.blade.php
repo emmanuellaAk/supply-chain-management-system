@@ -17,24 +17,24 @@
                     <table class="table table-striped" id="datatable">
                         <thead>
                             <tr>
-                                <th class="whitespace-nowrap">#</th>
-                                <th class="whitespace-nowrap">Full Name</th>
-                                <th class="whitespace-nowrap">Company Name</th>
-                                <th class="whitespace-nowrap">Mobile Number</th>
-                                <th class="whitespace-nowrap">Email</th>
-                                <th class="whitespace-nowrap">Location</th>
+                                <th class="whitespace-nowrap text-center">#</th>
+                                <th class="whitespace-nowrap text-center">Full Name</th>
+                                <th class="whitespace-nowrap text-center">Company Name</th>
+                                <th class="whitespace-nowrap text-center">Mobile Number</th>
+                                <th class="whitespace-nowrap text-center">Email</th>
+                                <th class="whitespace-nowrap text-center">Location</th>
                                 <th class="whitespace-nowrap text-center">More</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($suppliers as $supplier)
                                 <tr>
-                                    <td>{{ $supplier->id }}</td>
-                                    <td>{{ $supplier->full_name }}</td>
-                                    <td>{{ $supplier->company_name }}</td>
-                                    <td>{{ $supplier->mobile_number }}</td>
-                                    <td>{{ $supplier->email }}</td>
-                                    <td>{{ $supplier->location }}</td>
+                                    <td class="text-center">{{ $supplier->id }}</td>
+                                    <td class="text-center">{{ $supplier->full_name }}</td>
+                                    <td class="text-center">{{ $supplier->company_name }}</td>
+                                    <td class="text-center">{{ $supplier->mobile_number }}</td>
+                                    <td class="text-center">{{ $supplier->email }}</td>
+                                    <td class="text-center">{{ $supplier->location }}</td>
                                     <td>
                                         <div class="flex mt-4 lg:mt-0">
                                             <button class="btn btn-primary py-1 px-2 mr-2">Profile</button>

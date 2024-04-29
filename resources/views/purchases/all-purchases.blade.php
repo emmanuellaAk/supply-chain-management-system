@@ -10,18 +10,20 @@
             <h2 class="font-medium text-base mr-auto">
                 Purchases
             </h2>
-            <label for="purchase">STATUS</label>
 
-            <form action="{{ route('filter')}}" method="GET">
-            <select name="order_status" id="" class="intro-x login__input form-control py-3 px-4 block mt-4">
 
-                <option value="">Select</option>
-                <option value="pending">Pending</option>
-                <option value="received">Received</option>
-                <option value="declined">Declined</option>
+            <form action="{{ route('filter') }}" method="GET" class="flex justify-center items-center gap-3">
+                <label for="purchase" class="font-semibold">STATUS</label>
+                <select name="order_status" id=""
+                    class="intro-x login__input form-control p-3 h-11">
 
-            </select>
-            <button class="btn btn-primary py-1 px-2">Search</button>
+                    <option value="" class="">Select</option>
+                    <option value="pending">Pending</option>
+                    <option value="received">Received</option>
+                    <option value="declined">Declined</option>
+
+                </select>
+                <button class="btn btn-primary py-2 px-2">Search</button>
             </form>
         </div>
         <div class="p-5" id="example">
@@ -74,9 +76,11 @@
                                     </td> --}}
                                 </tr>
                             @endforeach
-                            {{$purchases->links()}}
+
                         </tbody>
+
                     </table>
+                    {{ $purchases->links() }}
                 </div>
             </div>
             <div class="source-code hidden">

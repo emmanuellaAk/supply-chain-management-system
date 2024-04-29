@@ -44,13 +44,13 @@
                             </td>
                             {{-- <td class="text-center">{{ $product->quantity }}</td> --}}
                             <td class="table-report__action w-56">
-                                <div class="flex justify-center items-center">
-                                    <a class="flex items-center mr-3" href="{{ route('edit', $product->id) }}"> <i
+                                <div class="flex justify-center ">
+                                    <a class="flex  mr-3" href="{{ route('edit', $product->id) }}"> <i
                                             data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
 
                                     <form action="{{ route('delete', $product->id) }}" method="POST">
                                         @csrf
-                                        <button class="flex items-center text-danger" type="submit"
+                                        <button class="flex  text-danger" type="submit"
                                             data-tw-target="#delete-confirmation-modal"> <i data-lucide="trash-2"
                                                 class="w-4 h-4 mr-1"></i> Delete
                                         </button>
