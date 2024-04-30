@@ -65,4 +65,4 @@ Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
 Route::get('/customers',[OrdersController::class,'create'])->name('customer-form');
 Route::post('add/customer',[OrdersController::class,'store'])->name('addCustomer');
 Route::get('/received/{id}',[OrdersController::class,'received'])->name('received');
-Route::get('/declined/{id}',OrdersController::class, 'declined')->name('declined');
+Route::get('/canceled/{id}',[OrdersController::class, 'canceled'])->name('canceled');

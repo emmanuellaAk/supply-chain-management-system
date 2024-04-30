@@ -41,16 +41,16 @@
                             <td class="text-center">{{ $order->delivery_type }}</td>
                             <td class="w-40">
                                 <div
-                                    class="flex items-center justify-center {{ $order->order_status == 'pending' || $order->order_status == 'declined' ? 'text-red-500' : 'text-success' }} ">
+                                    class="flex items-center justify-center {{ $order->order_status == 'pending' || $order->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">
                                     <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
                                     {{ $order->order_status }}
                                 </div>
                             </td>
                             <td class="flex justify-center items-center gap-5 ">
                                 <a class="btn btn-primary py-1 px-2 "
-                                    href="{{ route('received', $order->id) }}">Received</a>
+                                    href="{{ route('received', $order->id) }}">Delivered</a>
                                 <a class="btn btn-primary py-1 px-2 "
-                                    href="{{ route('declined', $order->id) }}">Purchase Declined</a>
+                                    href="{{ route('canceled', $order->id) }}">Canceled</a>
                             </td>
                         </tr>
                     @endforeach

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Orders;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -40,6 +41,24 @@ class OrdersController extends Controller
 
     public function received($id)
     {
-      order
+      $order = Orders::findorfail($id);
+      if ($order->order_status !=='received') {
+        $product = Inventory::findorfail($order->product_id);
+
+        $currentQuantity = $product->quantity;
+
+        $newQuantity = $currentQuantity - $order->quantity;
+
+        $product->update(['quantity'=> $newQuantity]);
+      }
+    }
+
+    public function canceled($id)
+    {
+        Orders::where('id', $id)->update([
+            'order_status' => "canceled"
+        ]);
+
+        return redirect()->back();
     }
 }
