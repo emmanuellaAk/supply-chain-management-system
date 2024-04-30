@@ -7,6 +7,7 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,7 +58,11 @@ Route::get('/inventory-form', [InventoryController::class, 'create']);
 Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product');
 
 Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit');
-Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product');
+Route::post('/edit-pro   duct{product}',[InventoryController::class, 'update'])->name('edit-product');
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete');
 
-
+Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
+Route::get('/customers',[OrdersController::class,'create'])->name('customer-form');
+Route::post('add/customer',[OrdersController::class,'store'])->name('addCustomer');
+Route::get('/received/{id}',[OrdersController::class,'received'])->name('received');
+Route::get('/declined/{id}',OrdersController::class, 'declined')->name('declined');

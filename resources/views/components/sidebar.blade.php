@@ -78,16 +78,28 @@
                               </div>
                           </a>
                       </li>
-                      <li>
+                  <li>
                           <a href="javascript:;" class="side-menu">
-                              <div class="side-menu__icon"> <i data-lucide="users"></i> </div>
+                              <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                               <div class="side-menu__title">
                                   Orders
-                                  {{-- <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div> --}}
+                                  <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                               </div>
                           </a>
+                          <ul class="">
+                              <li>
+                                  <a href="{{ route('orders')}}" class="side-menu">
+                                      <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                      <div class="side-menu__title"> Customers </div>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="{{ route('customer-form')}}" class="side-menu">
+                                      <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                      <div class="side-menu__title"> Add Customer</div>
+                                  </a>
+                              </li>
+                          </ul>
                       </li>
-                  </ul>
-                  </li>
                   </ul>
               </nav>
