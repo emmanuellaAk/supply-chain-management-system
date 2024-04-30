@@ -40,6 +40,6 @@ class OrdersController extends Controller
 
     public function received($id)
     {
-      
+      order
     }
 }
