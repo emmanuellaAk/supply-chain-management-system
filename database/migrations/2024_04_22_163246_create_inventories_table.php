@@ -18,6 +18,7 @@ return new class extends Migration
             // $table->string('quantity');
             $table->decimal('cost_price', 10, 2);
             $table->decimal('selling_price', 10, 2);
+            $table->integer('quantity');
             $table->unsignedBigInteger('supplier_id');
             $table->foreign('supplier_id')->references('id')->on('suppliers')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();

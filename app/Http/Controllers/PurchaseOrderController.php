@@ -22,15 +22,17 @@ class PurchaseOrderController extends Controller
 
     public function store(Request $request)
     {
-        $attributes = request()->validate([
-            'product' => 'required',
-            'quantity' => 'required',
+        // Validate the incoming request data
+        $request->validate([
+            'product' => 'required|exists:inventories,id',
+            'quantity' => 'required|integer|min:1',
         ]);
 
-        PurchaseOrder::create([
-            'product_id' => $request->product,
-            'quantity' => $request->quantity,
-            'order_status' => 'pending'
+        // Create a new purchase order
+        $purchase = PurchaseOrder::create([
+            'product_id' => $request->input('product'),
+            'quantity' => $request->input('quantity'),
+            'order_status' => 'pending',
         ]);
 
         return redirect()->route('all-purchases');
@@ -38,9 +40,22 @@ class PurchaseOrderController extends Controller
 
     public function received($id)
     {
-        PurchaseOrder::where('id', $id)->update([
-            'order_status' => "received"
-        ]);
+        $order = PurchaseOrder::findOrFail($id);
+        if ($order->order_status !== 'received') {
+            // Retrieve the product based on the provided ID
+            $product = Inventory::findOrFail($order->product_id);
+
+            // Get the current quantity of the product
+            $currentQuantity = $product->quantity;
+
+            // Add the ordered quantity to the current quantity
+            $newQuantity = $currentQuantity + $order->quantity;
+
+            // Update the quantity of the product
+            $product->update(['quantity' => $newQuantity]);
+        }
+
+        $order->update(['order_status' => 'received']);
 
         return redirect()->back();
     }
@@ -56,13 +71,7 @@ class PurchaseOrderController extends Controller
 
     public function filter(Request $request)
     {
-        // return $request->order_status;
-        $filter = PurchaseOrder::where([
-           'order_status'=> $request->order_status
-        ])->get();
-
-        return view('purchases.all-purchases', ['purchases' => $filter ]);
-
-
+        $filter = PurchaseOrder::where('order_status', $request->order_status)->get();
+        return view('purchases.all-purchases', ['purchases' => $filter]);
     }
 }

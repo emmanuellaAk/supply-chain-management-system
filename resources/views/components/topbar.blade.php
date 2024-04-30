@@ -22,7 +22,7 @@
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
-            <span class="text-white text-sm ml-3">WELCOME</span>
+            <span class="text-white text-sm ml-3">WELCOME: {{ auth()->user()->name }}</span>
             {{-- <div class="search hidden sm:block">
                         <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                         <i data-lucide="search" class="search__icon dark:text-slate-500"></i>

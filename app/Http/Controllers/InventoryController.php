@@ -35,14 +35,16 @@ class InventoryController extends Controller
             'product_name' => 'required',
             'cost_price' => 'required',
             'selling_price' => 'required',
-            'supplier'=>'required'
+            'supplier'=>'required',
+            'quantity' => 'required'
         ]);
 
         Inventory::create([
             'product_name' => $request->product_name,
             'cost_price' => $request->cost_price,
             'selling_price' => $request->selling_price,
-            'supplier_id'=>$request->supplier
+            'supplier_id'=>$request->supplier,
+            'quantity' => $request->quantity
         ]);
 
         return redirect()->route('inventory');
