@@ -1,5 +1,6 @@
 <x-head />
 <x-topbar />
+<x-notification/>
 <x-sidebar />
 <div class="content">
     <h2 class="intro-y text-lg font-medium mt-10">
@@ -31,7 +32,7 @@
                         <th class="text-center whitespace-nowrap">SELLING PRICE</th>
                         <th class="text-center whitespace-nowrap">QUANTITY</th>
                         <th class="text-center whitespace-nowrap">SUPPLIERS</th>
-                        {{-- <th class="text-center whitespace-nowrap">QUANTITY AVAILABLE</th> --}}
+                        <th class="text-center whitespace-nowrap">PREDICTED PROFIT</th>
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
                 </thead>
@@ -44,7 +45,7 @@
                             <td class="text-center">{{ $product->quantity }}</td>
                             <td class="text-center">{{ App\Models\Supplier::find($product->supplier_id)->full_name }}
                             </td>
-                            {{-- <td class="text-center">{{ $product->quantity }}</td> --}}
+                            <td class="text-center">{{ ($product->cost_price - $product->selling_price) * $product->quantity }}</td>
                             <td class="table-report__action w-56">
                                 <div class="flex justify-center ">
                                     <a class="flex  mr-3" href="{{ route('edit', $product->id) }}"> <i
