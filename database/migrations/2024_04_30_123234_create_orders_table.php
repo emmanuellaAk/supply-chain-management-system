@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('customer_name');
             $table->string('location');
-            $table->string('delivery_type');
-            $table->string('order_status');
             $table->timestamps();
         });
     }

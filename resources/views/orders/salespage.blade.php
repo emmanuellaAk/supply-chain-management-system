@@ -42,10 +42,11 @@
                                 <td class="text-center">{{ $product->selling_price }}</td>
                                 <td class="flex justify-center items-center">
                                     <!-- Move the input box here -->
-                                       <input type="text" name="figures" class="flex justify-center items-center">
+                                       <input type="text" name="figures" class="flex justify-center items-center  border-2 border-gray-800">
                                 </td>
                             </tr>
                         @endforeach
+                        
                     </form>
                 </tbody>
             </table>

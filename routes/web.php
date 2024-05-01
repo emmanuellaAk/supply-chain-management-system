@@ -62,7 +62,7 @@ Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit'
 Route::post('/edit-pro   duct{product}',[InventoryController::class, 'update'])->name('edit-product');
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete');
 
-Route::get('/orders', [CustomersController::class, 'index'])->name('orders');
+Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');
 Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
 Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
 Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
@@ -70,4 +70,4 @@ Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('can
 
 Route::get('/orders1',[OrdersController::class, 'index'])->name('salesPoint');
 Route::post('/sendCart',[OrdersController::class, 'store'])->name('sendCart');
-
+Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');

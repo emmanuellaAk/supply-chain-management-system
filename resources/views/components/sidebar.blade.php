@@ -88,7 +88,7 @@
                           </a>
                           <ul class="">
                               <li>
-                                  <a href="{{ route('orders')}}" class="side-menu">
+                                  <a href="{{ route('customersPage')}}" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Customers </div>
                                   </a>
@@ -103,6 +103,12 @@
                                   <a href="{{ route('salesPoint')}}" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Sales Point</div>
+                                  </a>
+                              </li>
+                              <li>
+                                  <a href="{{ route('showOrders')}}" class="side-menu">
+                                      <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
+                                      <div class="side-menu__title"> Orders </div>
                                   </a>
                               </li>
                           </ul>

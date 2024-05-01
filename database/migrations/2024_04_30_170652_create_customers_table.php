@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->integer('quantity');
+            $table->string('delivery_type');
+            $table->string('order_status');
             // $table->unsignedBigInteger('product_id');
             $table->foreignId('product_id')->references('id')->on('inventories')->cascadeOnUpdate()->cascadeOnDelete();
             // $table->unsignedBigInteger('customer_id');
