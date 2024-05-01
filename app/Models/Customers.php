@@ -9,4 +9,10 @@ class Customers extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'], function ($query, $search) {
+            $query->where('customer_name', 'like', '%' . $search . '%');
+        });
+    }
 }

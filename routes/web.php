@@ -65,9 +65,11 @@ Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name(
 Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');
 Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
 Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
-Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
-Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
+// Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
+// Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
 
 Route::get('/orders1',[OrdersController::class, 'index'])->name('salesPoint');
 Route::post('/sendCart',[OrdersController::class, 'store'])->name('sendCart');
 Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
+Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
+Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');

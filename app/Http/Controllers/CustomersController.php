@@ -11,8 +11,16 @@ class CustomersController extends Controller
 {
     public function index()
     {
-        $customers = Customers::all();
-        return view('orders.order', compact('customers'));
+
+        $filter = request()->search;
+
+        return view('orders.order', [
+            'customers' =>Customers::latest()->filter([
+                'search' => $filter
+            ])->paginate(9)
+        ]);
+        // $customers = Customers::all();
+        // return view('orders.order', compact('customers'));
     }
 
     public function create()
@@ -33,33 +41,33 @@ class CustomersController extends Controller
         Customers::create([
         'customer_name'=>$request->customer_name,
         'location'=>$request->location,
-        'delivery_type'=>'pickup',
-        'order_status'=>'pending'
+        // 'delivery_type'=>'pickup',
+        // 'order_status'=>'pending'
        ]);
 
-       return redirect()->route('orders');
+       return redirect()->route('customersPage');
     }
 
-    public function received($id)
-    {
-      $order = Customers::findorfail($id);
-      if ($order->order_status !=='received') {
-        $product = Inventory::findorfail($order->product_id);
+    // public function received($id)
+    // {
+    //   $order = Customers::findorfail($id);
+    //   if ($order->order_status !=='received') {
+    //     $product = Inventory::findorfail($order->product_id);
 
-        $currentQuantity = $product->quantity;
+    //     $currentQuantity = $product->quantity;
 
-        $newQuantity = $currentQuantity - $order->quantity;
+    //     $newQuantity = $currentQuantity - $order->quantity;
 
-        $product->update(['quantity'=> $newQuantity]);
-      }
-    }
+    //     $product->update(['quantity'=> $newQuantity]);
+    //   }
+    // }
 
-    public function canceled($id)
-    {
-        Orders::where('id', $id)->update([
-            'order_status' => "canceled"
-        ]);
+    // public function canceled($id)
+    // {
+    //     Orders::where('id', $id)->update([
+    //         'order_status' => "canceled"
+    //     ]);
 
-        return redirect()->back();
-    }
+    //     return redirect()->back();
+    // }
 }

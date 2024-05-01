@@ -13,7 +13,7 @@
             <div class="hidden md:block mx-auto text-slate-500"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
-                    <form method="GET" action="{{ route('salesPoint') }}">
+                    <form method="GET" action="{{ route('showOrders') }}">
                         <input type="text" class="form-control w-56 box pr-10" placeholder="Search..." name="search"
                             value="{{ request('search') }}">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
@@ -33,18 +33,30 @@
                         <th class="text-center whitespace-nowrap">ACTIONS</th>
                     </tr>
                 </thead>
-                {{-- <tbody>
+                <tbody>
                         @csrf
                         @foreach ($orders as $order)
                             <tr class="intro-x">
                                 <td class="w-40">{{ $order->id }}</td>
-                                <td class="text-center">{{   }}</td>
-                                <td class="text-center">{{ $order->order_status }}</td>
+                                <td></td>
+                                {{-- <td class="text-center">{{   }}</td> --}}
+                                <td></td>
+                                 <td class="w-40">
+                                <div
+                                    class="flex items-center justify-center {{ $order->order_status == 'pending' || $order->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">
+                                    <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
+                                    {{ $order->order_status }}
+                                </div>
+                            </td>
+                            <td class="flex justify-center items-center gap-5 ">
+                                <a class="btn btn-primary py-1 px-2 "
+                                    href="{{ route('received', $order->id) }}">Delivered</a>
+                                <a class="btn btn-primary py-1 px-2 "
+                                    href="{{ route('canceled', $order->id) }}">Canceled</a>
+                            </td>
                             </tr>
                         @endforeach
-
-
-                </tbody> --}}
+                </tbody>
             </table>
             {{-- {{ $products->links() }} --}}
         </div>

@@ -13,7 +13,7 @@
             <div class="hidden md:block mx-auto text-slate-500"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
-                    <form method="GET" action="/orders">
+                    <form method="GET" action="/customersPage">
                         <input type="text" class="form-control w-56 box pr-10" placeholder="Search..." name="search"
                             value="{{ request('search') }}">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
@@ -28,9 +28,9 @@
                     <tr>
                         <th class="text-center whitespace-nowrap">CUSTOMER NAME</th>
                         <th class="text-center whitespace-nowrap">LOCATION</th>
-                        <th class="text-center whitespace-nowrap">DELIVERY TYPE</th>
-                        <th class="text-center whitespace-nowrap">ORDER STATUS</th>
-                        <th class="text-center whitespace-nowrap">ACTIONS</th>
+                        {{-- <th class="text-center whitespace-nowrap">DELIVERY TYPE</th> --}}
+                        {{-- <th class="text-center whitespace-nowrap">ORDER STATUS</th>
+                        <th class="text-center whitespace-nowrap">ACTIONS</th> --}}
                     </tr>
                 </thead>
                 <tbody>
@@ -38,8 +38,7 @@
                         <tr class="intro-x">
                             <td class="w-40">{{$customer->customer_name }}</td>
                             <td class="text-center">{{ $customer->location }}</td>
-                            <td class="text-center">{{ $customer->delivery_type }}</td>
-                            <td class="w-40">
+                            {{-- <td class="w-40">
                                 <div
                                     class="flex items-center justify-center {{ $customer->order_status == 'pending' || $customers->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">
                                     <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
@@ -51,7 +50,7 @@
                                     href="{{ route('received', $customer->id) }}">Delivered</a>
                                 <a class="btn btn-primary py-1 px-2 "
                                     href="{{ route('canceled', $customer->id) }}">Canceled</a>
-                            </td>
+                            </td> --}}
                         </tr>
                     @endforeach
                 </tbody>
