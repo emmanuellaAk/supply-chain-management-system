@@ -40,18 +40,17 @@
                                 <td class="w-40">{{ $product->product_name }}</td>
                                 <td class="text-center">{{ $product->quantity }}</td>
                                 <td class="text-center">{{ $product->selling_price }}</td>
-                                <td class="flex judtify-center items-center">
-
-                                    <input type="text" name="figures" class="flex justify-center items-center">
-
+                                <td class="flex justify-center items-center">
+                                    <!-- Move the input box here -->
+                                       <input type="text" name="figures" class="flex justify-center items-center">
                                 </td>
                             </tr>
                         @endforeach
                     </form>
-
                 </tbody>
             </table>
             {{-- {{ $products->links() }} --}}
         </div>
     </div>
     <x-script />
+</div>

@@ -18,10 +18,15 @@ class OrdersController extends Controller
         // $products = Inventory::all();
         $filter = request()->search;
 
-        return view('orders.orderspage', [
+        return view('orders.salespage', [
             'products' => Inventory::latest()->filter([
                 'search' => $filter
             ])->paginate(9)
         ]);
+    }
+
+    public function show()
+    {
+        return view('orders.showorders');
     }
 }
