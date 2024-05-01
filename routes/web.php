@@ -2,12 +2,13 @@
 
 use App\Models\PurchaseOrder;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +62,12 @@ Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit'
 Route::post('/edit-pro   duct{product}',[InventoryController::class, 'update'])->name('edit-product');
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete');
 
-Route::get('/orders', [OrdersController::class, 'index'])->name('orders');
-Route::get('/customers',[OrdersController::class,'create'])->name('customer-form');
-Route::post('add/customer',[OrdersController::class,'store'])->name('addCustomer');
-Route::get('/received/{id}',[OrdersController::class,'received'])->name('received');
-Route::get('/canceled/{id}',[OrdersController::class, 'canceled'])->name('canceled');
+Route::get('/orders', [CustomersController::class, 'index'])->name('orders');
+Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
+Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
+Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
+Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
+
+Route::get('/orders1',[OrdersController::class, 'index'])->name('salesPoint');
+Route::post('/sendCart',[OrdersController::class, 'store'])->name('sendCart');
+

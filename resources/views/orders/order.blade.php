@@ -34,23 +34,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($orders as $order)
+                    @foreach ($customers as $customer)
                         <tr class="intro-x">
-                            <td class="w-40">{{ $order->customer_name }}</td>
-                            <td class="text-center">{{ $order->location }}</td>
-                            <td class="text-center">{{ $order->delivery_type }}</td>
+                            <td class="w-40">{{$customer->customer_name }}</td>
+                            <td class="text-center">{{ $customer->location }}</td>
+                            <td class="text-center">{{ $customer->delivery_type }}</td>
                             <td class="w-40">
                                 <div
-                                    class="flex items-center justify-center {{ $order->order_status == 'pending' || $order->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">
+                                    class="flex items-center justify-center {{ $customer->order_status == 'pending' || $customers->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">
                                     <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
-                                    {{ $order->order_status }}
+                                    {{ $customer->order_status }}
                                 </div>
                             </td>
                             <td class="flex justify-center items-center gap-5 ">
                                 <a class="btn btn-primary py-1 px-2 "
-                                    href="{{ route('received', $order->id) }}">Delivered</a>
+                                    href="{{ route('received', $customer->id) }}">Delivered</a>
                                 <a class="btn btn-primary py-1 px-2 "
-                                    href="{{ route('canceled', $order->id) }}">Canceled</a>
+                                    href="{{ route('canceled', $customer->id) }}">Canceled</a>
                             </td>
                         </tr>
                     @endforeach
