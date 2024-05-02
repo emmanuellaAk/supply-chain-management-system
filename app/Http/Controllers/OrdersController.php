@@ -6,6 +6,7 @@ use App\Models\Orders;
 use App\Models\Customers;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class OrdersController extends Controller
 {
@@ -29,19 +30,29 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+
         // Validate the request
-        $request->validate([
+
+        $quantities =
+        array_filter($request->quantity);
+        $validation = Validator::make($request->all(), [
             'quantity' => 'required',
+            'quantities.' => 'required',
             'delivery_type' => 'required',
+            'customer_name'=> 'required'
         ]);
 
-        Orders::create([
-            'quantity' => $request->quantity,
-            'delivery_type' => $request->delivery_type,
-            'order_status' => 'pending',
-            'product_id' => $request->product_id,
-        ]);
+        if ($validation->fails()) {
+            // dd($validation->errors()->messages());
+            return back()->with('error', $validation->errors()->messages());
+        }
+        dd('hello');
+        // Orders::create([
+        //     'quantity' => $request->quantity,
+        //     'delivery_type' => $request->delivery_type,
+        //     'order_status' => 'pending',
+        //     'product_id' => $request->product_id,
+        // ]);
 
         return redirect()->route('showOrders');
     }

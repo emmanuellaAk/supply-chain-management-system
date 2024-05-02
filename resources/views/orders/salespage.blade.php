@@ -22,12 +22,29 @@
                     </form>
                 </div>
 
-                <select name="customer" id="" class="form-control col-span-4">
-                    <option> Select a customer </option>
-                    @foreach ($customers as $customer)
-                        <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
-                    @endforeach
-                </select>
+                <form action="{{ route('orderInfo') }}" method="POST">
+                    @csrf
+                    <select name="customer" id="" class="form-control col-span-4">
+                        <option> Select a Customer </option>
+                        @foreach ($customers as $customer)
+                            <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                        @endforeach
+                    </select>
+
+                    @error('customer_name')
+                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                    @enderror
+
+                    <select name="delivery_type" class="border-2 border-blue-800">
+                        <option>Select an Option</option>
+                        <option value="delivery">Delivery</option>
+                        <option value="pickup">Pickup</option>
+                    </select>
+                    @error('delivery_type')
+                        <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                    @enderror
+
+
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -39,31 +56,25 @@
                         <th class="text-center whitespace-nowrap">QUANTITY AVAILABLE</th>
                         <th class="text-center whitespace-nowrap">PRICE</th>
                         <th class="text-center whitespace-nowrap">QUANTITY</th>
-                        <th class="text-center whitespace-nowrap">DELIVERY TYPE</th>
+                        {{-- <th class="text-center whitespace-nowrap">DELIVERY TYPE</th> --}}
                     </tr>
                 </thead>
                 <tbody>
-                    <form action="{{ route('orderInfo') }}" method="POST">
-                        @csrf
-                        @foreach ($products as $product)
-                            <tr class="intro-x">
-                                <td class="w-40">{{ $product->product_name }}</td>
-                                <td class="text-center">{{ $product->quantity }}</td>
-                                <td class="text-center">{{ $product->selling_price }}</td>
-                                <td class="flex justify-center items-center">
-                                    <input type="text" name="quantity"
-                                        class="flex justify-center items-center  border-2 border-gray-800">
-                                </td>
-                                <td class="">
-                                    <select name="delivery_type" class="border-2 border-blue-800">
-                                        <option value="delivery">Delivery</option>
-                                        <option value="pickup">Pickup</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        @endforeach
+                    @foreach ($products as $product)
+                        <tr class="intro-x">
+                            <td class="w-40">{{ $product->product_name }}</td>
+                            <td class="text-center">{{ $product->quantity }}</td>
+                            <td class="text-center">{{ $product->selling_price }}</td>
 
-
+                            <td class="flex justify-center items-center">
+                                <input type="text" name="quantity[{{ $product->id }}]"
+                                    class="flex justify-center items-center  border-2 border-gray-800">
+                            </td>
+                        </tr>
+                    @endforeach
+                    @error('quantity')
+                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                    @enderror
                 </tbody>
             </table>
             <button class="btn btn-primary flex justify-center items-center">Send Order</button>
