@@ -13,12 +13,21 @@
             <div class="hidden md:block mx-auto text-slate-500"></div>
             <div class="w-full sm:w-auto mt-3 sm:mt-0 sm:ml-auto md:ml-0">
                 <div class="w-56 relative text-slate-500">
-                    <form method="GET" action="{{ route('salesPoint')}}">
+                    <form action="{{ route('salesPoint') }}" method="POST">
+
+                        @csrf
                         <input type="text" class="form-control w-56 box pr-10" placeholder="Search..." name="search"
                             value="{{ request('search') }}">
                         <i class="w-4 h-4 absolute my-auto inset-y-0 mr-3 right-0" data-lucide="search"></i>
                     </form>
                 </div>
+
+                <select name="customer" id="" class="form-control col-span-4">
+                    <option> Select a customer </option>
+                    @foreach ($customers as $customer)
+                        <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
+                    @endforeach
+                </select>
             </div>
         </div>
         <!-- BEGIN: Data List -->
@@ -34,7 +43,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <form action="" method="POST">
+                    <form action="{{ route('orderInfo') }}" method="POST">
                         @csrf
                         @foreach ($products as $product)
                             <tr class="intro-x">
@@ -42,14 +51,23 @@
                                 <td class="text-center">{{ $product->quantity }}</td>
                                 <td class="text-center">{{ $product->selling_price }}</td>
                                 <td class="flex justify-center items-center">
-                                <input type="text" name="figures" class="flex justify-center items-center  border-2 border-gray-800">
+                                    <input type="text" name="quantity"
+                                        class="flex justify-center items-center  border-2 border-gray-800">
+                                </td>
+                                <td class="">
+                                    <select name="delivery_type" class="border-2 border-blue-800">
+                                        <option value="delivery">Delivery</option>
+                                        <option value="pickup">Pickup</option>
+                                    </select>
                                 </td>
                             </tr>
                         @endforeach
 
-                    </form>
+
                 </tbody>
             </table>
+            <button class="btn btn-primary flex justify-center items-center">Send Order</button>
+            </form>
             {{-- {{ $products->links() }} --}}
         </div>
     </div>

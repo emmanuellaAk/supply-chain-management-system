@@ -69,7 +69,7 @@ Route::post('add/customer',[CustomersController::class,'store'])->name('addCusto
 // Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
 
 Route::get('/orders1',[OrdersController::class, 'index'])->name('salesPoint');
-Route::post('/sendCart',[OrdersController::class, 'store'])->name('sendCart');
+Route::post('/sendCart',[OrdersController::class, 'store'])->name('orderInfo');
 Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
 Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
 Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');

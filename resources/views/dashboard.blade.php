@@ -35,8 +35,8 @@
                                                     class="w-4 h-4 ml-0.5"></i> </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">4.710</div>
-                                    <div class="text-base text-slate-500 mt-1">Item Sales</div>
+                                    <div class="text-xl font-medium leading-8 mt-6">Money</div>
+                                    <div class="text-base text-slate-500 mt-1">profit</div>
                                 </div>
                             </div>
                         </div>
@@ -52,8 +52,8 @@
                                                     class="w-4 h-4 ml-0.5"></i> </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">3.721</div>
-                                    <div class="text-base text-slate-500 mt-1">New Orders</div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">TOTAL PRODUCTS</div>
+                                    <div class="text-base text-slate-500 mt-1">products Left</div>
                                 </div>
                             </div>
                         </div>
@@ -68,8 +68,8 @@
                                                 {{-- title="12% Higher than last month"> 12% <i data-lucide="chevron-up" --}} class="w-4 h-4 ml-0.5"></i> </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">2.149</div>
-                                    <div class="text-base text-slate-500 mt-1">Total Products</div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">PENDING ORDERS</div>
+                                    <div class="text-base text-slate-500 mt-1">check on pending</div>
                                 </div>
                             </div>
                         </div>
@@ -84,8 +84,8 @@
                                                 {{-- title="22% Higher than last month"> 22% <i data-lucide="chevron-up" --}} class="w-4 h-4 ml-0.5"></i> </div>
                                         </div>
                                     </div>
-                                    <div class="text-3xl font-medium leading-8 mt-6">152.040</div>
-                                    <div class="text-base text-slate-500 mt-1">Unique Visitor</div>
+                                    <div class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</div>
+                                    <div class="text-base text-slate-500 mt-1">Report a problem</div>
                                 </div>
                             </div>
                         </div>

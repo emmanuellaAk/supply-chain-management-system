@@ -22,13 +22,53 @@ class OrdersController extends Controller
         return view('orders.salespage', [
             'products' => Inventory::latest()->filter([
                 'search' => $filter
-            ])->paginate(9)
+            ])->paginate(9),
+            'customers'=>Customers::all()
         ]);
     }
 
+    public function store(Request $request)
+    {
+        dd($request);
+        // Validate the request
+        $request->validate([
+            'quantity' => 'required',
+            'delivery_type' => 'required',
+        ]);
+
+        Orders::create([
+            'quantity' => $request->quantity,
+            'delivery_type' => $request->delivery_type,
+            'order_status' => 'pending',
+            'product_id' => $request->product_id,
+        ]);
+
+        return redirect()->route('showOrders');
+    }
+    // }
+
+    //  public function store(Request $request)
+    // {
+
+    //     $request->validate([
+    //         'product' => 'required|exists:inventories,id',
+    //         'quantity' => 'required|integer|min:1',
+    //     ]);
+
+
+    //    PurchaseOrder::create([
+    //         'product_id' => $request->input('product'),
+    //         'quantity' => $request->input('quantity'),
+    //         'order_status' => 'pending',
+    //     ]);
+
+    //     return redirect()->route('all-purchases');
+    // }
+
     public function show()
-    {   $orders = Orders::all();
-        return view('orders.showorders', ['orders'=> $orders]);
+    {
+        $orders = Orders::all();
+        return view('orders.showorders', ['orders' => $orders]);
         // $filter = request()->search;
 
         // return view('orders.showorders', [
@@ -61,3 +101,4 @@ class OrdersController extends Controller
         return redirect()->back();
     }
 }
+
