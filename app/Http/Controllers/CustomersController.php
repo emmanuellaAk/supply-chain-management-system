@@ -58,6 +58,8 @@ class CustomersController extends Controller
         $newQuantity = $currentQuantity - $order->quantity;
 
         $product->update(['quantity'=> $newQuantity]);
+
+        return redirect()->route('customers')->with('Success', 'Successfully updated');
       
     }
 

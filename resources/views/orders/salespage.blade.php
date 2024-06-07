@@ -35,14 +35,14 @@
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror
 
-                    <select name="delivery_type" class="border-2 border-blue-800">
+                    <!-- <select name="delivery_type" class="border-2 border-blue-800">
                         <option>Select an Option</option>
                         <option value="delivery">Delivery</option>
                         <option value="pickup">Pickup</option>
-                    </select>
-                    @error('delivery_type')
+                    </select> -->
+                    <!-- @error('delivery_type')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                    @enderror
+                    @enderror -->
 
 
             </div>
