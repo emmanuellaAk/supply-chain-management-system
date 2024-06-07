@@ -47,14 +47,15 @@
                                     <td>{{ $purchase->quantity }}</td>
                                     <td class="w-40">
                                         <div
-                                            class="flex items-center justify-center {{ $purchase->order_status == 'pending' || $purchase->order_status == 'declined' ? 'text-red-500' : 'text-success' }} ">
+                                            class="flex items-center justify-center {{ $purchase->order_status == 'pending' ||
+                                            $purchase->order_status == 'declined' ? 'text-red-500' : 'text-success' }} ">
                                             <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
                                             {{ $purchase->order_status }}
                                         </div>
                                     </td>
                                     <td class="flex justify-center items-center gap-5 ">
                                         <a class="btn btn-primary py-1 px-2 "
-                                            href="{{ route('received', $purchase->id) }}">Received</a>
+                                            href="{{ route('receive',['id'=>$purchase->id] ) }}">Received</a>
                                         <a class="btn btn-primary py-1 px-2 "
                                             href="{{ route('declined', $purchase->id) }}">Purchase Declined</a>
                                     </td>
@@ -83,12 +84,6 @@
                     {{ $purchases->links() }}
                 </div>
             </div>
-            <div class="source-code hidden">
-                <button data-target="#copy-striped-rows-table" class="copy-code btn py-1 px-2 btn-outline-secondary"> <i
-                        data-lucide="file" class="w-4 h-4 mr-2"></i> Copy example code </button>
-                <div class="overflow-y-auto mt-3 rounded-md">
-                    <pre class="source-preview" id="copy-striped-rows-table"> <code class="html"> HTMLOpenTagdiv class=&quot;overflow-x-auto&quot;HTMLCloseTag HTMLOpenTagtable class=&quot;table table-striped&quot;HTMLCloseTag HTMLOpenTagtheadHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagth class=&quot;whitespace-nowrap&quot;HTMLCloseTag#HTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;whitespace-nowrap&quot;HTMLCloseTagFirst NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;whitespace-nowrap&quot;HTMLCloseTagLast NameHTMLOpenTag/thHTMLCloseTag HTMLOpenTagth class=&quot;whitespace-nowrap&quot;HTMLCloseTagUsernameHTMLOpenTag/thHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/theadHTMLCloseTag HTMLOpenTagtbodyHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtdHTMLCloseTag1HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagAngelinaHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagJolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTag@angelinajolieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtdHTMLCloseTag2HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagBradHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagPittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTag@bradpittHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTagtrHTMLCloseTag HTMLOpenTagtdHTMLCloseTag3HTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagCharlieHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTagHunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTagtdHTMLCloseTag@charliehunnamHTMLOpenTag/tdHTMLCloseTag HTMLOpenTag/trHTMLCloseTag HTMLOpenTag/tbodyHTMLCloseTag HTMLOpenTag/tableHTMLCloseTag HTMLOpenTag/divHTMLCloseTag </code> </pre>
-                </div>
             </div>
         </div>
     </div>

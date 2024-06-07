@@ -22,9 +22,9 @@
                     @enderror
                     <br>
 
-                    <label for="company_name" class="m-2">Company Name</label>
+                    <label for="company" class="m-2">Company Name</label>
                     <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4"
-                        name="company_name" placeholder="company name" value="{{ old('company_name', $user->company_name) }}">
+                        name="company_name" placeholder="company name" value="{{ old('company', $user->company) }}">
                     @error('company_name')
                         <p class="text-danger text-xs mt-2">{{ $message }}</p>
                     @enderror

@@ -40,9 +40,33 @@ class PurchaseOrderController extends Controller
 
     public function received($id)
     {
-        $order = PurchaseOrder::findOrFail($id);
-        if ($order->order_status !== 'received') {
-          
+    // $order = PurchaseOrder::findOrFail($id);
+        // if ($order->order_status == 'received') {
+        
+            // $product = Inventory::findOrFail($order->product_id);
+
+            // $currentQuantity = $product->quantity;
+
+            // $newQuantity = $currentQuantity + $order->quantity;
+
+            // $product->update(['quantity' => $newQuantity]);
+
+            PurchaseOrder::where('id' ,$id)->update(['order_status' => "received"]);
+
+            
+
+           return redirect()->back();
+        
+    }
+
+    public function receive($id){
+
+        PurchaseOrder::where('id', $id)->update([
+            'order_status' => "received"
+        ]);
+
+           $order = PurchaseOrder::findOrFail($id);
+        
             $product = Inventory::findOrFail($order->product_id);
 
             $currentQuantity = $product->quantity;
@@ -50,12 +74,10 @@ class PurchaseOrderController extends Controller
             $newQuantity = $currentQuantity + $order->quantity;
 
             $product->update(['quantity' => $newQuantity]);
+
+            return redirect()->route('all-purchases')->with('Success', 'Successfully updated');
+    
         }
-
-        $order->update(['order_status' => 'received']);
-
-        return redirect()->back();
-    }
 
     public function declined($id)
     {

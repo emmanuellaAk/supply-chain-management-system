@@ -25,7 +25,7 @@ class AuthenticationController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
-            'company_name' => 'required',
+            'company' => 'required',
             'mobile_number' => 'required'
 
         ]);

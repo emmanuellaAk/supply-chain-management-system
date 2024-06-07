@@ -49,9 +49,9 @@
                             @enderror
                             <br>
 
-                            <label for="company_name">Company Name</label>
-                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="company_name" placeholder="Company Name" required>
-                            @error('company_name')
+                            <label for="company">Company Name</label>
+                            <input type="text" class="intro-x login__input form-control py-3 px-4 block mt-4" name="company" placeholder="Company Name" required>
+                            @error('company')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
                             <br>

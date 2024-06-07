@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use App\Models\PurchaseOrder;
 use Illuminate\Support\Facades\Route;
@@ -51,6 +51,7 @@ Route::get('/all-purchases',[PurchaseOrderController::class, 'index'])->name('al
 Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order');
 Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder');
 Route::get('/received/{id}',[PurchaseOrderController::class, 'received'])->name('received');
+Route::get('/receive/{id}', [PurchaseOrderController::class, 'receive'])->name('receive');
 Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined');
 Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter');
 
