@@ -27,17 +27,16 @@
                 <thead>
                     <tr>
                         <th class="text-center whitespace-nowrap">CUSTOMER NAME</th>
+                        <th class="text-center whitespace-nowrap">MOBILE NUMBER</th>
                         <th class="text-center whitespace-nowrap">LOCATION</th>
-                        {{-- <th class="text-center whitespace-nowrap">DELIVERY TYPE</th> --}}
-                        {{-- <th class="text-center whitespace-nowrap">ORDER STATUS</th>
-                        <th class="text-center whitespace-nowrap">ACTIONS</th> --}}
-                    </tr>
                 </thead>
                 <tbody>
                     @foreach ($customers as $customer)
                         <tr class="intro-x">
                             <td class="w-40">{{$customer->customer_name }}</td>
+                            <td class="text-center">{{ $customer->mobile_number }}</td>
                             <td class="text-center">{{ $customer->location }}</td>
+
                             {{-- <td class="w-40">
                                 <div
                                     class="flex items-center justify-center {{ $customer->order_status == 'pending' || $customers->order_status == 'canceled' ? 'text-red-500' : 'text-success' }} ">

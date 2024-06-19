@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('customer_name');
             $table->string('location');
+            $table->string('mobile_number');
+            $table->string('password');
             $table->timestamps();
         });
     }

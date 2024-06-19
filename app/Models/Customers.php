@@ -15,4 +15,11 @@ class Customers extends Model
             $query->where('customer_name', 'like', '%' . $search . '%');
         });
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    
 }

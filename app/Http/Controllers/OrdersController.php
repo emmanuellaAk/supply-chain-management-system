@@ -10,106 +10,107 @@ use Illuminate\Support\Facades\Validator;
 
 class OrdersController extends Controller
 {
-    // public function index () {
-    // $products = Inventory::all();
-    // return view('orders.orderspage', ['products'=> $products]);
-    // }
-
+    /**
+     * Display the sales page with products and customers.
+     *
+     * @return \Illuminate\View\View
+     */
     public function index()
     {
-        // $products = Inventory::all();
         $filter = request()->search;
 
         return view('orders.salespage', [
             'products' => Inventory::latest()->filter([
                 'search' => $filter
             ])->paginate(9),
-            'customers'=>Customers::all()
+            'customers' => Customers::all()
         ]);
     }
 
+    /**
+     * Store a new order in the database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request)
-    {
+{
+    // Validate the request
+    $validator = Validator::make($request->all(), [
+        'quantity' => 'required|array',
+        'quantity.*' => 'required|integer|min:1',
+        'delivery_type' => 'required|string|in:delivery,pickup',
+        'customer_name' => 'required|exists:customers,id'
+    ]);
 
-        // Validate the request
-
-        $quantities =
-        array_filter($request->quantity);
-        $validation = Validator::make($request->all(), [
-            'quantity' => 'required',
-            'quantities.' => 'required',
-            'delivery_type' => 'required',
-            'customer_name'=> 'required'
-        ]);
-
-        if ($validation->fails()) {
-            // dd($validation->errors()->messages());
-            return back()->with('error', $validation->errors()->messages());
-        }
-        dd('hello');
-        // Orders::create([
-        //     'quantity' => $request->quantity,
-        //     'delivery_type' => $request->delivery_type,
-        //     'order_status' => 'pending',
-        //     'product_id' => $request->product_id,
-        // ]);
-
-        return redirect()->route('showOrders');
+    if ($validator->fails()) {
+        return back()->withErrors($validator)->withInput();
     }
-    // }
 
-    //  public function store(Request $request)
-    // {
+    // Create the order(s)
+    foreach ($request->quantity as $productId => $quantity) {
+        if ($quantity > 0) {
+            Orders::create([
+                'quantity' => $quantity,
+                'delivery_type' => $request->delivery_type,
+                'order_status' => 'pending',
+                'product_id' => $productId,
+                'customer_id' => $request->customer_name
+            ]);
+        }
+    }
 
-    //     $request->validate([
-    //         'product' => 'required|exists:inventories,id',
-    //         'quantity' => 'required|integer|min:1',
-    //     ]);
-
-
-    //    PurchaseOrder::create([
-    //         'product_id' => $request->input('product'),
-    //         'quantity' => $request->input('quantity'),
-    //         'order_status' => 'pending',
-    //     ]);
-
-    //     return redirect()->route('all-purchases');
-    // }
-
+    return redirect()->route('showOrders')->with('success', 'Order(s) created successfully.');
+}
+    /**
+     * Display a listing of the orders.
+     *
+     * @return \Illuminate\View\View
+     */
     public function show()
     {
         $orders = Orders::all();
         return view('orders.showorders', ['orders' => $orders]);
-        // $filter = request()->search;
-
-        // return view('orders.showorders', [
-        //     'customers' => Customers::latest()->filter([
-        //         'search' => $filter
-        //     ])->paginate(9)
-        // ]);
     }
 
+    /**
+     * Mark an order as received and update product quantity.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function received($id)
     {
-        $order = Orders::findorfail($id);
+        $order = Orders::findOrFail($id);
+
         if ($order->order_status !== 'received') {
-            $product = Inventory::findorfail($order->product_id);
+            $product = Inventory::findOrFail($order->product_id);
 
-            $currentQuantity = $product->quantity;
+            $newQuantity = $product->quantity - $order->quantity;
 
-            $newQuantity = $currentQuantity - $order->quantity;
+            // Ensure the quantity does not go below zero
+            if ($newQuantity < 0) {
+                return back()->with('error', 'Insufficient stock to mark the order as received.');
+            }
 
             $product->update(['quantity' => $newQuantity]);
+            $order->update(['order_status' => 'received']);
         }
+
+        return redirect()->back()->with('success', 'Order marked as received.');
     }
 
+    /**
+     * Cancel an order.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function canceled($id)
     {
-        Orders::where('id', $id)->update([
-            'order_status' => "canceled"
-        ]);
+        $order = Orders::findOrFail($id);
+        $order->update(['order_status' => 'canceled']);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Order canceled successfully.');
     }
 }
-

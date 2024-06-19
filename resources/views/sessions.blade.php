@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
-<x-head/>
+<x-head />
+
 <body class="login">
     <div class="container sm:px-10">
         <div class="block xl:grid grid-cols-2 gap-4">
@@ -12,7 +13,7 @@
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                         A few more clicks to
                         <br>
-                       Continue your journey
+                        Continue your journey
                     </div>
                     <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Manage all your e-commerce accounts in one place</div>
                 </div>
@@ -30,21 +31,21 @@
                         <div class="intro-x mt-8">
                             <label for="email">Email</label>
                             <input type="email" class="intro-x login__input form-control py-3 px-4 block mt-4" name="email" placeholder="Email" required>
-                             @error('email')
+                            @error('email')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
-                            <label for="password">Password</label>
+                            <label for="password" class="pt-3">Password</label>
                             <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4" name="password" placeholder="Password" required>
-                             @error('password')
+                            @error('password')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                             @enderror
-                             @error('incorrect_login')
+                            @enderror
+                            @error('incorrect_login')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                             @enderror
+                            @enderror
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" type="submit" value="Login">Login</button>
-                            <a href="/register" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Register</a>
+                            <a href="/permission" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Register</a>
                         </div>
                     </form>
                 </div>
@@ -57,4 +58,5 @@
     <script src="dist/js/app.js"></script>
     <!-- END: JS Assets-->
 </body>
+
 </html>

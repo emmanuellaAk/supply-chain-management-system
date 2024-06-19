@@ -29,45 +29,48 @@ Route::get('/register', [AuthenticationController::class, 'viewRegisterForm']); 
 Route::post('/register', [AuthenticationController::class, 'store'])->name('register'); //send form
 Route::get('/edit-profile/{user}', [AuthenticationController::class, 'edit'])->name('edit-profile');
 Route::post('/update/{user}', [AuthenticationController::class, 'update'])->name('update');
-
 Route::get('/', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
 Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->name('dashboard')->middleware('new-role');
 
-Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers');
-//supplier's form route
-Route::get('/add.supplier', [SupplierController::class, 'create']);
-Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier');
 
-Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod');
-Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier');
-Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier');
+Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');
+Route::get('/add.supplier', [SupplierController::class, 'create'])->name('view.supplier')->middleware('new-role');
+Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier')->middleware('new-role');
+Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod')->middleware('new-role');;
+Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier')->middleware('new-role');
+Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier')->middleware('new-role');
 
-Route::get('/all-purchases',[PurchaseOrderController::class, 'index'])->name('all-purchases');
-Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order');
-Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder');
-Route::get('/received/{id}',[PurchaseOrderController::class, 'received'])->name('received');
-Route::get('/receive/{id}', [PurchaseOrderController::class, 'receive'])->name('receive');
-Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined');
-Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter');
+Route::get('/all-purchases',[PurchaseOrderController::class, 'index'])->name('all-purchases')->middleware('new-role');
+Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order')->middleware('new-role');
+Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder')->middleware('new-role');
+Route::get('/received/{id}',[PurchaseOrderController::class, 'received'])->name('received')->middleware('new-role');
+Route::get('/receive/{id}', [PurchaseOrderController::class, 'receive'])->name('receive')->middleware('new-role');
+Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined')->middleware('new-role');
+Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter')->middleware('new-role');
 
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory');
-Route::get('/inventory-form', [InventoryController::class, 'create']);
-Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product');
+Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware('new-role');
+Route::get('/inventory-form', [InventoryController::class, 'create'])->name('inventory-create')->middleware('new-role');
+Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product')->middleware('new-role');
+Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit')->middleware('new-role');
+Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product')->middleware('new-role');
+Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
 
-Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit');
-Route::post('/edit-pro   duct{product}',[InventoryController::class, 'update'])->name('edit-product');
-Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete');
 
 Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');
 Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
+// Route::get('/', [SessionsController::class, 'create']); //view login form
+// Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
+// Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
 Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
-Route::post('editCustomer/{id}',[CustomersController::class, 'edit'])->name('editCustomer');
+Route::get('editCustomer/{id}',[CustomersController::class, 'edit'])->name('editCustomer');
+Route::post('updateCustomer/{id}',[CustomersController::class, 'update'])->name('updateCustomer');
 Route::post('deleteCustomer/{id}',[CustomersController::class, 'delete'])->name('deleteCustomer');
+
 // Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
 // Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
 

@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthenticationController extends Controller
-
-
-
 {
     public function viewRegisterForm()
     {
@@ -27,12 +24,11 @@ class AuthenticationController extends Controller
             'password' => 'required|min:7|max:255',
             'company' => 'required',
             'mobile_number' => 'required'
-
         ]);
 
         // Create user based on validated input
-        User::create($attributes);
-
+        $user = User::create($attributes);
+        $user->assignRole('customer');
         return redirect('/');
     }
 
