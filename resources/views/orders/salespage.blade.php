@@ -8,7 +8,7 @@
     <div class="grid grid-cols-12 gap-6 mt-5">
         <div class="intro-y col-span-12 flex flex-wrap sm:flex-nowrap items-center mt-2">
         <div class="mt-5">
-                    <label for="customer" class="block font-bold">Select a Customer</label>
+                    <!-- <label for="customer" class="block font-bold">Select a Customer</label>
                     <select name="customer_name" id="customer" class="form-control col-span-4">
                         @foreach ($customers as $customer)
                             <option value="{{ $customer->id }}">{{ $customer->customer_name }}</option>
@@ -16,10 +16,10 @@
                     </select>
                     @error('customer_name')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
-                    @enderror
+                    @enderror -->
                 </div>
                 <div class="mt-5">
-                    <label for="delivery_type" class="block font-bold">Delivery Type</label>
+                    <label for="delivery_type" class="block font-bold text-center">Delivery Type</label>
                     <select name="delivery_type" class="form-control col-span-4">
                         <option value="delivery">Delivery</option>
                         <option value="pickup">Pickup</option>

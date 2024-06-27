@@ -30,12 +30,12 @@
                         <div class="intro-x mt-2 text-slate-400 dark:text-slate-400 xl:hidden text-center">Welcome Back!</div>
                         <div class="intro-x mt-8">
                             <label for="email">Email</label>
-                            <input type="email" class="intro-x login__input form-control py-3 px-4 block mt-4" name="email" placeholder="Email" required>
+                            <input type="email" class="intro-x login__input form-control py-3 px-4 block mt-2 mb-4" name="email" placeholder="Email" required>
                             @error('email')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
                             <label for="password" class="pt-3">Password</label>
-                            <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-4" name="password" placeholder="Password" required>
+                            <input type="password" class="intro-x login__input form-control py-3 px-4 block mt-2" name="password" placeholder="Password" required>
                             @error('password')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
@@ -44,8 +44,8 @@
                             @enderror
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
-                            <button class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top" type="submit" value="Login">Login</button>
-                            <a href="/permission" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Register</a>
+                            <button class="btn btn-primary py-3 px-4 w-full xl:w-32 mr-3 align-top mb-4" type="submit" value="Login">Login</button>
+                            <a href="/register" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">Register</a>
                         </div>
                     </form>
                 </div>

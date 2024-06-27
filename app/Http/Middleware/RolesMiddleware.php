@@ -4,16 +4,12 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class RolesMiddleware
 {
-    protected $auth;
-    public function __construct(Auth $auth)
-    {
-        $this->auth = $auth;
-    }
-
     /**
      * Handle an incoming request.
      *
@@ -21,31 +17,38 @@ class RolesMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        
-        // get user role permissions
+        // Get the authenticated user
+        $user = Auth::user();
+
+        // Log the user information
+        Log::info($user);
+
+        // Initialize the permissions array
         $permissions = [];
 
-        \Log::info($this->auth->user());
-        foreach ($this->auth->user()->roles as $role) {
+        // Collect permissions from roles
+        foreach ($user->roles as $role) {
             foreach ($role->permissions as $permission) {
                 $permissions[] = $permission->name;
             }
         }
-        // dd($this->auth->user()->permissions);
-        foreach ($this->auth->user()->permissions as $permission) {
+
+        // Collect direct permissions of the user
+        foreach ($user->permissions as $permission) {
             $permissions[] = $permission->name;
         }
 
-        $action = class_basename($request->route()->getName()); // separating controller and method
+        // Get the action name from the route
+        $action = class_basename($request->route()->getName());
 
-        foreach ($permissions as $permission) {
-            if ($action == $permission) {
-                // authorized requests
-                return $next($request);
-            }
-        } 
-       // none authorized request
-       return response('Unauthorized Action', 403);
-     }
+        // Check if the action is in the user's permissions
+        if (in_array($action, $permissions)) {
+            // Authorized request
+            return $next($request);
+        }
+
+        // Unauthorized request
+        return response('Unauthorized Action', 403);
+    }
 }
 

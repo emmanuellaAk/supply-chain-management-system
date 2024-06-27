@@ -10,7 +10,7 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        return view('sessions');
+       return view('sessions');
     }
 
     public function submitLogin(Request $request)
@@ -26,24 +26,24 @@ class SessionsController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard');
+        return redirect()->route('customers.customers');
     }
 
-    public function customerLogin(Request $request)
-    {
-            request()->validate([
-            'email' => 'required',
-            'password' => 'required'
-        ]); 
+    // public function customerLogin(Request $request)
+    // {
+    //         request()->validate([
+    //         'email' => 'required',
+    //         'password' => 'required'
+    //     ]); 
 
-        if(!auth()->attempt(['email'=>$request->email , 'password' => $request->password])){
-                throw ValidationException::withMessages([
-                'incorrect_login' => 'Your provided credentials could not be verified'
-            ]);
-        }
+    //     if(!auth()->attempt(['email'=>$request->email , 'password' => $request->password])){
+    //             throw ValidationException::withMessages([
+    //             'incorrect_login' => 'Your provided credentials could not be verified'
+    //         ]);
+    //     }
 
-        return redirect()->route('dashboard');
-    }
+    //     return redirect()->route('dashboard');
+    // }
 
     public function destroy()
     {

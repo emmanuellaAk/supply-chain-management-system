@@ -9,6 +9,8 @@ use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CustomerController;
+use App\Models\Customer;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +27,15 @@ use App\Http\Controllers\AuthenticationController;
 //      return view('welcome');
 // });
 
-Route::get('/register', [AuthenticationController::class, 'viewRegisterForm']); //view form
-Route::post('/register', [AuthenticationController::class, 'store'])->name('register'); //send form
-Route::get('/edit-profile/{user}', [AuthenticationController::class, 'edit'])->name('edit-profile');
-Route::post('/update/{user}', [AuthenticationController::class, 'update'])->name('update');
+Route::get('/register', [CustomerController::class, 'viewRegisterForm']); //view form
+Route::post('/register', [CustomerController::class, 'store'])->name('register'); //send form
+// Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
+// Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
 Route::get('/', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
+Route::get('/customer', [CustomerController::class, 'index'])->name('customers.customers');
+
+
 Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
 
 Route::get('/dashboard', function () {
@@ -61,15 +66,15 @@ Route::post('/edit-product{product}',[InventoryController::class, 'update'])->na
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
 
 
-Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');
-Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
-// Route::get('/', [SessionsController::class, 'create']); //view login form
-// Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
-// Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
-Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
-Route::get('editCustomer/{id}',[CustomersController::class, 'edit'])->name('editCustomer');
-Route::post('updateCustomer/{id}',[CustomersController::class, 'update'])->name('updateCustomer');
-Route::post('deleteCustomer/{id}',[CustomersController::class, 'delete'])->name('deleteCustomer');
+// Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');
+// Route::get('/customers',[CustomersController::class,'create'])->name('customer-form');
+// // Route::get('/', [SessionsController::class, 'create']); //view login form
+// // Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
+// // Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
+// Route::post('add/customer',[CustomersController::class,'store'])->name('addCustomer');
+// Route::get('editCustomer/{id}',[CustomersController::class, 'edit'])->name('editCustomer');
+// Route::post('updateCustomer/{id}',[CustomersController::class, 'update'])->name('updateCustomer');
+// Route::post('deleteCustomer/{id}',[CustomersController::class, 'delete'])->name('deleteCustomer');
 
 // Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
 // Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
