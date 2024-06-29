@@ -22,7 +22,7 @@
         <!-- END: Breadcrumb -->
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
-            <span class="text-white text-sm ml-3">WELCOME: {{ auth()->user()->name }}</span>
+            {{-- <span class="text-white text-sm ml-3">WELCOME: {{ auth()->user()->name }}</span> --}}
             {{-- <div class="search hidden sm:block">
                         <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                         <i data-lucide="search" class="search__icon dark:text-slate-500"></i>
@@ -113,10 +113,7 @@
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
-                    <li>
-                        <a href="{{ route('edit-profile', $user_auth->id) }}" class="dropdown-item hover:bg-white/5"> <i
-                                data-lucide="user" class="w-4 h-4 mr-2"></i> Profile </a>
-                    </li>
+
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>

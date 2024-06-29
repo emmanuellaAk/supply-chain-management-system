@@ -16,14 +16,16 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
+        
+
         $role = Role::create(['name'=> 'super-admin']);
         $role = Role::create(['name'=> 'manager']);
-        $role = Role::create(['name'=> 'customer']);
+        $role = Role::create(['name'=> 'customer', 'guard_name' => 'customer']);
         
         $user = User::create([
             'name' => 'Antwon Omar',
             'email' => 'antwonomar@icloud.com',
-            'password'=> Hash::make('antwonzy'),
+            'password'=> Hash::make('emma1234'),
             'mobile_number'=> '0502749808'
         ]);
 
@@ -51,11 +53,6 @@ class RoleSeeder extends Seeder
         Permission::firstOrCreate(['name' => 'edit']);
         Permission::firstOrCreate(['name' => 'edit-product']);
         Permission::firstOrCreate(['name' => 'delete']);
-
-
-
-
-
 
         $role = Role::where('name' , 'super-admin')->first();
         $role->givePermissionTo(Permission::all());

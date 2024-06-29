@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 class CustomerController extends Controller
 {
     public function viewRegisterForm()
@@ -13,27 +15,33 @@ class CustomerController extends Controller
         return view('register');
     }
 
-    public function store()
+    public function store(Request $request)
     {
         // Validate user input
-        $attributes = request()->validate([
+     request()->validate([
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|min:7|max:255',
             'mobile_number' => 'required'
         ]);
 
+        $customer = Customer::create([
+        'name'=>$request->name,
+        'email'=>$request->email,
+        'mobile_number'=>$request->mobile_number,
+        'password'=>Hash::make($request->password)
+       ]);
 
         // Create user based on validated input
-        $customer = Customer::create($attributes);
-        $customer->assignRole('customer');
-        return redirect('/');
+
+        $customer->assignRole('manager');
+        return redirect()->route('customer.login');
     }
 
     public function index() {
-         return view('customers.customers');
+         return view('customers.login');
     }
-    
+
     //     // dd('here');
     //    request()->validate([
     //     'customer_name'=>'required',
@@ -51,5 +59,16 @@ class CustomerController extends Controller
     //     'password'=>$hashedPassword
     //    ]);
 
+    public function viewCustomers() {
+        // $customers = Customer::all();
+        // return view('customers.current', compact('customers'));
 
+        $filter = request()->search;
+
+        return view('customers.current', [
+            'customers' => Customer::latest()->filter([
+                'search' => $filter
+            ])->paginate(9)
+        ]);
+    }
 }

@@ -33,14 +33,20 @@ Route::post('/register', [CustomerController::class, 'store'])->name('register')
 // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
 Route::get('/', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
-Route::get('/customer', [CustomerController::class, 'index'])->name('customers.customers');
+Route::get('/login/customer', [CustomerController::class, 'index'])->name('customer.login');
+Route::post('/login/customer', [SessionsController::class, 'customerLogin'])->name('customer.login.post');
+Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
-
-Route::post('/logout', [SessionsController::class. 'destroy'])->name('logout');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard')->middleware('new-role');
+
+Route::get('/customer/dashboard', function () {
+    return view('customers.dashboard');
+})->name('customer-dashboard');
+
+Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('view.Customers');
 
 
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');

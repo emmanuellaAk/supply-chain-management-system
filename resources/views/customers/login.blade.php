@@ -24,7 +24,7 @@
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                         Log In
                     </h2>
-                    <form action="{{ route('login') }}" method="POST">
+                    <form action="{{ route('customer.login.post') }}" method="POST">
                         @csrf
                         <div class="intro-x mt-2 text-slate-400 dark:text-slate-400 xl:hidden text-center">Welcome Back!</div>
                         <div class="intro-x mt-8">
@@ -38,9 +38,9 @@
                             @error('password')
                             <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
                             @enderror
-                            @error('incorrect_login')
-                            <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
-                            @enderror
+                            @if(session('incorrect_login'))
+                            <p class="text-red-500 text-xs mt-2">{{ session('incorrect_login') }}</p>
+                            @endif
                         </div>
                         <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
                             <button class="btn btn-primary py-3 px-4 w-full xl:w-32 mr-3 align-top mb-4" type="submit" value="Login">Login</button>

@@ -41,10 +41,10 @@ return [
             'provider' => 'users',
         ],
 
-        // 'customerzz' => [
-        //     'driver' => 'session',
-        //     'provider' => 'customers',
-        // ],
+        'customer' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
     ],
 
     /*
@@ -70,10 +70,10 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        // 'customers' => [
-        //     'driver' => 'eloquent',
-        //     'model' => App\Models\Customers::class,
-        // ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Customer::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',

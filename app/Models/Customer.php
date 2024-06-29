@@ -13,4 +13,13 @@ class Customer extends Model
     use HasFactory;
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
     protected $guarded = [];
+
+    protected $guard_name = 'customer';
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'], function ($query, $search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        });
+    }
 }
