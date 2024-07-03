@@ -67,6 +67,9 @@ Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter')
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware('new-role');
 Route::get('/inventory-form', [InventoryController::class, 'create'])->name('inventory-create')->middleware('new-role');
 Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product')->middleware('new-role');
+Route::get('/products',[InventoryController::class, 'viewProducts'])->name('viewProducts');
+Route::get('/customer/orders',[InventoryController::class, 'viewOrders'])->name('viewOrders');
+Route::post('/product',[InventoryController::class, 'addProducts'])->name('addProducts');
 Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit')->middleware('new-role');
 Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product')->middleware('new-role');
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
@@ -85,8 +88,8 @@ Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name(
 // Route::get('/received/{id}',[CustomersController::class,'received'])->name('received');
 // Route::get('/canceled/{id}',[CustomersController::class, 'canceled'])->name('canceled');
 
-Route::get('/salesPoint',[OrdersController::class, 'index'])->name('salesPoint');
-Route::post('/sendCart',[OrdersController::class, 'store'])->name('orderInfo');
-Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
-Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
-Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');
+// Route::get('/salesPoint',[OrdersController::class, 'index'])->name('salesPoint');
+// Route::post('/sendCart',[OrdersController::class, 'store'])->name('orderInfo');
+// Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
+// Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
+// Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -68,7 +69,17 @@ class CustomerController extends Controller
         return view('customers.current', [
             'customers' => Customer::latest()->filter([
                 'search' => $filter
-            ])->paginate(9)
+            ])->paginate(10)
+        ]);
+    }
+
+    public function viewSalesPoint() {
+        $filter = request()->search;
+
+        return view('customers.salesPoint', [
+            'products' => Inventory::latest()->filter([
+                'search' => $filter
+            ])->paginate(10)
         ]);
     }
 }

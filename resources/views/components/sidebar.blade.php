@@ -114,6 +114,13 @@
                               Customers
                            </div>
                        </a>
+
+                       <a href="/products" class="side-menu">
+                        <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
+                        <div class="side-menu__title">
+                           Products
+                        </div>
+                    </a>
                    </li>
                   </ul>
               </nav>

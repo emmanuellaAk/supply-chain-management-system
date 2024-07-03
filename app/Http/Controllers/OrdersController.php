@@ -15,17 +15,17 @@ class OrdersController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
-    {
-        $filter = request()->search;
+    // public function index()
+    // {
+    //     $filter = request()->search;
 
-        return view('orders.salespage', [
-            'products' => Inventory::latest()->filter([
-                'search' => $filter
-            ])->paginate(9),
-            'customers' => Customers::all()
-        ]);
-    }
+    //     return view('orders.salespage', [
+    //         'products' => Inventory::latest()->filter([
+    //             'search' => $filter
+    //         ])->paginate(9),
+    //         'customers' => Customers::all()
+    //     ]);
+    // }
 
     /**
      * Store a new order in the database.
@@ -34,12 +34,13 @@ class OrdersController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
-{
+    {
     // Validate the request
     $validator = Validator::make($request->all(), [
         'quantity' => 'required|array',
         'quantity.*' => 'required|integer|min:1',
-        'delivery_type' => 'required|string|in:delivery,pickup',
+        'product_name' => 'required|exists:inventories,id',
+        // 'delivery_type' => 'required|string|in:delivery,pickup',
         'customer_name' => 'required|exists:customers,id'
     ]);
 

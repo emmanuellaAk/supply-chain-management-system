@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('orders-reciept', function (Blueprint $table) {
             $table->id();
-            $table->string('customer_name');
-            $table->string('location');
-            $table->string('mobile_number');
-            $table->string('password');
-            $table->timestamps();
+            $table->string('quantity');
+            $table->decimal('total_price');
+            // $table->foreignId('product_id')->references('id')->on('inventories')->cascadeOnUpdate()->cascadeOnDelete();
+            // $table->foreignId('customer_id')->references('id')->on('customers')->cascadeOnUpdate()->cascadeOnDelete();
         });
     }
 
