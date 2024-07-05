@@ -31,10 +31,10 @@ Route::get('/register', [CustomerController::class, 'viewRegisterForm']); //view
 Route::post('/register', [CustomerController::class, 'store'])->name('register'); //send form
 // Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
 // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
-Route::get('/', [SessionsController::class, 'create']); //view login form
+Route::get('/login/admin', [SessionsController::class, 'create']); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
-Route::get('/login/customer', [CustomerController::class, 'index'])->name('customer.login');
-Route::post('/login/customer', [SessionsController::class, 'customerLogin'])->name('customer.login.post');
+Route::get('/', [CustomerController::class, 'index'])->name('customer.login');
+Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post');
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
 

@@ -35,7 +35,7 @@ class CustomerController extends Controller
 
         // Create user based on validated input
 
-        $customer->assignRole('manager');
+        // $customer->assignRole('manager');
         return redirect()->route('customer.login');
     }
 
