@@ -8,7 +8,6 @@
             <div class="hidden xl:flex flex-col min-h-screen">
                 <a href="#" class="-intro-x flex items-center pt-5"></a>
                 <div class="my-auto">
-                    <img alt="Midone - HTML Admin Template" class="-intro-x w-1/2 -mt-16" src="dist/images/illustration.svg">
                     <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">
                         A few more clicks to
                         <br>
@@ -24,7 +23,7 @@
                     <h2 class="intro-x font-bold text-2xl xl:text-3xl text-center xl:text-left">
                         Log In
                     </h2>
-                    <form action="{{ route('login') }}" method="POST">
+                    <form action="{{ route('admin.login') }}" method="POST">
                         @csrf
                         <div class="intro-x mt-2 text-slate-400 dark:text-slate-400 xl:hidden text-center">Welcome Back!</div>
                         <div class="intro-x mt-8">

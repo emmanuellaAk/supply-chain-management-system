@@ -54,13 +54,7 @@ class InventoryController extends Controller
 
     public function viewProducts(Request $request)
     {
-        $filter = $request->search;
-
-        return view('customers.productArea', [
-            'products' => Inventory::latest()->filter([
-                'search' => $filter
-            ])->paginate(9)
-        ]);
+        return view('customers.productArea');
     }
 
     public function addProducts(Request $request)

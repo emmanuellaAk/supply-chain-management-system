@@ -40,7 +40,13 @@ class CustomerController extends Controller
     }
 
     public function index() {
-         return view('customers.login');
+         $sessions = auth()->user();
+        if($sessions){
+            return redirect()->route('customer-dashboard');
+        }
+        // dd(session()->all());
+        return view('customers.login');
+
     }
 
     //     // dd('here');
@@ -71,6 +77,10 @@ class CustomerController extends Controller
                 'search' => $filter
             ])->paginate(10)
         ]);
+    }
+
+    public function viewAddForm() {
+        return view('customers.addCustomer');
     }
 
     public function viewSalesPoint() {

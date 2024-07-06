@@ -29,24 +29,26 @@ use App\Models\Customer;
 
 Route::get('/register', [CustomerController::class, 'viewRegisterForm']); //view form
 Route::post('/register', [CustomerController::class, 'store'])->name('register'); //send form
+Route::get('/', [CustomerController::class, 'index'])->name('customer.login')->action;//view customer login page
+Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('view.Customers');//admin views current customers
+Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
 // Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
 // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
 Route::get('/login/admin', [SessionsController::class, 'create']); //view login form
-Route::post('/login', [SessionsController::class, 'submitLogin'])->name('login'); //submit Login form
-Route::get('/', [CustomerController::class, 'index'])->name('customer.login');
-Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post');
-Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
+Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login'); //submit Login form
+Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post');//view customer dashboard
+Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');//logout
 
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard')->middleware('new-role');
+})->name('dashboard')->middleware('new-role');//view admin dashboard
 
 Route::get('/customer/dashboard', function () {
     return view('customers.dashboard');
-})->name('customer-dashboard');
+})->name('customer-dashboard')->middleware('customerLogin');//view customer dashboard
 
-Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('view.Customers');
+
 
 
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');
@@ -93,3 +95,5 @@ Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name(
 // Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
 // Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
 // Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');
+
+

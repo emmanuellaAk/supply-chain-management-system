@@ -14,4 +14,29 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.5/css/dataTables.bootstrap5.css"/> --}}
 
     <!-- END: CSS Assets-->
+
+     {{-- toastify library --}}
+
+    @if(session('error') || session('success'))
+       <script>
+
+    //    console.log("{{ session('success') ?? session('error')}}");
+        // Toastify({
+        //         text: "{{ session('success') ?? session('error')}}",
+        //         duration: 3000,
+        //         close: true,
+        //         gravity: "top", // `top` or `bottom`
+        //         position: "left", // `left`, `center` or `right`
+        //         stopOnFocus: true, // Prevents dismissing of toast on hover
+        //         style: {
+        //             background: "{{ session('success') ? 'green' : 'red' }}"
+        //         }
+        // }).showToast();
+       alert("{{ session('success') ?? session('error') }}");
+       </script>
+    @endif
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    @livewireStyles
+    @livewireScripts
+
 </head>
