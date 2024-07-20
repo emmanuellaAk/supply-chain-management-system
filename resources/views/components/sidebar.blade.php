@@ -6,24 +6,16 @@
               <nav class="side-nav">
                   <ul>
 
-                      <li>
-                          <a href="/dashboard" class="side-menu side-menu--active">
-                              <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
-                              <div class="side-menu__title">
-                                  Dashboard
-                              </div>
-                          </a>
-                      </li>
-
-                    
-                      <li>
-                        <a href="/customer-dashboard" class="side-menu side-menu--active">
+                    <li>
+                        <a href="/dashboard" class="side-menu side-menu--active">
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                             <div class="side-menu__title">
-                                Customer Dashboard
+                                Dashboard
                             </div>
                         </a>
                     </li>
+
+                      
 
 
                       <li>
@@ -83,6 +75,7 @@
                                       <div class="side-menu__title"> Add Product </div>
                                   </a>
                               </li>
+
                               <li>
                                   <a href="/all-purchases" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
@@ -106,21 +99,16 @@
                               </div>
                           </a>
                       </li>
+
+
                       <li>
-
-                       <a href="/customers" class="side-menu">
+                      <a href="/customers" class="side-menu">
                            <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
-                           <div class="side-menu__title">
-                              Customers
-                           </div>
+                           <div class="side-menu__title">Customers</div>
                        </a>
+                       </li>
 
-                       <a href="/products" class="side-menu">
-                        <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
-                        <div class="side-menu__title">
-                           Products
-                        </div>
-                    </a>
-                   </li>
+
+
                   </ul>
               </nav>

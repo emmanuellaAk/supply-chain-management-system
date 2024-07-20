@@ -1,6 +1,5 @@
  <?php
 
-use App\Models\PurchaseOrder;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\SessionsController;
@@ -8,8 +7,9 @@ use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\PurchaseOrderController;
-use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CartController;
+use App\Models\Cart;
 use App\Models\Customer;
 
 /*
@@ -34,7 +34,7 @@ Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('vie
 Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
 // Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
 // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
-Route::get('/login/admin', [SessionsController::class, 'create']); //view login form
+Route::get('/login/admin', [SessionsController::class, 'create'])->name('login'); //view login form
 Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login'); //submit Login form
 Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post');//view customer dashboard
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');//logout
@@ -54,7 +54,7 @@ Route::get('/customer/dashboard', function () {
 Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');
 Route::get('/add.supplier', [SupplierController::class, 'create'])->name('view.supplier')->middleware('new-role');
 Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier')->middleware('new-role');
-Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod')->middleware('new-role');;
+Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod')->middleware('new-role');
 Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier')->middleware('new-role');
 Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier')->middleware('new-role');
 
@@ -69,12 +69,20 @@ Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter')
 Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware('new-role');
 Route::get('/inventory-form', [InventoryController::class, 'create'])->name('inventory-create')->middleware('new-role');
 Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product')->middleware('new-role');
-Route::get('/products',[InventoryController::class, 'viewProducts'])->name('viewProducts');
 Route::get('/customer/orders',[InventoryController::class, 'viewOrders'])->name('viewOrders');
 Route::post('/product',[InventoryController::class, 'addProducts'])->name('addProducts');
 Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit')->middleware('new-role');
 Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product')->middleware('new-role');
 Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
+
+
+Route::get('/products', [CartController::class, 'viewProducts'])->name('viewProducts');
+Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
+Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
+Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('/cart/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
+
 
 
 // Route::get('/customersPage', [CustomersController::class, 'index'])->name('customersPage');

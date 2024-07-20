@@ -1,31 +1,31 @@
-<?php
 
-namespace App\Livewire\Products;
 
-use App\Models\Inventory;
-use Livewire\Attributes\Url;
-use Livewire\Component;
+// namespace App\Livewire\Products;
 
-class Products extends Component
+// use App\Models\Inventory;
+// use Livewire\Attributes\Url;
+// use Livewire\Component;
 
-{
-    #[Url(keep: true)]
-    public $filter  = '';
-    protected $queryString = [
-        'filter' => ['except' => '']
-    ];
+// class Products extends Component
 
-    public function getProducts(){
+// {
+//     #[Url(keep: true)]
+//     public $filter  = '';
+//     protected $queryString = [
+//         'filter' => ['except' => '']
+//     ];
 
-        return Inventory::latest()->filter([
-            'search' => $this->filter
-        ])->paginate();
-    }
-    
-    public function render()
-    {
-        // dd($this->filter);
-        $allProducts = $this->getProducts();
-        return view('livewire.products.products', ['allProducts' => $allProducts]);
-    }
-}
+//     public function getProducts(){
+
+//         return Inventory::latest()->filter([
+//             'search' => $this->filter
+//         ])->paginate();
+//     }
+
+//     public function render()
+//     {
+//         // dd($this->filter);
+//         $allProducts = $this->getProducts();
+//         return view('livewire.products.products', ['allProducts' => $allProducts]);
+//     }
+// }

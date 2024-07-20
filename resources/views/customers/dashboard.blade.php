@@ -5,7 +5,18 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <x-head />
     <x-topbar />
-    <x-sidebar />
+    <x-customersidebar/>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get the customer ID from the session
+            @if (session('customer_id'))
+                var customerId = "{{ session('customer_id') }}";
+                // Store customer ID in local storage
+                localStorage.setItem('customer_id', customerId);
+            @endif
+        });
+    </script>
 </head>
 
 <body>

@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RolesMiddleware
 {
     /**
-     * Handle an incoming request.
+    * Handle an incoming request.
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
@@ -26,9 +26,9 @@ class RolesMiddleware
         Log::warning('No authenticated user found');
 
         // You can either throw an exception, redirect to login, or return an error response
-        return redirect()->route('admin.login');
-        // or
-        // return response()->json(['error' => 'Unauthorized'], 401);
+        // return redirect()->route('admin.login');
+
+        return response()->json(['error' => 'Unauthorized'], 401);
     }
 
     // Log the user information
@@ -63,6 +63,10 @@ class RolesMiddleware
 
     return $next($request);
 }
+
+
+
+
 
 }
 

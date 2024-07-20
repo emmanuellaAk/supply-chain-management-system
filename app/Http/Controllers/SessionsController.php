@@ -13,7 +13,7 @@ class SessionsController extends Controller
 {
     public function create()
     {
-        return view('sessions');
+        return view('auth.admin.login');
     }
 
     public function submitLogin(Request $request)
@@ -23,12 +23,8 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        $user = User::where('email', $request->email)->first();
-        //     $password = 'emma1234';
-        //     $user->password = bcrypt($password ) ;
-        //     $user->save();
-        //    $password;
-        //     dd( $user, $request->all());
+         User::where('email', $request->email)->first();
+
 
         if (!auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
             throw ValidationException::withMessages([
@@ -62,6 +58,7 @@ class SessionsController extends Controller
         // }
 
         // dd($request->all());
+        session(['customer_id' => $customer->id]);
 
         return  view('customers.dashboard');
     }

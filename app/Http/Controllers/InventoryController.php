@@ -6,7 +6,7 @@ use App\Models\Customer;
 use App\Models\User;
 use App\Models\Supplier;
 use App\Models\Inventory;
-use App\Models\Orders;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -14,7 +14,7 @@ class InventoryController extends Controller
 {
     public function index()
     {
-        // $products = Inventory::all();
+
         $filter = request()->search;
 
         return view('inventory.inventory', [
@@ -51,49 +51,6 @@ class InventoryController extends Controller
 
         return redirect()->route('inventory');
     }
-
-    public function viewProducts(Request $request)
-    {
-        return view('customers.productArea');
-    }
-
-    public function addProducts(Request $request)
-    {
-        $selectedProducts = $request->input('selected_products', []);
-        $quantities = $request->input('quantity', []);
-
-        if (empty($selectedProducts)) {
-            return redirect()->route('viewProducts')->with('error', 'No products selected.');
-        }
-
-        foreach ($selectedProducts as $productId) {
-            $product = Inventory::find($productId);
-
-            if ($product) {
-                $quantity = $quantities[$productId] ?? 0;
-
-                if ($quantity > 0) {
-                    Orders::create([
-                        'product_id' => $productId,
-                        'quantity' => $quantity,
-                        'total_price' => $product->selling_price * $quantity,
-                    ]);
-
-                    $product->quantity -= $quantity;
-                    $product->save();
-                } else {
-                    return redirect()->route('viewProducts')->with('error', 'Invalid quantity for product: ' . $product->product_name);
-                }
-            } else {
-                return redirect()->route('viewProducts')->with('error', 'Product not found: ' . $productId);
-            }
-        }
-
-        return redirect()->route('viewProducts')->with('success', 'Products added successfully.');
-    }
-
-
-
 
     public function edit(Inventory $product)
     {

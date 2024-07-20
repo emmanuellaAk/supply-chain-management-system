@@ -13,12 +13,5 @@ class adminLogin
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
-    {
-        if(!auth()->user()){
-            return redirect(route('admin.login'))->with('error','Admin must be logged in');
-        }
-        return $next($request);
-        return $next($request);
-    }
+  
 }

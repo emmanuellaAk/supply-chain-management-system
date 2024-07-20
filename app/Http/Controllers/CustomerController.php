@@ -13,7 +13,7 @@ class CustomerController extends Controller
     public function viewRegisterForm()
     {
         // View the registration form
-        return view('register');
+        return view('auth.customer.register');
     }
 
     public function store(Request $request)
@@ -26,7 +26,7 @@ class CustomerController extends Controller
             'mobile_number' => 'required'
         ]);
 
-        $customer = Customer::create([
+         Customer::create([
         'name'=>$request->name,
         'email'=>$request->email,
         'mobile_number'=>$request->mobile_number,
@@ -45,7 +45,7 @@ class CustomerController extends Controller
             return redirect()->route('customer-dashboard');
         }
         // dd(session()->all());
-        return view('customers.login');
+        return view('auth.customer.login');
 
     }
 
