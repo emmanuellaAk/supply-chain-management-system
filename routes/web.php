@@ -1,18 +1,18 @@
  <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\SupplierController;
-use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\PurchaseOrderController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CartController;
-use App\Models\Cart;
-use App\Models\Customer;
+    use Illuminate\Support\Facades\Route;
+    use App\Http\Controllers\OrdersController;
+    use App\Http\Controllers\SessionsController;
+    use App\Http\Controllers\SupplierController;
+    use App\Http\Controllers\CustomersController;
+    use App\Http\Controllers\InventoryController;
+    use App\Http\Controllers\PurchaseOrderController;
+    use App\Http\Controllers\CustomerController;
+    use App\Http\Controllers\CartController;
+    use App\Models\Cart;
+    use App\Models\Customer;
 
-/*
+    /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -23,65 +23,77 @@ use App\Models\Customer;
 |
 */
 
-// Route::get('/', function () {
-//      return view('welcome');
-// });
+    // Route::get('/', function () {
+    //      return view('welcome');
+    // });
 
-Route::get('/register', [CustomerController::class, 'viewRegisterForm']); //view form
-Route::post('/register', [CustomerController::class, 'store'])->name('register'); //send form
-Route::get('/', [CustomerController::class, 'index'])->name('customer.login')->action;//view customer login page
-Route::get('/customers',[CustomerController::class, 'viewCustomers'])->name('view.Customers');//admin views current customers
-Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
-// Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
-// Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
-Route::get('/login/admin', [SessionsController::class, 'create'])->name('login'); //view login form
-Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login'); //submit Login form
-Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post');//view customer dashboard
-Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');//logout
+    Route::get('/register', [CustomerController::class, 'viewRegisterForm']); //view form
+    Route::post('/register', [CustomerController::class, 'store'])->name('register'); //send form
+    Route::get('/',  function() {
+         return view('auth.customer.login');
+    })->name('customer.login');
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard')->middleware('new-role');//view admin dashboard
-
-Route::get('/customer/dashboard', function () {
-    return view('customers.dashboard');
-})->name('customer-dashboard')->middleware('customerLogin');//view customer dashboard
-
-
-
-
-Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');
-Route::get('/add.supplier', [SupplierController::class, 'create'])->name('view.supplier')->middleware('new-role');
-Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier')->middleware('new-role');
-Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod')->middleware('new-role');
-Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier')->middleware('new-role');
-Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier')->middleware('new-role');
-
-Route::get('/all-purchases',[PurchaseOrderController::class, 'index'])->name('all-purchases')->middleware('new-role');
-Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order')->middleware('new-role');
-Route::post('/add-purchase-orders',[PurchaseOrderController::class, 'store'])->name('addPurchaseOrder')->middleware('new-role');
-Route::get('/received/{id}',[PurchaseOrderController::class, 'received'])->name('received')->middleware('new-role');
-Route::get('/receive/{id}', [PurchaseOrderController::class, 'receive'])->name('receive')->middleware('new-role');
-Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined')->middleware('new-role');
-Route::get('/filter',[PurchaseOrderController::class, 'filter'])->name('filter')->middleware('new-role');
-
-Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware('new-role');
-Route::get('/inventory-form', [InventoryController::class, 'create'])->name('inventory-create')->middleware('new-role');
-Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product')->middleware('new-role');
-Route::get('/customer/orders',[InventoryController::class, 'viewOrders'])->name('viewOrders');
-Route::post('/product',[InventoryController::class, 'addProducts'])->name('addProducts');
-Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit')->middleware('new-role');
-Route::post('/edit-product{product}',[InventoryController::class, 'update'])->name('edit-product')->middleware('new-role');
-Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
+    Route::get('/customers', [CustomerController::class, 'viewCustomers'])->name('view.Customers'); //admin views current customers
+    Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
+    // Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
+    // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
+    Route::get('/login/admin', [SessionsController::class, 'create'])->name('login'); //view login form
+    Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login')->middleware('new-role'); //submit Login form
+    Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post'); //view customer dashboard
+    Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout'); //logout
 
 
-Route::get('/products', [CartController::class, 'viewProducts'])->name('viewProducts');
-Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
-Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
-Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
-Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('/cart/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard')->middleware('new-role'); //view admin dashboard
+
+    Route::get('/customer/dashboard', function () {
+        return view('customers.dashboard');
+    })->name('customer-dashboard')->middleware('customerLogin'); //view customer dashboard
+
+
+
+
+    Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers')->middleware('new-role');
+    Route::get('/add.supplier', [SupplierController::class, 'create'])->name('view.supplier')->middleware('new-role');
+    Route::post('/add.supplier', [SupplierController::class, 'store'])->name('add.supplier')->middleware('new-role');
+    Route::get('/edit.supplier/{supplier}', [SupplierController::class, 'edit'])->name('edit.supplier.getmethod')->middleware('new-role');
+    Route::post('/edit.1supplier/{supplier}', [SupplierController::class, 'update'])->name('edit.supplier')->middleware('new-role');
+    Route::post('/delete-supplier/{supplier}', [SupplierController::class, 'destroy'])->name('delete-supplier')->middleware('new-role');
+
+    Route::get('/all-purchases', [PurchaseOrderController::class, 'index'])->name('all-purchases')->middleware('new-role');
+    Route::get('/purchase-orders', [PurchaseOrderController::class, 'create'])->name('purchase-order')->middleware('new-role');
+    Route::post('/add-purchase-orders', [PurchaseOrderController::class, 'store'])->name('addPurchaseOrder')->middleware('new-role');
+    Route::get('/received/{id}', [PurchaseOrderController::class, 'received'])->name('received');
+    Route::get('/receive/{id}', [PurchaseOrderController::class, 'receive'])->name('receive')->middleware('new-role');
+    Route::get('/declined/{id}', [PurchaseOrderController::class, 'declined'])->name('declined');
+    Route::get('/filter', [PurchaseOrderController::class, 'filter'])->name('filter');
+
+    Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory')->middleware('new-role');
+    Route::get('/inventory-form', [InventoryController::class, 'create'])->name('inventory-create')->middleware('new-role');
+    Route::post('inventory-form', [InventoryController::class, 'store'])->name('add.product')->middleware('new-role');
+    Route::get('/customer/orders', [InventoryController::class, 'viewOrders'])->name('viewOrders');
+    Route::post('/product', [InventoryController::class, 'addProducts'])->name('addProducts');
+    Route::get('/edit/{product}', [InventoryController::class, 'edit'])->name('edit')->middleware('new-role');
+    Route::post('/edit-product{product}', [InventoryController::class, 'update'])->name('edit-product')->middleware('new-role');
+    Route::post('/delete/{product}', [InventoryController::class, 'destroy'])->name('delete')->middleware('new-role');
+
+
+    Route::get('/products', [CartController::class, 'viewProducts'])->name('viewProducts');
+    Route::post('/addCart', [CartController::class, 'addCart'])->name('addCart');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
+    Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    // Route::post('/cart/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
+    Route::get('/order/create', [CartController::class, 'createOrder'])->name('createOrder');
+    Route::get('/order/summary/', [CartController::class, 'customerOrderSummary'])->name('orderSummary');
+    Route::get('/orders', [CartController::class, 'OrderSummary'])->name('customer.order.summary');
+    // Route::patch('/order/status/{orderId}', [CartController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+    Route::get('/received/{orderId}', [CartController::class, 'orderreceived'])->name('orderreceived');
+    Route::get('/declined/{orderId}', [CartController::class, 'orderdeclined'])->name('orderdeclined');
+    // Route::get('/filter', [CartController::class, 'filter'])->name('filter');
+
 
 
 
@@ -103,5 +115,3 @@ Route::post('/cart/placeOrder', [CartController::class, 'placeOrder'])->name('ca
 // Route::get('/showOrders', [OrdersController::class, 'show'])->name('showOrders');
 // Route::get('/received/{id}', [OrdersController::class, 'received'])->name('received');
 // Route::get('/canceled/{id}', [OrdersController::class, 'canceled'])->name('canceled');
-
-

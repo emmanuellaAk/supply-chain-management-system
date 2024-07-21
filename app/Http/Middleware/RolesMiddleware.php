@@ -25,7 +25,7 @@ class RolesMiddleware
         // Log the information that the user is null
         Log::warning('No authenticated user found');
 
-        // You can either throw an exception, redirect to login, or return an error response
+        // // You can either throw an exception, redirect to login, or return an error response
         // return redirect()->route('admin.login');
 
         return response()->json(['error' => 'Unauthorized'], 401);

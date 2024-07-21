@@ -1,16 +1,16 @@
 <x-head />
 <x-topbar />
-<x-sidebar />
+<x-customersidebar/>
 <div class="content">
     <h2 class="text-lg font-medium mt-10">Cart</h2>
 
-    @if(session('success'))
+    {{-- @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
     @endif
 
     @if(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
-    @endif
+    @endif --}}
 
     <table class="table">
         <thead>
@@ -48,7 +48,7 @@
         </tbody>
     </table>
 
-    <form action="{{ route('cart.placeOrder') }}" method="POST">
+    <form action="{{ route('createOrder') }}" method="GET">
         @csrf
         <button type="submit" class="btn btn-success mt-3">Place Order</button>
     </form>

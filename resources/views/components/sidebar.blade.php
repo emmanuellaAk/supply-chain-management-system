@@ -5,7 +5,6 @@
               <!-- BEGIN: Side Menu -->
               <nav class="side-nav">
                   <ul>
-
                     <li>
                         <a href="/dashboard" class="side-menu side-menu--active">
                             <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
@@ -14,12 +13,7 @@
                             </div>
                         </a>
                     </li>
-
-                      
-
-
                       <li>
-
                           <a href="javascript:;" class="side-menu">
                               <div class="side-menu__icon"> <i data-lucide="box"></i> </div>
                               <div class="side-menu__title">
@@ -37,19 +31,14 @@
 
                               </li>
                               <li>
-
-
-                                  <a href="/add.supplier" class="side-menu">
+                                 <a href="/add.supplier" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Add Supplier</div>
                                   </a>
                               </li>
                           </ul>
-
                       </li>
-
                       <li>
-
                           <a href="javascript:;" class="side-menu">
                               <div class="side-menu__icon"> <i data-lucide="shopping-bag"></i> </div>
                               <div class="side-menu__title">
@@ -57,25 +46,19 @@
                                   <div class="side-menu__sub-icon "> <i data-lucide="chevron-down"></i> </div>
                               </div>
                           </a>
-
-                          <ul class="">
-
-                              <li>
-
-                                  <a href="/purchase-orders" class="side-menu">
+                         <ul class="">
+                             <li>
+                                 <a href="/purchase-orders" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Purchase Order</div>
                                   </a>
-
                               </li>
                               <li>
-
-                                  <a href="/inventory-form" class="side-menu">
+                                 <a href="/inventory-form" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
                                       <div class="side-menu__title"> Add Product </div>
                                   </a>
                               </li>
-
                               <li>
                                   <a href="/all-purchases" class="side-menu">
                                       <div class="side-menu__icon"> <i data-lucide="activity"></i> </div>
@@ -99,16 +82,19 @@
                               </div>
                           </a>
                       </li>
-
-
                       <li>
                       <a href="/customers" class="side-menu">
                            <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
                            <div class="side-menu__title">Customers</div>
                        </a>
                        </li>
-
-
-
+                       <li>
+                        <a href="/orders" class="side-menu">
+                         <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
+                         <div class="side-menu__title">
+                          Orders
+                         </div>
+                      </a>
+                    </li>
                   </ul>
               </nav>

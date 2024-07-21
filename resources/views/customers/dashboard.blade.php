@@ -1,8 +1,3 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
-
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <x-head />
     <x-topbar />
     <x-customersidebar/>
@@ -39,8 +34,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=[" your-google-map-api"]&libraries=places"></script>
     <script src="dist/js/app.js"></script>
     <!-- END: JS Assets-->
-</body>
 
-</html>
 
 

@@ -14,15 +14,16 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create roles
-        $roleSuperAdmin = Role::create(['name' => 'super-admin']);
-        $roleManager = Role::create(['name' => 'manager']);
-        $roleCustomer = Role::create(['name' => 'customer', 'guard_name' => 'customer']);
+        // Create roles if they do not exist
+        $roleSuperAdmin = Role::firstOrCreate(['name' => 'super-admin', 'guard_name' => 'web']);
+        $roleManager = Role::firstOrCreate(['name' => 'manager', 'guard_name' => 'web']);
+        $roleCustomer = Role::firstOrCreate(['name' => 'customer', 'guard_name' => 'customer']);
 
-        // Create a super-admin user
-        $user = User::create([
-            'name' => 'Antwon Omar',
+        // Create a super-admin user if it does not exist
+        $user = User::firstOrCreate([
             'email' => 'antwonomar@icloud.com',
+        ], [
+            'name' => 'Antwon Omar',
             'password' => Hash::make('emma1234'),
             'mobile_number' => '0502749808',
         ]);
@@ -30,8 +31,9 @@ class RoleSeeder extends Seeder
         // Assign super-admin role to the user
         $user->assignRole('super-admin');
 
-        // Define permissions
+        // Define permissions with the web guard
         $permissions = [
+            'admin.login',
             'dashboard',
             'suppliers',
             'view.supplier',
@@ -57,21 +59,21 @@ class RoleSeeder extends Seeder
 
         // Create permissions if they do not exist
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
         }
 
         // Give all permissions to super-admin role
-        $roleSuperAdmin->givePermissionTo(Permission::all());
+        $roleSuperAdmin->givePermissionTo(Permission::where('guard_name', 'web')->get());
 
-        // Define customer-specific permissions
+        // Define customer-specific permissions with the customer guard
         $customerPermissions = [
             'customer-dashboard',
             // Add other permissions specific to customers here
         ];
 
-        // Assign customer-specific permissions to the customer role
+        // Create customer-specific permissions and assign them to the customer role
         foreach ($customerPermissions as $permissionName) {
-            $permission = Permission::firstOrCreate(['name' => $permissionName]);
+            $permission = Permission::firstOrCreate(['name' => $permissionName, 'guard_name' => 'customer']);
             $roleCustomer->givePermissionTo($permission);
         }
     }

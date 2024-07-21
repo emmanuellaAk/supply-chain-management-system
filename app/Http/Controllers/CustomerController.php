@@ -39,15 +39,15 @@ class CustomerController extends Controller
         return redirect()->route('customer.login');
     }
 
-    public function index() {
-         $sessions = auth()->user();
-        if($sessions){
-            return redirect()->route('customer-dashboard');
-        }
-        // dd(session()->all());
-        return view('auth.customer.login');
+    // public function index() {
+    //     $sessions = auth()->user();
+    //     if($sessions){
+    //         return redirect()->route('customer-dashboard');
+    //     }
+    //     // dd(session()->all());
+    //     return view('auth.customer.login');
 
-    }
+    // }
 
     //     // dd('here');
     //    request()->validate([

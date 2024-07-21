@@ -42,7 +42,7 @@ class PurchaseOrderController extends Controller
     {
     // $order = PurchaseOrder::findOrFail($id);
         // if ($order->order_status == 'received') {
-        
+
             // $product = Inventory::findOrFail($order->product_id);
 
             // $currentQuantity = $product->quantity;
@@ -53,10 +53,10 @@ class PurchaseOrderController extends Controller
 
             PurchaseOrder::where('id' ,$id)->update(['order_status' => "received"]);
 
-            
+
 
            return redirect()->back();
-        
+
     }
 
     public function receive($id){
@@ -66,7 +66,7 @@ class PurchaseOrderController extends Controller
         ]);
 
            $order = PurchaseOrder::findOrFail($id);
-        
+
             $product = Inventory::findOrFail($order->product_id);
 
             $currentQuantity = $product->quantity;
@@ -76,7 +76,7 @@ class PurchaseOrderController extends Controller
             $product->update(['quantity' => $newQuantity]);
 
             return redirect()->route('all-purchases')->with('Success', 'Successfully updated');
-    
+
         }
 
     public function declined($id)
