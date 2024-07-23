@@ -272,10 +272,10 @@ class CartController extends Controller
         }
     }
 
-    CartItem::where('customer_id', $customerId)->delete();
+    // CartItem::where('customer_id', $customerId)->delete();
 
     return redirect()->route('orderSummary', $order->id)->with('success', 'Order created successfully!');
-}
+    }
 
     public function customerOrderSummary(Request $request)
     {
@@ -289,16 +289,28 @@ class CartController extends Controller
         return view('customers.orderDetails', compact('orders'));
     }
 
-    public function orderSummary(Request $request)
-    {
+    // public function orderSummary(Request $request)
+    // {
 
-        $query = Order::with('customer')->with('customer');
-        if($request->order_status) {
-          $query->where('status', $request->order_status);
-        }
-        $orders = $query->paginate(10);
-        return view('customers.customerOrderDetails', compact('orders'));
+    //     $query = Order::with('customer')->with('customer');
+    //     if($request->order_status) {
+    //       $query->where('status', $request->order_status);
+    //     }
+    //     $orders = $query->paginate(10);
+    //     return view('customers.customerOrderDetails', compact('orders'));
+    // }
+
+    public function orderSummary(Request $request)
+{
+    $query = Order::with('items.product')->with('customer');
+    if ($request->order_status) {
+        $query->where('status', $request->order_status);
     }
+    $orders = $query->paginate(10);
+
+    return view('customers.orderDetails', compact('orders'));
+}
+
 
 
     public function orderstatus(Request  $request) {

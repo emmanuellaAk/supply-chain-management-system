@@ -18,24 +18,7 @@
             <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
                 <div class="report-box zoom-in">
                     <div class="box p-5">
-                        <div class="flex">
-                            <i data-lucide="shopping-cart" class="report-box__icon text-primary"></i>
-                            <div class="ml-auto">
-                                <div class="report-box__indicator bg-success tooltip cursor-pointer"
-                                    {{-- title="33% Higher than last month"> 33% <i data-lucide="chevron-up" --}}
-                                    class="w-4 h-4 ml-0.5"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#"><div class="text-xl font-medium leading-8 mt-6">About Us</div></a>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
-                <div class="report-box zoom-in">
-                    <div class="box p-5">
-                        <h2>{{App\Models\Inventory::count()}}</h2>
+                        <h2 class="text-2xl font-bold">{{App\Models\Inventory::count()}}</h2>
                         <div class="text-xl font-medium leading-8 mt-6">TOTAL PRODUCTS</div>
                         <div class="text-xl font-medium mt-2"></div>
                         <div class="text-base text-slate-500 mt-1">products left</div>
@@ -45,7 +28,7 @@
             <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
                 <div class="report-box zoom-in">
                     <div class="box p-5">
-                        <h2>{{App\Models\Order::where('status', 'pending')->count()}}</h2>
+                        <h2 class="text-2xl font-bold">{{App\Models\Order::where('status', 'pending')->count()}}</h2>
                         <div class="text-2xl font-medium leading-8 mt-6">PENDING ORDERS</div>
                         <div class="text-base text-slate-500 mt-1">check on pending</div>
                     </div>
@@ -62,14 +45,22 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
+                        <a href="/contact" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
                         <div class="text-base text-slate-500 mt-1">Report a problem</div>
+                    </div>
+                </div>
+            </div>
+            <!-- New Low Inventory Box -->
+            <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
+                <div class="report-box zoom-in">
+                    <div class="box p-5">
+                        <h2 class="text-2xl font-bold">{{App\Models\Inventory::where('quantity', '<', 100)->count()}}</h2>
+                        <div class="text-xl font-medium leading-8 mt-6">LOW INVENTORY</div>
+                        <div class="text-base text-slate-500 mt-1">products with less than 100 in stock</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
 </body>
 </html>

@@ -13,6 +13,8 @@
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.5",
         "spatie/laravel-permission": "^6.7",
+        "symfony/http-client": "*",
+        "symfony/mailgun-mailer": "*",
         "yajra/laravel-datatables-oracle": "^10.11"
     },
     "require-dev": {

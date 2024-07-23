@@ -102,14 +102,14 @@
         <div class="intro-x dropdown w-8 h-8">
             <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110"
                 role="button" aria-expanded="false" data-tw-toggle="dropdown">
-                <img alt="Midone - HTML Admin Template" src="{{ asset('dist/images/profile-3.jpg')}}">
+                <i class="fa fa-user-circle" style="font-size: 24px; color: white;" aria-hidden="true"></i>
+
+
             </div>
             <div class="dropdown-menu w-56">
                 <ul
                     class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
-                    <li class="p-2">
-                        <div class="font-medium">Robert De Niro</div>
-                    </li>
+
                     <li>
                         <hr class="dropdown-divider border-white/[0.08]">
                     </li>
@@ -124,9 +124,9 @@
                     <li>
                         {{-- <a href="{{ route('edit-profile', ['id' => $customer->id]) }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
                                 class="w-4 h-4 mr-2"></i> Edit Profile </a> --}}
-                                <a href="{{ route('edit-profile', ['id' => auth()->id()]) }}" class="dropdown-item hover:bg-white/5">
+                                {{-- <a href="{{ route('edit-profile', ['id' => auth()->id()]) }}" class="dropdown-item hover:bg-white/5">
                                     <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Edit Profile
-                                </a>
+                                </a> --}}
                     </li>
                 </ul>
             </div>

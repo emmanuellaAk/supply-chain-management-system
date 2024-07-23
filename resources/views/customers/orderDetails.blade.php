@@ -28,6 +28,7 @@
                                     <td>{{ $order->customer->name }}</td>
                                     <td>${{ number_format($order->total_cost, 2) }}</td>
                                     <td class="w-40">
+
                                         <div class="flex items-center justify-center {{ $order->status == 'pending' || $order->status == 'cancelled' ? 'text-red-500' : 'text-success' }}">
                                             <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
                                             {{ ucfirst($order->status) }}

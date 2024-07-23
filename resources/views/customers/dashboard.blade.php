@@ -20,7 +20,7 @@
         <div class="col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
-                <x-generalreport/>
+                <x-customerreport/>
                 <!-- END: General Report -->
             </div>
         </div>

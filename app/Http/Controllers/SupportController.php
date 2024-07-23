@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class SupportController extends Controller
 {
-    public function send(Request $request)
-    {
-        $request->validate([
-            'email' => 'required|email',
-            'problem' => 'required|string',
-        ]);
+    public function viewForm(){
 
-        // Send the email (you can customize this part)
-        Mail::raw($request->problem, function ($message) use ($request) {
-            $message->to('support@example.com')
-                ->subject('Technical Support Request')
-                ->from($request->email);
-        });
-
-        return back()->with('success', 'Your problem report has been sent successfully.');
+        Mail::to('emmanuellaanimwaa17@icloud.com')->send(new Email);
+        return view('customers.contact');
     }
+
+
 }

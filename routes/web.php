@@ -10,8 +10,10 @@
     use App\Http\Controllers\CustomerController;
     use App\Http\Controllers\CartController;
     use App\Http\Controllers\SupportController;
-    use App\Models\Cart;
+use App\Http\Controllers\TechnicalSupportController;
+use App\Models\Cart;
     use App\Models\Customer;
+use App\Models\TechnicalSupport;
 
     /*
 |--------------------------------------------------------------------------
@@ -34,12 +36,15 @@
 
     Route::get('/customers', [CustomerController::class, 'viewCustomers'])->name('view.Customers'); //admin views current customers
     Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
-    Route::get('/profile/edit/{id}', [CustomerController::class, 'editProfile'])->name('edit-profile');
-    Route::post('/profile/update/{id}', [CustomerController::class, 'updateProfile'])->name('update');
+    // Route::get('/profile/edit/{id}', [CustomerController::class, 'editProfile'])->name('edit-profile');
+    // Route::post('/profile/update/{id}', [CustomerController::class, 'updateProfile'])->name('update');
     Route::get('/login/admin', [SessionsController::class, 'create'])->name('login')->middleware('new-role'); //view login form
     Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login')->middleware('new-role'); //submit Login form
     Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post'); //view customer dashboard
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout'); //logout
+
+    Route::get('/viewForm',[SupportController::class, 'viewForm'])->name('viewForm');
+    Route::post('/sendMail', [SupportController::class, 'sendMail'])->name('sendMail');
 
 
     Route::get('/dashboard', function () {
@@ -49,6 +54,12 @@
     Route::get('/customer/dashboard', function () {
         return view('customers.dashboard');
     })->name('customer-dashboard'); //view customer dashboard
+    Route::get('/contact', function(){
+        return view('customers.contact');
+    });
+    Route::get('/about', function(){
+        return view('customers.about');
+    });
 
 
 
@@ -90,10 +101,10 @@
 
     Route::get('order/customerhistory/{id}',[CartController::class, 'customerOrderHistory'])->name('customerOrderHistory');
     Route::get('/change-status/{orderId}/{status}', [CartController::class, 'orderstatus'])->name('changeOrderStatus');
-
-
+    Route::get('/report', [TechnicalSupportController::class, 'viewReport'])->name('viewReportForm');
+    Route::post('/sendReport', [TechnicalSupportController::class, 'store'])->name('sendReport');
 // web.php
-    Route::post('/support/send', [SupportController::class, 'send'])->name('support.send');
+    // Route::post('/support/send', [SupportController::class, 'send'])->name('support.send');
 
 
 

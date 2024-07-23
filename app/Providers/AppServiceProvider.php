@@ -4,6 +4,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\View;
 use App\Models\Customer;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +34,10 @@ public function boot()
             $view->with('customer', Customer::find(auth()->id()));
         }
     });
+
+    // View::composer('*', function ($view) {
+    //     $view->with('userName', Auth::user() ? Auth::user()->name : 'Guest');
+    // });
 }
 
 }
