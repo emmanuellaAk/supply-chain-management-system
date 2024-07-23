@@ -27,7 +27,7 @@ class RolesMiddleware
             Log::warning('No authenticated user found');
 
             // Check if the current route is not the login route to prevent redirect loop
-            if ($request->route()->getName() !== 'login') {
+            if ($request->route()->getName() !== 'login' && $request->route()->getName() !== 'admin.login') {
                 return redirect()->route('login')->with('error', 'unauthorized access');
             }
 
@@ -60,7 +60,7 @@ class RolesMiddleware
         Log::info('Collected permissions:', ['permissions' => $permissions]);
 
         // Get the action name from the route
-        $action = class_basename($request->route()->getName());
+        $action = $request->route()->getName();
 
         // Log the action being checked
         Log::info('Action being checked:', ['action' => $action]);

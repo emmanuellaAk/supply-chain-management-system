@@ -121,6 +121,13 @@
                         <a href="/" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
                                 class="w-4 h-4 mr-2"></i> Logout </a>
                     </li>
+                    <li>
+                        {{-- <a href="{{ route('edit-profile', ['id' => $customer->id]) }}" class="dropdown-item hover:bg-white/5"> <i data-lucide="toggle-right"
+                                class="w-4 h-4 mr-2"></i> Edit Profile </a> --}}
+                                <a href="{{ route('edit-profile', ['id' => auth()->id()]) }}" class="dropdown-item hover:bg-white/5">
+                                    <i data-lucide="toggle-right" class="w-4 h-4 mr-2"></i> Edit Profile
+                                </a>
+                    </li>
                 </ul>
             </div>
         </div>

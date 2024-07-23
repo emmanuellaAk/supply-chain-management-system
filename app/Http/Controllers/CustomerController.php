@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\Inventory;
-use Illuminate\Http\Request;
-use App\Models\User;
+use Illuminate\Http\Request;;
 use Illuminate\Support\Facades\Hash;
-use Spatie\Permission\Models\Role;
+
 class CustomerController extends Controller
 {
     public function viewRegisterForm()
@@ -33,43 +31,10 @@ class CustomerController extends Controller
         'password'=>Hash::make($request->password)
        ]);
 
-        // Create user based on validated input
-
-        // $customer->assignRole('manager');
         return redirect()->route('customer.login');
     }
 
-    // public function index() {
-    //     $sessions = auth()->user();
-    //     if($sessions){
-    //         return redirect()->route('customer-dashboard');
-    //     }
-    //     // dd(session()->all());
-    //     return view('auth.customer.login');
-
-    // }
-
-    //     // dd('here');
-    //    request()->validate([
-    //     'customer_name'=>'required',
-    //     'location'=>'required',
-    //     'password'=>'required',
-    //     'mobile_number'=>'required'
-    //    ]);
-
-    //    $hashedPassword = Hash::make($request->password);
-
-    //     Customers::create([
-    //     'customer_name'=>$request->customer_name,
-    //     'location'=>$request->location,
-    //     'mobile_number'=>$request->mobile_number,
-    //     'password'=>$hashedPassword
-    //    ]);
-
     public function viewCustomers() {
-        // $customers = Customer::all();
-        // return view('customers.current', compact('customers'));
-
         $filter = request()->search;
 
         return view('customers.current', [
@@ -79,17 +44,74 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function viewAddForm() {
-        return view('customers.addCustomer');
+    public function editProfile($id)
+    {
+        // Retrieve the customer by ID
+        $customer = Customer::findOrFail($id);
+
+        // Pass the customer data to the view
+        return view('userinfo', ['customer' => $customer]);
     }
 
-    public function viewSalesPoint() {
-        $filter = request()->search;
 
-        return view('customers.salesPoint', [
-            'products' => Inventory::latest()->filter([
-                'search' => $filter
-            ])->paginate(10)
-        ]);
+//    public function updateProfile(Request $request)
+//    {
+//     // Validate input
+//     $request->validate([
+//         'name' => 'required|max:255',
+//         'email' => 'required|email|max:255|unique:users,email,' . auth()->id(),
+//         'mobile_number' => 'required',
+//         'password' => 'nullable|min:7|max:255'
+//     ]);
+
+//     // Get the authenticated user
+//     // $customer = auth()->user();
+//     $customer = session('customer_id');
+
+//     // Update user information
+//     $customer->name = $request->name;
+//     $customer->email = $request->email;
+//     $customer->mobile_number = $request->mobile_number;
+
+//     // Update password if provided
+//     if ($request->filled('password')) {
+//         $customer->password = Hash::make($request->password);
+//     }
+
+//     $customer->update();
+
+//     return redirect()->route('/')->with('success', 'Profile updated successfully.');
+// }
+
+public function updateProfile(Request $request, $id)
+{
+    // Validate input
+    $request->validate([
+        'name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:customers,email,' . $id,
+        'mobile_number' => 'required',
+        'password' => 'nullable|min:7|max:255'
+    ]);
+
+    // Retrieve the customer by ID
+    $customer = Customer::findOrFail($id);
+
+    // Update user information
+    $customer->name = $request->name;
+    $customer->email = $request->email;
+    $customer->mobile_number = $request->mobile_number;
+
+    // Update password if provided
+    if ($request->filled('password')) {
+        $customer->password = Hash::make($request->password);
     }
+
+    // Save the updated customer information
+    $customer->save();
+
+    return redirect()->route('edit-profile', $customer->id)->with('success', 'Profile updated successfully.');
+}
+
+
+
 }

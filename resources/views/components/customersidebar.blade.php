@@ -7,7 +7,7 @@
                 <ul>
 
                     <li>
-                      <a href="/customer/dashboard" class="side-menu side-menu--active">
+                      <a href="/customer/dashboard" class="side-menu">
                           <div class="side-menu__icon"> <i data-lucide="home"></i> </div>
                           <div class="side-menu__title">
                               Customer Dashboard

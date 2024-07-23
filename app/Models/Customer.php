@@ -13,7 +13,7 @@ class Customer extends Model
 {
     use HasFactory;
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
-    protected $guarded = [];
+    protected $fillable = ['name', 'email', 'mobile_number', 'password'];
 
     protected $guard_name = 'customer';
 
@@ -33,5 +33,7 @@ class Customer extends Model
 {
     return $this->role === 'customer';
 }
+
+
 
 }
