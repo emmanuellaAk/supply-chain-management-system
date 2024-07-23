@@ -38,7 +38,7 @@
     Route::get('/addCustomer', [CustomerController::class, 'viewAddForm'])->name('viewAddForm');
     // Route::get('/edit-profile/{user}', [CustomerController::class, 'edit'])->name('edit-profile');
     // Route::post('/update/{user}', [CustomerController::class, 'update'])->name('update');
-    Route::get('/login/admin', [SessionsController::class, 'create'])->name('login'); //view login form
+    Route::get('/login/admin', [SessionsController::class, 'create'])->name('login')->middleware('new-role'); //view login form
     Route::post('/login', [SessionsController::class, 'submitLogin'])->name('admin.login')->middleware('new-role'); //submit Login form
     Route::post('/customer/dashboard', [SessionsController::class, 'customerLogin'])->name('customer.login.post'); //view customer dashboard
     Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout'); //logout
@@ -50,7 +50,7 @@
 
     Route::get('/customer/dashboard', function () {
         return view('customers.dashboard');
-    })->name('customer-dashboard')->middleware('customerLogin'); //view customer dashboard
+    })->name('customer-dashboard'); //view customer dashboard
 
 
 
@@ -85,14 +85,15 @@
     Route::get('/cart', [CartController::class, 'viewCart'])->name('viewCart');
     Route::post('/cart/update/{productId}', [CartController::class, 'updateCart'])->name('cart.update');
     Route::delete('/cart/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-    // Route::post('/cart/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeOrder');
     Route::get('/order/create', [CartController::class, 'createOrder'])->name('createOrder');
     Route::get('/order/summary/', [CartController::class, 'customerOrderSummary'])->name('orderSummary');
     Route::get('/orders', [CartController::class, 'OrderSummary'])->name('customer.order.summary');
-    // Route::patch('/order/status/{orderId}', [CartController::class, 'updateOrderStatus'])->name('updateOrderStatus');
-    Route::get('/received/{orderId}', [CartController::class, 'orderreceived'])->name('orderreceived');
-    Route::get('/declined/{orderId}', [CartController::class, 'orderdeclined'])->name('orderdeclined');
-    // Route::get('/filter', [CartController::class, 'filter'])->name('filter');
+    Route::get('order/history/{id}',[CartController::class, 'orderHistory'])->name('orderHistory');
+
+    Route::get('order/customerhistory/{id}',[CartController::class, 'customerOrderHistory'])->name('customerOrderHistory');
+    Route::get('/change-status/{orderId}/{status}', [CartController::class, 'orderstatus'])->name('changeOrderStatus');
+
+
 
 
 

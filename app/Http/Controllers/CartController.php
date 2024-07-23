@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\CartItem;
 use App\Models\OrderItem;
+use App\Models\ProductOrders;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -49,15 +50,31 @@ class CartController extends Controller
                         'total_cost' => $totalCost,
                     ]);
 
+                    $currentCart = CartItem::where('customer_id', $customerId)->where('product_id', $productId)
+                        ->first();
+
                     // Create a new cart entry linked to the customer
-                    CartItem::create([
-                        'customer_id' => $customerId,
-                        'product_id' => $product->id,
-                        'product_name' => $product->product_name,
-                        'quantity' => $quantity,
-                        'price' => $sellingPrice,
-                        'total_cost' => $totalCost,
-                    ]);
+                    if ($currentCart) {
+                        $currentCart->increment('quantity', $quantity);
+                        $totalCost = $sellingPrice * $quantity;
+                        $currentCart->product_name = $product->product_name;
+                        $currentCart->price = $sellingPrice;
+                        $currentCart->total_cost = $totalCost;
+
+                        $currentCart->save();
+                    }
+                    if (!$currentCart) {
+                        CartItem::create(
+                            [
+                                'customer_id' => $customerId,
+                                'product_id' => $product->id,
+                                'product_name' => $product->product_name,
+                                'quantity' => $quantity,
+                                'price' => $sellingPrice,
+                                'total_cost' => $totalCost,
+                            ]
+                        );
+                    }
                 }
             }
 
@@ -120,10 +137,12 @@ class CartController extends Controller
             'customer_id' => $customerId,
             'status' => 'pending',
         ]);
+        $orderId = $order->id;
+        $orders = collect([]);
 
         foreach ($cartItems as $cartItem) {
-            OrderItem::create([
-                'order_id' => $order->id,
+            $singleOrder = OrderItem::create([
+                'order_id' => $orderId,
                 'product_id' => $cartItem->product_id,
                 'product_name' => $cartItem->product_name,
                 'quantity' => $cartItem->quantity,
@@ -131,28 +150,71 @@ class CartController extends Controller
                 'total_cost' => $cartItem->total_cost,
             ]);
 
+            $orders[] = $singleOrder->id;
+
             // // Optionally, you can clear the cart item after it's added to the order
             // $cartItem->delete();
         }
 
-        return redirect()->route('customer.order.summary', $order->id)->with('success', 'Order created successfully!');
+        ProductOrders::create([
+            'order_id' => $orderId,
+            'products' => $orders
+        ]);
+        return redirect()->route('orderSummary', $order->id)->with('success', 'Order created successfully!');
     }
 
-    public function customerOrderSummary()
+    public function customerOrderSummary(Request $request)
     {
         $customerId = session('customer_id');
+       
         // dd($customerId);
         // $orders = Order::with('customer')->paginate(10);
-        $orders = Order::where('customer_id', $customerId)->with('customer')->paginate(10);
+        $query = Order::where('customer_id', $customerId)->with('customer');
+        if($request->order_status) {
+          $query->where('status', $request->order_status);
+        }
+        $orders = $query->paginate(10);
         return view('customers.orderDetails', compact('orders'));
     }
 
-    public function orderSummary()
+    public function orderSummary(Request $request)
     {
 
-        // dd($customerId);
-        $orders = Order::with('customer')->paginate(10);
+        $query = Order::with('customer')->with('customer');
+        if($request->order_status) {
+          $query->where('status', $request->order_status);
+        }
+        $orders = $query->paginate(10);
         return view('customers.customerOrderDetails', compact('orders'));
+    }
+
+
+    public function orderstatus(Request  $request) {
+        $orderStatus = [
+            'received','cancelled'
+        ];
+
+        if(!in_array($request->status,$orderStatus )) {
+           return back()->with('error',"invalid order status {$request->status}");
+        };
+
+        $order = Order::findOrFail($request->orderId);
+
+       $order->status = $request->status;
+
+       $order->save();
+
+       return back()->with('success', "order status has been changed to {$request->status}" );
+    }
+
+    public function orderHistory(Request $request) {
+        $order = Order::findOrFail($request->id)->with('items')->first();
+        return view('customers.orderHistory', compact('order'));
+    }
+
+    public function customerOrderHistory(Request $request) {
+        $order = Order::findOrFail($request->id)->with('items')->first();
+        return view('customers.customerOrderHistory', compact('order'));
     }
 
     //     public function received(Request $request, $orderId,  $status)
@@ -169,24 +231,32 @@ class CartController extends Controller
     //     $order = Order::findOrFail($orderId);
     //     $order->update(['status' => $status]);
     //     return redirect()->route('orderSummary')->with('success', 'Order status updated successfully!');
-    public function orderreceived($id)
-    {
-        Order::where('id', $id)->update(['status' => "received"]);
-        return redirect()->back();
-    }
-
-    public function orderdeclined($id)
-    {
-        Order::where('id', $id)->update([
-            'status' => "declined"
-        ]);
-
-        return redirect()->back();
-    }
-
-    // public function filter(Request $request)
+    // public function orderreceived($id)
     // {
-    //     $filter = Order::where('status', $request->status)->get();
-    //     return view('customers.orderDetails', ['orders' => $filter]);
+    //     Order::where('id', $id)->update(['status' => 'received']);
+    //     return redirect()->back()->with('success', 'Order status updated to received.');
     // }
+
+    // public function orderdeclined($id)
+    // {
+    //     Order::where('id', $id)->update(['status' => 'declined']);
+    //     return redirect()->back()->with('success', 'Order status updated to declined.');
+    // }
+
+
+    // public function orderreceived($orderId)
+    // {
+    //     Log::info('Order received route hit with ID: ' . $orderId);
+    //     Order::where('id', $orderId)->update(['status' => 'received']);
+    //     return redirect()->back()->with('success', 'Order status updated to received.');
+    // }
+
+    // public function orderdeclined($orderId)
+    // {
+    //     Log::info('Order declined route hit with ID: ' . $orderId);
+    //     Order::where('id', $orderId)->update(['status' => 'declined']);
+    //     return redirect()->back()->with('success', 'Order status updated to declined.');
+    // }
+
+
 }

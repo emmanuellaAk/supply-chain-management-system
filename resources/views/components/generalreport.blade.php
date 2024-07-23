@@ -1,3 +1,5 @@
+
+
 <div class="col-span-12 mt-8">
                     <div class="intro-y flex items-center h-10">
                         <h2 class="text-lg font-medium truncate mr-5">
@@ -28,14 +30,7 @@
                             <!-- Adjusted column span for larger width -->
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
-                                    <div class="flex">
-                                        <i data-lucide="credit-card" class="report-box__icon text-pending"></i>
-                                        <div class="ml-auto">
-                                            <div class="report-box__indicator bg-danger tooltip cursor-pointer"
-                                                {{-- title="2% Lower than last month"> 2% <i data-lucide="chevron-down" --}}
-                                                    class="w-4 h-4 ml-0.5"></i> </div>
-                                        </div>
-                                    </div>
+                                    {{-- <h2>{{App\Models\Order::where('product', 'pending')->count()}}</h2> --}}
                                     <div class="text-xl font-medium leading-8 mt-6">TOTAL PRODUCTS</div>
                                     <div class="text-xl font-medium mt-2"></div>
                                     <div class="text-base text-slate-500 mt-1">products left</div>
@@ -46,13 +41,7 @@
                             <!-- Adjusted column span for larger width -->
                             <div class="report-box zoom-in">
                                 <div class="box p-5">
-                                    <div class="flex">
-                                        <i data-lucide="monitor" class="report-box__icon text-warning"></i>
-                                        <div class="ml-auto">
-                                            <div class="report-box__indicator bg-success tooltip cursor-pointer"
-                                                {{-- title="12% Higher than last month"> 12% <i data-lucide="chevron-up" --}} class="w-4 h-4 ml-0.5"></i> </div>
-                                        </div>
-                                    </div>
+                                    <h2>{{App\Models\Order::where('status', 'pending')->count()}}</h2>
                                     <div class="text-2xl font-medium leading-8 mt-6">PENDING ORDERS</div>
                                     <div class="text-base text-slate-500 mt-1">check on pending</div>
                                 </div>

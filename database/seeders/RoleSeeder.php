@@ -33,6 +33,7 @@ class RoleSeeder extends Seeder
 
         // Define permissions with the web guard
         $permissions = [
+            'login',
             'admin.login',
             'dashboard',
             'suppliers',

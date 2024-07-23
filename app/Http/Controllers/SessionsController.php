@@ -16,12 +16,15 @@ class SessionsController extends Controller
         return view('auth.admin.login');
     }
 
+
     public function submitLogin(Request $request)
     {
         request()->validate([
             'email' => 'required',
             'password' => 'required'
         ]);
+
+
 
          User::where('email', $request->email)->first();
 

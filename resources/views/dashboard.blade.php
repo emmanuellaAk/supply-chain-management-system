@@ -14,6 +14,7 @@
         <div class="col-span-12">
             <div class="grid grid-cols-12 gap-6">
                 <!-- BEGIN: General Report -->
+                
                 <x-generalreport/>
                 <!-- END: General Report -->
             </div>

@@ -88,6 +88,7 @@
                            <div class="side-menu__title">Customers</div>
                        </a>
                        </li>
+                       
                        <li>
                         <a href="/orders" class="side-menu">
                          <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>

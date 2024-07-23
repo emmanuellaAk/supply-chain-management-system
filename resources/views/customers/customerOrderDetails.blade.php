@@ -14,7 +14,7 @@
                     Order Summary
                 </h2>
 
-                <form action="{{ route('filter') }}" method="GET" class="flex justify-center items-center gap-3">
+                <form action="{{ url()->full() }}" method="GET" class="flex justify-center items-center gap-3">
                     <label for="status" class="font-semibold">STATUS</label>
                     <select name="order_status" id="status" class="intro-x login__input form-control p-3 h-11">
                         <option value="" class="">Select</option>
@@ -31,6 +31,7 @@
                         <table class="table table-striped" id="datatable">
                             <thead>
                                 <tr>
+                                    <th class="text-center whitespace-nowrap">Order Id</th>
                                     <th class="text-center whitespace-nowrap">Customer Name</th>
                                     <th class="whitespace-nowrap">Total Cost</th>
                                     <th class="text-center whitespace-nowrap">Status</th>
@@ -40,6 +41,7 @@
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr>
+                                        <td>{{ $order->id }}</td>
                                         <td>{{ $order->customer->name }}</td>
                                         <td>${{ number_format($order->total_cost, 2) }}</td>
                                         <td class="w-40">
@@ -49,14 +51,15 @@
                                             </div>
                                         </td>
                                         <td class="flex justify-center items-center gap-5">
-                                            <a class="btn btn-primary py-1 px-2" href="{{ route('orderreceived', ['orderId' => $order->id, 'status' => 'received']) }}">Received</a>
-                                            <a class="btn btn-primary py-1 px-2" href="{{ route('orderdeclined', ['orderId' => $order->id, 'status' => 'cancelled']) }}">Cancelled</a>
+                                            <a class="btn btn-primary py-1 px-2" href="{{ route('changeOrderStatus', ['orderId' => $order->id, 'received']) }}">Received</a>
+                                            <a class="btn btn-primary py-1 px-2" href="{{ route('changeOrderStatus', ['orderId' => $order->id, 'cancelled']) }}">Cancelled</a>
+                                            <a class="btn btn-primary py-1 px-2" href="{{ route('customerOrderHistory', $order->id) }}">View</a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- {{ $orders->links() }} --}}
+                        {{ $orders->links() }}
                     </div>
                 </div>
             </div>

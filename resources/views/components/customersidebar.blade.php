@@ -22,6 +22,12 @@
                       </div>
                    </a>
                  </li>
+                <li>
+                 <a href="/cart" class="side-menu">
+                    <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
+                    <div class="side-menu__title">Cart</div>
+                </a>
+                </li>
                  <li>
                     <a href="/order/summary/" class="side-menu">
                      <div class="side-menu__icon"> <i data-lucide="edit"></i> </div>
