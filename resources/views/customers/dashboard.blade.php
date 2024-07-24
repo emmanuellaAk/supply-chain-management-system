@@ -1,5 +1,5 @@
     <x-head />
-    <x-topbar />
+    <x-fixedtopbar />
     <x-customersidebar/>
 
     <script>

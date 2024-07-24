@@ -1,5 +1,5 @@
 <x-head />
-<x-topbar />
+<x-fixedtopbar />
 <x-sidebar />
 <div class="content">
             <h2 class="text-lg font-medium mt-10">

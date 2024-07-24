@@ -1,5 +1,5 @@
 <x-head />
-<x-topbar />
+<x-fixedtopbar />
 <x-sidebar/>
 <div class="content">
     <div class="intro-y box mt-5">

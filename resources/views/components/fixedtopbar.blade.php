@@ -1,7 +1,6 @@
 @php
-    $user_auth = auth()->user();
-    // dd($user_auth)
-@endphp
+    $customerId = session('customer_id');
+ @endphp
 
 <div
     class="top-bar-boxed h-[70px] z-[51] relative border-b border-white/[0.08] mt-12 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 md:pt-0 mb-12">
@@ -23,6 +22,19 @@
         <!-- BEGIN: Search -->
         <div class="intro-x relative mr-3 sm:mr-6">
             {{-- <span class="text-white text-sm ml-3">WELCOME: {{ auth()->user()->name }}</span> --}}
+
+    {{-- <span class="text-white text-sm ml-3">WELCOME: {{(App\Models\Customer::where('customer_id', $customerId))}}  </span> --}}
+    @php
+    $customer = App\Models\Customer::where('id', $customerId)->first();
+@endphp
+
+<span class="text-white text-sm ml-3">
+    WELCOME: {{ $customer ? $customer->name : 'Guest' }}
+</span>
+
+
+
+
             {{-- <div class="search hidden sm:block">
                         <input type="text" class="search__input form-control border-transparent" placeholder="Search...">
                         <i data-lucide="search" class="search__icon dark:text-slate-500"></i>

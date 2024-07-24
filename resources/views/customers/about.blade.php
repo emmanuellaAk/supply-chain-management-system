@@ -8,7 +8,7 @@
 </head>
 <body>
     <x-head />
-    <x-topbar />
+    <x-fixedtopbar />
     <x-customersidebar/>
 
     <div class="content">

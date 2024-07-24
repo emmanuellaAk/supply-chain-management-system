@@ -87,50 +87,30 @@ class CartController extends Controller
     //     }
     // }
     public function addCart(Request $request)
-{
-    try {
-        $validated = $request->validate([
-            'product_ids' => 'required|array',
-            'product_ids.*' => 'exists:inventories,id',
-            'quantities' => 'required|array',
-            'quantities.*' => 'integer|min:1',
-        ]);
+    {
+        try {
+            $validated = $request->validate([
+                'product_ids' => 'required|array',
+                'product_ids.*' => 'exists:inventories,id',
+                'quantities' => 'required|array',
+                'quantities.*' => 'integer|min:1',
+            ]);
 
-        $customerId = session('customer_id');
+            $customerId = session('customer_id');
 
-        foreach ($validated['product_ids'] as $productId) {
-            $quantity = $validated['quantities'][$productId];
-            $product = Inventory::find($productId);
+            foreach ($validated['product_ids'] as $productId) {
+                $quantity = $validated['quantities'][$productId];
+                $product = Inventory::find($productId);
 
-            if ($product) {
-                if ($quantity > $product->quantity) {
-                    return redirect()->route('viewProducts')->with('error', 'Not enough stock for product: ' . $product->product_name);
-                }
+                if ($product) {
+                    if ($quantity > $product->quantity) {
+                        return redirect()->route('viewProducts')->with('error', 'Not enough stock for product: ' . $product->product_name);
+                    }
 
-                $sellingPrice = $product->selling_price;
-                $totalCost = $quantity * $sellingPrice;
+                    $sellingPrice = $product->selling_price;
+                    $totalCost = $quantity * $sellingPrice;
 
-                Log::info('Saving product to cart', [
-                    'customer_id' => $customerId,
-                    'product_id' => $product->id,
-                    'product_name' => $product->product_name,
-                    'quantity' => $quantity,
-                    'price' => $sellingPrice,
-                    'total_cost' => $totalCost,
-                ]);
-
-                $currentCart = CartItem::where('customer_id', $customerId)->where('product_id', $productId)->first();
-
-                if ($currentCart) {
-                    $currentCart->increment('quantity', $quantity);
-                    $totalCost = $sellingPrice * $quantity;
-                    $currentCart->product_name = $product->product_name;
-                    $currentCart->price = $sellingPrice;
-                    $currentCart->total_cost = $totalCost;
-
-                    $currentCart->save();
-                } else {
-                    CartItem::create([
+                    Log::info('Saving product to cart', [
                         'customer_id' => $customerId,
                         'product_id' => $product->id,
                         'product_name' => $product->product_name,
@@ -138,22 +118,42 @@ class CartController extends Controller
                         'price' => $sellingPrice,
                         'total_cost' => $totalCost,
                     ]);
+
+                    $currentCart = CartItem::where('customer_id', $customerId)->where('product_id', $productId)->first();
+
+                    if ($currentCart) {
+                        $currentCart->increment('quantity', $quantity);
+                        $totalCost = $sellingPrice * $quantity;
+                        $currentCart->product_name = $product->product_name;
+                        $currentCart->price = $sellingPrice;
+                        $currentCart->total_cost = $totalCost;
+
+                        $currentCart->save();
+                    } else {
+                        CartItem::create([
+                            'customer_id' => $customerId,
+                            'product_id' => $product->id,
+                            'product_name' => $product->product_name,
+                            'quantity' => $quantity,
+                            'price' => $sellingPrice,
+                            'total_cost' => $totalCost,
+                        ]);
+                    }
                 }
             }
-        }
 
-        return redirect()->route('viewCart')->with('success', 'Products added to cart successfully!');
-    } catch (\Exception $e) {
-        Log::error('Error adding products to cart: ' . $e->getMessage());
-        return redirect()->route('viewProducts')->with('error', 'Failed to add products to cart!');
+            return redirect()->route('viewCart')->with('success', 'Products added to cart successfully!');
+        } catch (\Exception $e) {
+            Log::error('Error adding products to cart: ' . $e->getMessage());
+            return redirect()->route('viewProducts')->with('error', 'Failed to add products to cart!');
+        }
     }
-}
 
 
     public function viewCart()
     {
         $customerId = session('customer_id');
-        $cartItems = CartItem::where('customer_id', $customerId)->get();
+        $cartMail = CartItem::where('customer_id', $customerId)->get();
         return view('customers.cartView', compact('cartItems'));
     }
 
@@ -229,52 +229,52 @@ class CartController extends Controller
     // }
 
     public function createOrder()
-{
-    $customerId = session('customer_id');
-    $cartItems = CartItem::where('customer_id', $customerId)->get();
+    {
+        $customerId = session('customer_id');
+        $cartItems = CartItem::where('customer_id', $customerId)->get();
 
-    if ($cartItems->isEmpty()) {
-        return redirect()->route('viewCart')->with('error', 'Your cart is empty!');
-    }
-
-    // Check if inventory is sufficient
-    foreach ($cartItems as $cartItem) {
-        $product = Inventory::find($cartItem->product_id);
-        if ($product && $cartItem->quantity > $product->quantity) {
-            return redirect()->route('viewCart')->with('error', 'Not enough stock for product: ' . $product->product_name);
+        if ($cartItems->isEmpty()) {
+            return redirect()->route('viewCart')->with('error', 'Your cart is empty!');
         }
-    }
 
-    // Create the order
-    $order = Order::create([
-        'customer_id' => $customerId,
-        'status' => 'pending',
-    ]);
+        // Check if inventory is sufficient
+        foreach ($cartItems as $cartItem) {
+            $product = Inventory::find($cartItem->product_id);
+            if ($product && $cartItem->quantity > $product->quantity) {
+                return redirect()->route('viewCart')->with('error', 'Not enough stock for product: ' . $product->product_name);
+            }
+        }
 
-    $orderId = $order->id;
-    $orders = collect([]);
-
-    foreach ($cartItems as $cartItem) {
-        OrderItem::create([
-            'order_id' => $orderId,
-            'product_id' => $cartItem->product_id,
-            'product_name' => $cartItem->product_name,
-            'quantity' => $cartItem->quantity,
-            'price' => $cartItem->price,
-            'total_cost' => $cartItem->total_cost,
+        // Create the order
+        $order = Order::create([
+            'customer_id' => $customerId,
+            'status' => 'pending',
         ]);
 
-        // Update inventory
-        $product = Inventory::find($cartItem->product_id);
-        if ($product) {
-            $product->quantity -= $cartItem->quantity;
-            $product->save();
+        $orderId = $order->id;
+        
+
+        foreach ($cartItems as $cartItem) {
+            OrderItem::create([
+                'order_id' => $orderId,
+                'product_id' => $cartItem->product_id,
+                'product_name' => $cartItem->product_name,
+                'quantity' => $cartItem->quantity,
+                'price' => $cartItem->price,
+                'total_cost' => $cartItem->total_cost,
+            ]);
+
+            // Update inventory
+            $product = Inventory::find($cartItem->product_id);
+            if ($product) {
+                $product->quantity -= $cartItem->quantity;
+                $product->save();
+            }
         }
-    }
 
-    // CartItem::where('customer_id', $customerId)->delete();
+        // CartItem::where('customer_id', $customerId)->delete();
 
-    return redirect()->route('orderSummary', $order->id)->with('success', 'Order created successfully!');
+        return redirect()->route('orderSummary', $order->id)->with('success', 'Order created successfully!');
     }
 
     public function customerOrderSummary(Request $request)
@@ -282,75 +282,67 @@ class CartController extends Controller
         $customerId = session('customer_id');
 
         $query = Order::where('customer_id', $customerId)->with('customer');
-        if($request->order_status) {
-          $query->where('status', $request->order_status);
+        if ($request->order_status) {
+            $query->where('status', $request->order_status);
         }
         $orders = $query->paginate(10);
         return view('customers.orderDetails', compact('orders'));
     }
 
-    // public function orderSummary(Request $request)
-    // {
-
-    //     $query = Order::with('customer')->with('customer');
-    //     if($request->order_status) {
-    //       $query->where('status', $request->order_status);
-    //     }
-    //     $orders = $query->paginate(10);
-    //     return view('customers.customerOrderDetails', compact('orders'));
-    // }
 
     public function orderSummary(Request $request)
-{
-    $query = Order::with('items.product')->with('customer');
-    if ($request->order_status) {
-        $query->where('status', $request->order_status);
+    {
+        $query = Order::with('items.product')->with('customer');
+        if ($request->order_status) {
+            $query->where('status', $request->order_status);
+        }
+        $orders = $query->paginate(10);
+
+        return view('customers.orderDetails', compact('orders'));
     }
-    $orders = $query->paginate(10);
-
-    return view('customers.orderDetails', compact('orders'));
-}
 
 
 
-    public function orderstatus(Request  $request) {
+    public function orderstatus(Request  $request)
+    {
         $orderStatus = [
-            'received','cancelled'
+            'received', 'cancelled'
         ];
 
-        if(!in_array($request->status,$orderStatus )) {
-           return back()->with('error',"invalid order status {$request->status}");
+        if (!in_array($request->status, $orderStatus)) {
+            return back()->with('error', "invalid order status {$request->status}");
         };
 
         $order = Order::findOrFail($request->orderId);
 
-       $order->status = $request->status;
+        $order->status = $request->status;
 
-       $order->save();
+        $order->save();
 
-       if ($request->status === 'received') {
-        // Subtract quantities from inventory
-        foreach ($order->items as $item) {
-            $product = Inventory::find($item->product_id);
-            if ($product) {
-                $product->quantity -= $item->quantity;
-                $product->save();
+        if ($request->status === 'received') {
+            // Subtract quantities from inventory
+            foreach ($order->items as $item) {
+                $product = Inventory::find($item->product_id);
+                if ($product) {
+                    $product->quantity -= $item->quantity;
+                    $product->save();
+                }
             }
         }
+
+
+        return back()->with('success', "order status has been changed to {$request->status}");
     }
 
-
-       return back()->with('success', "order status has been changed to {$request->status}" );
-    }
-
-    public function orderHistory(Request $request) {
+    public function orderHistory(Request $request)
+    {
         $order = Order::findOrFail($request->id)->with('items')->first();
         return view('customers.orderHistory', compact('order'));
     }
 
-    public function customerOrderHistory(Request $request) {
+    public function customerOrderHistory(Request $request)
+    {
         $order = Order::findOrFail($request->id)->with('items')->first();
         return view('customers.customerOrderHistory', compact('order'));
     }
-
 }

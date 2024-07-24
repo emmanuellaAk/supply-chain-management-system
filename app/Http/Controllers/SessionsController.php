@@ -6,7 +6,6 @@ use App\Models\Customer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class SessionsController extends Controller
@@ -26,7 +25,7 @@ class SessionsController extends Controller
 
 
 
-         User::where('email', $request->email)->first();
+        User::where('email', $request->email)->first();
 
 
         if (!auth()->attempt(['email' => $request->email, 'password' => $request->password])) {
@@ -49,18 +48,12 @@ class SessionsController extends Controller
         if (!$customer) {
             return back()->with('incorrect_login', 'Your provided credentials could not be verified');
         }
-        // dd($request->password, $customer->password);
 
-        if(!Hash::check($request->password, $customer->password) ) {
-                return back()->with('incorrect_login', 'Your password is wrong');
+
+        if (!Hash::check($request->password, $customer->password)) {
+            return back()->with('incorrect_login', 'Your password is wrong');
         }
-        // if(!auth()->attempt(['email'=>$request->email , 'password' => $request->password])){
-        //         throw ValidationException::withMessages([
-        //         'incorrect_login' => 'Your provided credentials could not be verified'
-        //     ]);
-        // }
 
-        // dd($request->all());
         session(['customer_id' => $customer->id]);
 
         return  view('customers.dashboard');
@@ -70,37 +63,9 @@ class SessionsController extends Controller
     {
 
         auth()->logout();
-
+        // For User authentication
+        session()->forget('customer_id'); // For Customer session
+        session()->flush();
         return redirect('/');
     }
 }
-
-
-        //$credentials = $request->only('email', 'password');
-
-        // if (Auth::guard('customer')->attempt($credentials)) {
-        //     return redirect()->route('salesPoint');
-        // }
-
-        // // Attempt to log in the manager if customer login fails
-        // if (Auth::guard('web')->attempt($credentials)) {
-        //     return redirect()->route('dashboard');
-        // }
-
-
-        // return 123;
-
-        // if (auth()->attempt($attributes)) {
-
-        //     //if authentication failed
-        //     throw ValidationException::withMessages([
-        //         'email' => 'Your provided credentials could not be verified'
-        //     ]);
-        // }
-
-
-        // session()->regenerate();
-
-        // return 123;
-
-        // return redirect()->route('dashboard');
