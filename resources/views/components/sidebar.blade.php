@@ -6,7 +6,7 @@
               <nav class="side-nav">
                   <ul>
                     <li>
-                        <a href="/dashboard" class="side-menu side-menu--active">
+                        <a href="/dashboard" class="side-menu">
                             <div class="side-menu__icon"></div>
                             <div class="side-menu__title">
                                 Dashboard

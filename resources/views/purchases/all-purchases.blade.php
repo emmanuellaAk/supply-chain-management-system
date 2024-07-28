@@ -17,7 +17,7 @@
                 <form action="{{ route('filter') }}" method="GET" class="flex justify-center items-center gap-3">
                     <label for="purchase" class="font-semibold">STATUS</label>
                     <select name="order_status" id="purchase_status" class="intro-x login__input form-control p-3 h-11">
-                        <option value="" class="">Select</option>
+                        <option value="">All</option>
                         <option value="pending">Pending</option>
                         <option value="received">Received</option>
                         <option value="declined">Declined</option>

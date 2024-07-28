@@ -7,6 +7,16 @@
             <h2 class="font-medium text-base mr-auto">
                 Technical Support Requests
             </h2>
+            <form action="{{ url()->full() }}" method="GET" class="flex justify-center items-center gap-3">
+                <label for="status" class="font-semibold">STATUS</label>
+                <select name="order_status" id="status" class="intro-x login__input form-control p-3 h-11">
+                    <option value="" class="">Select</option>
+                    <option value="pending">Pending</option>
+                    <option value="received">Received</option>
+                    <option value="fixed">Fixed</option>
+                </select>
+                <button class="btn btn-primary py-2 px-2">Search</button>
+            </form>
         </div>
         <div class="p-5" id="example">
             <div class="preview">

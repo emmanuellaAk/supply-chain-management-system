@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" class="light">
-<head>
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-    <x-head />
-</head>
-<body>
+ <x-head />
     <x-fixedtopbar />
     <x-sidebar />
     <div class="content">
@@ -67,5 +61,4 @@
     </div>
 
     <x-script />
-</body>
-</html>
+

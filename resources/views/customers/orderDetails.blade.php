@@ -5,8 +5,19 @@
     <div class="intro-y box mt-5">
         <div class="flex flex-col sm:flex-row items-center p-5 border-b border-slate-200/60">
             <h2 class="font-medium text-base mr-auto">
-              Order Summary
+                Order Summary
             </h2>
+
+            <form action="{{ url()->full() }}" method="GET" class="flex justify-center items-center gap-3">
+                <label for="status" class="font-semibold">STATUS</label>
+                <select name="order_status" id="status" class="intro-x login__input form-control p-3 h-11">
+                    <option value="" class="">Select</option>
+                    <option value="pending">Pending</option>
+                    <option value="received">Received</option>
+                    <option value="cancelled">Cancelled</option>
+                </select>
+                <button class="btn btn-primary py-2 px-2">Search</button>
+            </form>
         </div>
         <div class="p-5" id="example">
             <div class="preview">
@@ -45,6 +56,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{ $orders->links() }}
                 </div>
             </div>
         </div>

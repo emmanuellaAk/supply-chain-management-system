@@ -45,7 +45,7 @@
                             <td class="text-center">{{ $product->quantity }}</td>
                             <td class="text-center">{{ App\Models\Supplier::find($product->supplier_id)->full_name }}</td>
                             <td class="text-center">{{ ($product->selling_price - $product->cost_price) * $product->quantity }}</td>
-                            <td class="table-report__action w-56">
+                            <td>
                                 <div class="flex justify-center ">
                                     <a class="flex  mr-3" href="{{ route('edit', $product->id) }}"> <i
                                             data-lucide="check-square" class="w-4 h-4 mr-1"></i> Edit </a>
@@ -57,7 +57,6 @@
                                                 class="w-4 h-4 mr-1"></i> Delete
                                         </button>
                                     </form>
-
                                 </div>
                             </td>
                         </tr>
