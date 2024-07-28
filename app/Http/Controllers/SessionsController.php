@@ -66,6 +66,6 @@ class SessionsController extends Controller
         // For User authentication
         session()->forget('customer_id'); // For Customer session
         session()->flush();
-        return redirect('/');
+        
     }
 }

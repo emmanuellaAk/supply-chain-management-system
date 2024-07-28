@@ -38,17 +38,17 @@
                 <div class="report-box zoom-in">
                     <div class="box p-5">
                         <div class="flex">
-                            <i data-lucide="user" class="report-box__icon text-success"></i>
+                            {{-- <i data-lucide="user" class="report-box__icon text-success"></i>
                             <div class="ml-auto">
                                 <div class="report-box__indicator bg-success tooltip cursor-pointer"
-                                    {{-- title="22% Higher than last month"> 22% <i data-lucide="chevron-up" --}} class="w-4 h-4 ml-0.5"></i>
-                                </div>
-                            </div>
+                                    title="22% Higher than last month"> 22% <i data-lucide="chevron-up" class="w-4 h-4 ml-0.5"></i>
+                                </div> --}}
+                            {{-- </div>
                         </div>
-                        <a href="/contact" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
-                        <div class="text-base text-slate-500 mt-1">Report a problem</div>
+                        <a href="#" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
+                        <div class="text-base text-slate-500 mt-1">Contact Us</div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <!-- New Low Inventory Box -->
             <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">

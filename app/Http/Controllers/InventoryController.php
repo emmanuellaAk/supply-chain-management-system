@@ -14,15 +14,24 @@ class InventoryController extends Controller
 {
     public function index()
     {
-
         $filter = request()->search;
+        $threshold = request()->threshold;
+
+        $query = Inventory::latest()->filter([
+            'search' => $filter
+        ]);
+
+        if ($threshold) {
+            $query->where('quantity', '<', $threshold);
+        }
+
+        $products = $query->paginate(9);
 
         return view('inventory.inventory', [
-            'products' => Inventory::latest()->filter([
-                'search' => $filter
-            ])->paginate(9)
+            'products' => $products
         ]);
     }
+
 
     public function create()
     {

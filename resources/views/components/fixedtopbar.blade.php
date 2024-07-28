@@ -6,7 +6,7 @@
     class="top-bar-boxed h-[70px] z-[51] relative border-b border-white/[0.08] mt-12 md:-mt-5 -mx-3 sm:-mx-8 px-3 sm:px-8 md:pt-0 mb-12">
     <div class="h-full flex items-center">
         <!-- BEGIN: Logo -->
-        <a href="#" class="-intro-x hidden md:flex">
+        <a href="{{route('customer-dashboard')}}" class="-intro-x hidden md:flex">
             <img alt="Midone - HTML Admin Template" class="w-6" src="{{asset('dist\images\hexagon-photography-icon-logo-1.png')}}">
             <span class="text-white text-lg ml-3">SCM</span>
         </a>

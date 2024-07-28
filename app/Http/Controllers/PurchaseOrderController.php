@@ -65,7 +65,7 @@ class PurchaseOrderController extends Controller
             'order_status' => "received"
         ]);
 
-           $order = PurchaseOrder::findOrFail($id);
+            $order = PurchaseOrder::findOrFail($id);
 
             $product = Inventory::findOrFail($order->product_id);
 

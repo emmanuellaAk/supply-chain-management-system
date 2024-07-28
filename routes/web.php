@@ -50,10 +50,8 @@
 
     Route::get('/customer/dashboard', function () {
         return view('customers.dashboard');
-    })->name('customer-dashboard')->middleware('auth'); //view customer dashboard
-    Route::get('/contact', function(){
-        return view('customers.contact');
-    });
+    })->name('customer-dashboard'); //view customer dashboard
+
     Route::get('/about', function(){
         return view('customers.about');
     });

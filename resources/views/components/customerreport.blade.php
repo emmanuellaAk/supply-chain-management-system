@@ -32,7 +32,7 @@
         </div>
         <div class="grid grid-cols-12 gap-6 mt-8">
             <!-- Box 1 -->
-           
+
 
             <!-- Box 2: Recent Orders -->
             <div class="col-span-12 sm:col-span-6 xl:col-span-6 intro-y">
@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="/contact" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
+                        <a href="/report" class="text-2xl font-medium leading-8 mt-6">TECHNICAL SUPPORT</a>
                         <div class="text-base text-slate-500 mt-1">Report a problem</div>
                     </div>
                 </div>

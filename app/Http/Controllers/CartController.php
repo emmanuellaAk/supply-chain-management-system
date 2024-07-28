@@ -153,7 +153,7 @@ class CartController extends Controller
     public function viewCart()
     {
         $customerId = session('customer_id');
-        $cartMail = CartItem::where('customer_id', $customerId)->get();
+        $cartItems = CartItem::where('customer_id', $customerId)->get();
         return view('customers.cartView', compact('cartItems'));
     }
 
@@ -252,7 +252,7 @@ class CartController extends Controller
         ]);
 
         $orderId = $order->id;
-        
+
 
         foreach ($cartItems as $cartItem) {
             OrderItem::create([

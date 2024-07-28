@@ -36,7 +36,7 @@ class TechnicalSupportController extends Controller
 
         $technicalSupport->save();
 
-        return redirect()->back()->with('success', 'Request submitted successfully.');
+        return redirect()->route('viewProducts')->with('success', 'Request submitted successfully.');
     }
 
     public function index()
@@ -51,7 +51,7 @@ class TechnicalSupportController extends Controller
             'received', 'fixed'
         ];
 
-        if (!in_array($request->status, $reportStatus)) {
+        if (in_array($request->status, $reportStatus)) {
             return back()->with('error', "invalid report status {$request->status}");
         };
 
@@ -62,7 +62,5 @@ class TechnicalSupportController extends Controller
         $report->save();
 
         return back()->with('success', "report status has been changed to {$request->status}");
-
     }
-
 }

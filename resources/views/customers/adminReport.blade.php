@@ -24,7 +24,10 @@
                             </tr>
                         </thead>
                         <tbody>
+
+
                             @foreach ($technicalSupports as $support)
+
                                 <tr>
                                     <td>{{ $support->id }}</td>
                                     <td>{{ $support->customer->name }}</td>
@@ -49,7 +52,7 @@
                                     </td>
                                     <td class="w-40">
                                         <div
-                                            class="flex items-center justify-center {{ $support->status == 'pending' || $support->status == 'fixed' ? 'text-success' : 'text-success' }}">
+                                            class="flex items-center justify-center {{ $support->status == 'pending' || $support->status == 'fixed' ? 'text-red-500' : 'text-success' }}">
                                             <i data-lucide="check-square" class="w-4 h-4 mr-2"></i>
                                             {{ ucfirst($support->status) }}
                                         </div>
